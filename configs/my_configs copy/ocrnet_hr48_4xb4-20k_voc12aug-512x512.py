@@ -1,4 +1,4 @@
-_base_ = './ocrnet_hr18_4xb4-20k_voc12aug-512x512.py'
+_base_ = '../ocrnet/ocrnet_hr18_4xb4-20k_voc12aug-512x512.py'
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 model = dict(
     pretrained='open-mmlab://msra/hrnetv2_w48',

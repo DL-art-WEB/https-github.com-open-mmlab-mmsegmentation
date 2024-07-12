@@ -2,7 +2,7 @@
 from train_set.dict_utils import TrimData
 import os
 from mmengine import Config
-from copy import copy
+from copy import copy, deepcopy
 import markdown
 import re
 from mmengine.analysis.complexity_analysis import (
@@ -293,6 +293,7 @@ def postprocesses_model_dict_list(model_dict_list):
     model_dict_list = get_comparable_model_dict_list(
         model_dict_list=model_dict_list
     )
+
     return model_dict_list
 
 def get_all_model_dicts(
@@ -422,18 +423,14 @@ def add_n_params_to_model_dicts(model_dict_list):
         model_dict["n_params"] = parameter_count(model=model)['']
     return model_dict_list
         
-def get_top_n_metric(
+def sorted_by_metric(
     model_dict_list, 
-    n = 10, 
     metric ='mIoU', 
     descending=True
 ):
-    
     sort_list =  sorted(
         model_dict_list, key=lambda d : d[metric], reverse=descending
     ) 
-    if len(sort_list) >= n:      
-        return sort_list[:n]
     return sort_list
 
 
@@ -486,21 +483,12 @@ for model_dict in model_dict_list:
         model_dict["Mem (GB)"] = model_dict["Mem (GB)"] / 1000.0
 
 
-
-# def get_crop_size_from_cfg_name(cfg_name):
-#     pass
-
 def get_batch_size_from_cfg_name(cfg_name):
     return int(
         cfg_name.split("xb")[-1].split("-")[0]
     )
 
 
-
-# def deconstruct_cfg_name(model_dict):
-#     cfg_path = model_dict["config"]
-#     cfg_name = cfg_path.split("/")[-1].replace(".py", "")
-    
 
 # filter on memory
 # TODO: not very good estimator
@@ -518,31 +506,55 @@ def remove_too_big_models(model_dict_list, max_mem_per_batch = 2.5):
         )
     return model_dict_list_
 
+def get_best_model(model_group, metric = "mIoU"):
+    return sorted_by_metric(
+        model_dict_list=model_group,
+        metric=metric,
+        descending=True
+    )[0]
+    
 
-
+def get_unique_model_list(model_dict_list):
+    unique_list = []
+    for model_dict in model_dict_list:
+        if len(
+            [
+                m_dict for m_dict in unique_list
+                    if same_model_diff_sched(
+                        model_dict0=model_dict,
+                        model_dict1=m_dict
+                    ) or model_dict["config"] == m_dict["config"]
+            ]
+        ) > 0:
+            continue
+        model_group = [model_dict]
+        for model_dict1 in model_dict_list:
+            if model_dict is model_dict1:
+                continue
+            if same_model_diff_sched(
+                model_dict0=model_dict,
+                model_dict1=model_dict1
+            ):
+                model_group.append(model_dict1)
+        unique_list.append(
+            get_best_model(model_group=model_group)
+        )
+    return unique_list
+        
+        
 # model_dict_list = add_n_params_to_model_dicts(model_dict_list=model_dict_list)
 
-model_dict_list = remove_too_big_models(model_dict_list=model_dict_list) 
-
-# print(len(model_dict_list))
-
-# for model_dict in model_dict_list:
-#     print()
-#     for key, val in model_dict.items():
-#         print(f"{key} : {val}")
- 
-
-
-def record_score(model_dict, score_dict, rank, n_items, metric):
-    cfg = model_dict["config"].split("/")[-1]
+def record_score(model_dict, score_list, rank, n_items, metric):
+    
     rank_score = n_items - rank
     if metric == "Inf time (fps)" or metric == "mIoU":
         rank_score *= 2
-    if not cfg in score_dict.keys():
-        
-        score_dict[cfg] = {
+    if model_dict["config"] not in [
+        item["config"] for item in score_list 
+    ]:
+        model_dict = deepcopy(model_dict)
+        model_dict["score"] = {
             "count"             :          1,
-            "model_dict"        :          model_dict,
             "metric_results"    :          [
                     {
                         "rank"      :       rank,
@@ -551,38 +563,53 @@ def record_score(model_dict, score_dict, rank, n_items, metric):
                 ],
             "total_rank_score"  :           rank_score
         }
-        return score_dict
-    score_dict[cfg]["count"] += 1
-    score_dict[cfg]["metric_results"].append(
-        {
-            "rank"      :       rank,
-            "metric"    :       metric
-        }
-    )
-    score_dict[cfg]["total_rank_score"] += rank_score
-    return score_dict
+        score_list.append(
+            model_dict
+        )
+        return score_list
+    for item in score_list:
+        if item["config"] == model_dict["config"]:
+            item["score"]["count"] += 1
+            item["score"]["metric_results"].append(
+                {
+                    "rank"      :       rank,
+                    "metric"    :       metric
+                }
+            )
+            item["score"]["total_rank_score"] += rank_score
+            break
+    return score_list
 
-def get_top_n_for_dataset(
+
+
+def get_sorted_by_metric_for_dataset(
     dataset_name,
     model_dict_list,
-    metric_param_list,
-    n_items = 10
+    metric_param_list
 ):
     
     model_dict_list_ = [
         model_dict for model_dict in model_dict_list 
             if model_dict["dataset"] == dataset_name
     ]
-    top_n_metric_dict = {}
+    sorted_by_metric_dict = {}
     for param in metric_param_list:
         
-        top_n = get_top_n_metric(
+        sorted_dict_list = sorted_by_metric(
             model_dict_list=model_dict_list_,
-            n = n_items,
             metric=param["metric"],
             descending=param["descending"]
         )
-        top_n_metric_dict[param["metric"]] = top_n
+        sorted_by_metric_dict[param["metric"]] = sorted_dict_list
+    return sorted_by_metric_dict
+
+def get_top_n_metric_dict(
+    sorted_by_metric_dict,
+    n_items = 10
+):  
+    top_n_metric_dict = {}
+    for metric, sorted_dict_list in sorted_by_metric_dict.items():
+        top_n_metric_dict[metric] = sorted_dict_list[:n_items]
     return top_n_metric_dict
 
 def print_n_top_items(top_n_metric_dict):
@@ -590,73 +617,60 @@ def print_n_top_items(top_n_metric_dict):
         print(f"\ntop {len(top_n)} of {metric}:\n")
         rank = 1
         for model_dict in top_n:
-            print('-' * 80)
             print(f"Rank: {rank}")
             print_trimmed_model_dict(model_dict=model_dict)
+            print()
             rank += 1
 
-def get_score_dict_dataset(top_n_metric_dict):
-    score_dict = {}
+def get_score_list_dataset(top_n_metric_dict):
+    score_list = []
     for metric, top_n in top_n_metric_dict.items():
         rank = 1
         for model_dict in top_n:
-            score_dict = record_score(
+            score_list = record_score(
                 model_dict=model_dict,
-                score_dict=score_dict,
+                score_list=score_list,
                 rank=rank,
                 n_items=n_items,
                 metric=metric
             )
             rank += 1
-    return score_dict
+    return score_list
 
-# def sort_rank_score_(score_dict):
-#     sorted_score = dict(
-#         sorted(
-#             score_dict.items(), 
-#             key=lambda item: item[1]["total_rank_score"],
-#             reverse=True
-#         )
-#     )
-#     return sorted_score
 
-def sort_rank_score(score_dict):
-    sorted_score = dict(
-        sorted(
-            score_dict.items(), 
-            key=lambda item: item[1]["total_rank_score"],
-            reverse=True
-        )
-    )
-    return sorted_score
 
-def print_sorted_score(sorted_score, n_items = 10):
-    print(f"sorted scores ({len(sorted_score)}), top {n_items}: ")
-    for cfg, data in sorted_score.items():
-        print(f"\n{'#' * 80}")
-        print(f"cfg : {cfg}\n")
-        for key, val in data.items():
+def sorted_score(score_list, n_items = 10):
+    sorted_score_list = sorted(
+        score_list, 
+        key=lambda d : d["score"]["total_rank_score"], 
+        reverse=True
+    ) 
+    if len(sorted_score_list) >= n_items:      
+        return sorted_score_list[:n_items]
+    return sorted_score_list
+
+
+def print_sorted_score(sorted_score_list):
+    print(f"sorted scores ({len(sorted_score_list)}): ")
+    for moded_model_dict in sorted_score_list:
+        print_trimmed_model_dict(model_dict=moded_model_dict)
+        print("scores: ")
+        for key, val in moded_model_dict["score"].items():
             if key == "metric_results":
                 sorted_rank = sorted(
-                    data[key],
+                    val,
                     key=lambda item: item["rank"]
                 )
                 print(f"{key}:")
                 for record in sorted_rank:
                     print(f" - rank : {record['rank']}, metric : {record['metric']}")
                 continue
-            if key == "model_dict":
-                print("model_dict: ")
-                print('-' * 80)
-                print_trimmed_model_dict(model_dict=data["model_dict"])
-                print('-' * 80)
-                continue
             print(f"{key} : {val}")
         print()
 
 
 
-def write_selection_files(selected_model_dict_list):
+def write_selected_files(selected_model_dict_list):
     for model_dict in selected_model_dict_list:
         
         cfg_path = model_dict["config"]
@@ -689,6 +703,17 @@ def write_selection_files(selected_model_dict_list):
                         continue
                 dest_file.write(f"{line}")
 
+def select_configs(selected_model_dict_list, provisonal_list):
+    for provisional_model_dict in provisonal_list:
+        if provisional_model_dict["config"] in [
+            model_dict["config"] for model_dict in selected_model_dict_list
+        ]:
+            continue
+        selected_model_dict_list.append(
+            provisional_model_dict
+        )
+    return selected_model_dict_list
+
 
 metric_param_list = [
     {
@@ -712,13 +737,70 @@ metric_param_list = [
         "descending"    :       True
     }
 ]
+
+# model_dict_list = add_n_params_to_model_dicts(model_dict_list=model_dict_list)
+
+model_dict_list = remove_too_big_models(model_dict_list=model_dict_list) 
+
+# print(f"len model dict list (pre unique): {len(model_dict_list)}")
+# for model_dict in model_dict_list:
+#     print_trimmed_model_dict(model_dict=model_dict)
+    
+model_dict_list = get_unique_model_list(model_dict_list=model_dict_list)
+
+# print(f"len model dict list (unique): {len(model_dict_list)}")
+# for model_dict in model_dict_list:
+#     print_trimmed_model_dict(model_dict=model_dict)
+    
+
 selected_model_dict_list = []
-n_items = 10
+n_items = 5 # TODO maybe lower, look at result
+n_items_provisional = 20
+n_total_models = 0
 for dataset_name in TrimData.accepted_dataset_list:
     print(f"Dataset: {dataset_name}")
-    top_n_metric_dict = get_top_n_for_dataset(
-        dataset_name=dataset_name, model_dict_list=model_dict_list,
-        metric_param_list=metric_param_list, n_items=n_items
+    # Use a bigger provisional selection in order for more generalistic
+    #  model to be added
+    sorted_by_metric_dict = get_sorted_by_metric_for_dataset(
+        dataset_name=dataset_name, 
+        model_dict_list=model_dict_list,
+        metric_param_list=metric_param_list
     )
+    top_n_metric_dict = get_top_n_metric_dict(
+        sorted_by_metric_dict=sorted_by_metric_dict,
+        n_items=n_items_provisional
+    )
+    score_list = get_score_list_dataset(top_n_metric_dict=top_n_metric_dict)
+    # finer selection
+    for metric, top_n in top_n_metric_dict.items():
+        top_n_metric_dict[metric] = top_n[:n_items] 
+        
     print_n_top_items(top_n_metric_dict=top_n_metric_dict)
-    score_dict = get_score_dict_dataset(top_n_metric_dict=top_n_metric_dict)
+    
+    sorted_score_list = sorted_score(score_list=score_list, n_items=n_items)
+    print_sorted_score(sorted_score_list=sorted_score_list)
+    
+    
+    
+    for metric, top_n in top_n_metric_dict.items():
+        selected_model_dict_list = select_configs(
+            selected_model_dict_list=selected_model_dict_list,
+            provisonal_list=top_n
+        )
+        n_total_models += len(top_n)
+    
+    selected_model_dict_list = select_configs(
+        selected_model_dict_list=selected_model_dict_list,
+        provisonal_list=sorted_score_list
+    )
+    n_total_models += len(sorted_score_list)
+    
+    
+    print(f"n_total_models : {n_total_models}")
+    print(f"len selection : {len(selected_model_dict_list)}")
+    
+    
+    print('#' * 80)
+
+# for model_dict in sel
+write_selected_files(selected_model_dict_list=selected_model_dict_list)

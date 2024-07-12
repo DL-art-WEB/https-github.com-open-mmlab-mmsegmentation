@@ -1,4 +1,4 @@
-_base_ = '../ocrnet/ocrnet_hr18_4xb4-20k_voc12aug-512x512.py'
+_base_ = '../hrnet/fcn_hr18_4xb2-160k_cityscapes-512x1024.py'
 model = dict(
     pretrained='open-mmlab://msra/hrnetv2_w18_small',
     backbone=dict(

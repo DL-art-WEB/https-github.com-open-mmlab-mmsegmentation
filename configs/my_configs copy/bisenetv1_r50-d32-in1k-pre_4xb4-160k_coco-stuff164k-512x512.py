@@ -1,4 +1,4 @@
-_base_ = './bisenetv1_r50-d32_4xb4-160k_coco-stuff164k-512x512.py'
+_base_ = '../bisenetv1/bisenetv1_r50-d32_4xb4-160k_coco-stuff164k-512x512.py'
 
 model = dict(
     backbone=dict(
