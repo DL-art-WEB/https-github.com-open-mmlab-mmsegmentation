@@ -1,57 +1,89 @@
-"""A data structure interface of MMSegmentation. They are used as
-interfaces between different components.
+import os
+from mmengine import Config
+from mmengine.analysis.complexity_analysis import (
+    parameter_count_table, 
+    parameter_count
+)
+from mmengine.registry import init_default_scope
 
-The attributes in ``SegDataSample`` are divided into several parts:
+from mmseg.registry import MODELS
 
-    - ``gt_sem_seg``(PixelData): Ground truth of semantic segmentation.
-    - ``pred_sem_seg``(PixelData): Prediction of semantic segmentation.
-    - ``seg_logits``(PixelData): Predicted logits of semantic segmentation.
 
-Examples:
-        
-    <SegDataSample(
 
-        META INFORMATION
 
-        DATA FIELDS
-        gt_sem_seg: <PixelData(
+def get_param_count(cfg, trim_dict = True):
+    
+    init_default_scope(cfg.get('default_scope', 'mmseg'))
+    cfg.model.train_cfg = None
+    model = MODELS.build(cfg.model)
+    count_dict = parameter_count(model=model)
+    
+    if trim_dict:
+        count_dict_ = {}
+        count_dict, count_dict_ = count_dict_, count_dict
+        for key, val in count_dict_.items():
+            if "." in key:
+                continue
+            key_ = "model" if key == "" else key
+            count_dict[key_] = count_dict_[key]   
+    return count_dict
 
-                META INFORMATION
-                img_shape: (4, 4, 3)
-                pad_shape: (4, 4, 3)
+def print_count_dict(count_dict):
+    for key, val in count_dict.items():
+        print(f"{key} : {val}")
+# compare param count and table segformer_mit-b0:
+#   -> ade20k
+#   -> irl_vision
+#   -> hots_v1
+#   
+# compare mem/batch 
+# compare for diffent n_classes
+# compare resulted dumped cfgs  
 
-                DATA FIELDS
-                data: tensor([[[1, 1, 1, 0],
-                                [1, 0, 1, 1],
-                                [1, 1, 1, 1],
-                                [0, 1, 0, 1]]])
-            ) at 0x1c2b4156460>
-    ) at 0x1c2aae44d60>
+cfg_dump_path = "my_projects/tests/cfgs/"
 
-    >>> data_sample = SegDataSample()
-    >>> gt_sem_seg_data = dict(sem_seg=torch.rand(1, 4, 4))
-    >>> gt_sem_seg = PixelData(**gt_sem_seg_data)
-    >>> data_sample.gt_sem_seg = gt_sem_seg
-    >>> assert 'gt_sem_seg' in data_sample
-    >>> assert 'sem_seg' in data_sample.gt_sem_seg
-"""
-import torch
-import numpy as np
-from mmengine.structures import PixelData
-from mmseg.structures import SegDataSample
 
-data_sample = SegDataSample()
-img_meta = dict(img_shape=(4, 4, 3),
-               pad_shape=(4, 4, 3))
-gt_segmentations = PixelData(metainfo=img_meta)
-gt_segmentations.data = torch.randint(0, 2, (1, 4, 4))
-data_sample.gt_sem_seg = gt_segmentations
-print(data_sample.gt_sem_seg.shape)
-print(data_sample)
+cfg_path_hots = "work_dirs/segformer_mit-b0_8xb2-160k_hots-v1-512x512/20240712_052908.py"
+cfg_hots = Config.fromfile(cfg_path_hots)
+param_count_dict = get_param_count(cfg=cfg_hots)
+print("hots: ")
+print_count_dict(param_count_dict)
+print("mem : 989")
+print("n_classes : 47\n")
+cfg_hots.dump(
+    os.path.join(
+        cfg_dump_path,
+        "hots.py"
+    )
+)
 
-data_sample = SegDataSample()
-gt_sem_seg_data = dict(sem_seg=torch.rand(1, 4, 4))
-gt_sem_seg = PixelData(**gt_sem_seg_data)
-data_sample.gt_sem_seg = gt_sem_seg
-assert 'gt_sem_seg' in data_sample
-assert 'sem_seg' in data_sample.gt_sem_seg
+
+cfg_path_irl = "work_dirs/segformer_mit-b0_8xb2-160k_irl_vision_sim-512x512/20240712_052441.py"
+cfg_irl = Config.fromfile(cfg_path_irl)
+param_count_dict = get_param_count(cfg=cfg_irl)
+print("irl_vision: ")
+print_count_dict(param_count_dict)
+print("mem : 1138")
+print("n_classes : 72\n")
+cfg_irl.dump(
+    os.path.join(
+        cfg_dump_path,
+        "irl_vision.py"
+    )
+)
+
+
+cfg_path_ade20k = "configs/segformer/segformer_mit-b0_8xb2-160k_ade20k-512x512.py"
+cfg_ade20k = Config.fromfile(cfg_path_ade20k)
+param_count_dict = get_param_count(cfg=cfg_ade20k)
+print("ade20k: ")
+print_count_dict(param_count_dict)
+print("mem : 2100")
+print("n_classes : 150\n")
+cfg_ade20k.dump(
+    os.path.join(
+        cfg_dump_path,
+        "ade20k.py"
+    )
+)
+

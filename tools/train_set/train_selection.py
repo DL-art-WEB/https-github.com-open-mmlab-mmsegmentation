@@ -36,7 +36,6 @@ def get_my_models(
     my_models_path = "my_projects/best_models/hots_v1", 
     target_dataset = "irl_vision_sim"
 ):
-    config_build_data_list = []
     for model_dir_name in os.listdir(my_models_path):
         model_dir_path = os.path.join(my_models_path, model_dir_name)
         cfg_name = model_dir_name.replace("hots-v1", target_dataset)
@@ -62,7 +61,49 @@ def get_my_models(
             run_cfg(cfg=cfg)
         except:
             print(f"couldn't run config: {b_data['cfg_name']}")
-    
+
+def train_my_configs(
+    config_dir_path = "configs/my_configs",
+    datasets = ["irl_vision_sim", "hots-v1"],
+    crop_size = (512, 512),
+    iterations = 2000,
+    save_interval = 500,
+    val_interval = 500
+):
+    for base_cfg_name in os.listdir(config_dir_path):
+    # for base_cfg_name in ["fcn_hr18s_4xb4-20k_voc12aug-512x512.py"]:
+        base_cfg_path = os.path.join(config_dir_path, base_cfg_name)
+        base_cfg_name = base_cfg_path.split("/")[-1].replace(".py", "")
+        print(base_cfg_name)
+        for target_dataset in datasets:
+            training_data = base_cfg_name.split("_")[-1]
+            train_str_new = f"{target_dataset}-{crop_size[0]}x{crop_size[1]}"
+            cfg_name = base_cfg_name.replace(training_data, train_str_new)
+            # if cfg_name in os.listdir("work_dirs"):
+            #     continue
+            b_data = CFBD._get_cfg_build_data(
+                cfg_name=cfg_name, 
+                base_cfg_path=base_cfg_path,
+                dataset_cfg_path=dataset_info[target_dataset]["cfg_path"],
+                num_classes=dataset_info[target_dataset]["num_classes"],
+                pretrained=False, 
+                checkpoint_path=None,
+                pretrain_dataset=None, 
+                save_best=False, 
+                save_interval=save_interval,
+                val_interval=val_interval, 
+                batch_size=2, 
+                crop_size=crop_size,
+                iterations=iterations, 
+                epochs=None, 
+                dataset_name=target_dataset
+            )
+            cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
+            cfg.work_dir = os.path.join('./work_dirs', b_data["cfg_name"])
+            try:
+                run_cfg(cfg=cfg)
+            except:
+                print(f"couldn't run config: {b_data['cfg_name']}")
 
 # def apply_dataset(dataset_info, cfg_name, new_cfg: Config):
 #     num_classes = dataset_info["num_classes"]
@@ -86,7 +127,7 @@ def get_my_models(
 #     )
 
 def main():
-    get_my_models()
+    train_my_configs()
 
 
 if __name__ == '__main__':

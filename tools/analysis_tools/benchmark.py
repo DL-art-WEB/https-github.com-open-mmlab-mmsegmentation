@@ -58,7 +58,9 @@ def main():
     for time_index in range(repeat_times):
         print(f'Run {time_index + 1}:')
         # build the dataloader
-        data_loader = Runner.build_dataloader(cfg.test_dataloader)
+        cfg_test_dataloader = cfg.test_dataloader
+        cfg_test_dataloader.sampler = dict(shuffle=True, type='InfiniteSampler')
+        data_loader = Runner.build_dataloader(cfg_test_dataloader)
 
         # build the model and load checkpoint
         cfg.model.train_cfg = None
@@ -108,7 +110,9 @@ def main():
                 benchmark_dict[f'overall_fps_{time_index + 1}'] = round(fps, 2)
                 overall_fps_list.append(fps)
                 break
+    
     benchmark_dict['average_fps'] = round(np.mean(overall_fps_list), 2)
+    
     benchmark_dict['fps_variance'] = round(np.var(overall_fps_list), 4)
     print(f'Average fps of {repeat_times} evaluations: '
           f'{benchmark_dict["average_fps"]}')
