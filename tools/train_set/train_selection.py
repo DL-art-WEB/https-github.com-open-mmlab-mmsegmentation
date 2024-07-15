@@ -3,6 +3,7 @@ from argument_handler import ArgumentHandler as ArgHand
 from dict_utils import dataset_info
 import dict_utils
 from cfg_dict_generator import ConfigDictGenerator
+from config_data_helper import ConfigDataHelper as CDH
 import os
 from mmengine.config import Config
 
@@ -12,6 +13,10 @@ from mmengine.runner import Runner
 from mmseg.registry import RUNNERS
 import torch
 
+_empty_checkpoint = {
+    "dataset_name"      :       None,
+    "checkpoint_path"   :       None
+}
 def run_cfg(cfg):
     torch.cuda.empty_cache()
     # load config
@@ -32,35 +37,7 @@ def run_cfg(cfg):
     # start training
     runner.train()
     
-def get_my_models(
-    my_models_path = "my_projects/best_models/hots_v1", 
-    target_dataset = "irl_vision_sim"
-):
-    for model_dir_name in os.listdir(my_models_path):
-        model_dir_path = os.path.join(my_models_path, model_dir_name)
-        cfg_name = model_dir_name.replace("hots-v1", target_dataset)
-        cfg_name = cfg_name.replace("-1k_", "-2k_")
-        
-        base_cfg = [
-            file_ for file_ in os.listdir(model_dir_path) if '.py' in file_
-        ][0]
-        
-        base_cfg_path = os.path.join(model_dir_path, base_cfg)
-        b_data = CFBD._get_cfg_build_data(
-            cfg_name=cfg_name, base_cfg_path=base_cfg_path,
-            dataset_cfg_path=dataset_info[target_dataset]["cfg_path"],
-            num_classes=dataset_info[target_dataset]["num_classes"],
-            pretrained=False, checkpoint_path=None,
-            pretrain_dataset=None, save_best=False, save_interval=500,
-            val_interval=500, batch_size=None, crop_size=(512, 512),
-            iterations=2000, epochs=None, dataset_name=target_dataset
-        )
-        cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
-        cfg.work_dir = os.path.join('./my_projects/work_dirs', b_data["cfg_name"])
-        try:
-            run_cfg(cfg=cfg)
-        except:
-            print(f"couldn't run config: {b_data['cfg_name']}")
+
 
 def train_my_configs(
     config_dir_path = "configs/my_configs",
@@ -68,136 +45,157 @@ def train_my_configs(
     crop_size = (512, 512),
     iterations = 2000,
     save_interval = 500,
-    val_interval = 500
+    val_interval = 500,
+    unique = True,
+    pretrained = True
 ):
+    
+    checkpoint_lookup_table = generate_checkpoint_lookup_by_cfg_name()
+    
     for base_cfg_name in os.listdir(config_dir_path):
     # for base_cfg_name in ["fcn_hr18s_4xb4-20k_voc12aug-512x512.py"]:
         base_cfg_path = os.path.join(config_dir_path, base_cfg_name)
         base_cfg_name = base_cfg_path.split("/")[-1].replace(".py", "")
-        print(base_cfg_name)
+        # print(base_cfg_name)
         for target_dataset in datasets:
-            training_data = base_cfg_name.split("_")[-1]
-            train_str_new = f"{target_dataset}-{crop_size[0]}x{crop_size[1]}"
-            cfg_name = base_cfg_name.replace(training_data, train_str_new)
-            # if cfg_name in os.listdir("work_dirs"):
-            #     continue
-            b_data = CFBD._get_cfg_build_data(
-                cfg_name=cfg_name, 
-                base_cfg_path=base_cfg_path,
-                dataset_cfg_path=dataset_info[target_dataset]["cfg_path"],
-                num_classes=dataset_info[target_dataset]["num_classes"],
-                pretrained=False, 
-                checkpoint_path=None,
-                pretrain_dataset=None, 
-                save_best=False, 
-                save_interval=save_interval,
-                val_interval=val_interval, 
-                batch_size=2, 
-                crop_size=crop_size,
-                iterations=iterations, 
-                epochs=None, 
-                dataset_name=target_dataset
-            )
-            cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
-            cfg.work_dir = os.path.join('./work_dirs', b_data["cfg_name"])
-            try:
-                run_cfg(cfg=cfg)
-            except:
-                print(f"couldn't run config: {b_data['cfg_name']}")
+            checkpoints = [_empty_checkpoint]
+            if pretrained:
+                checkpoints.append(
+                    checkpoint_lookup_table[base_cfg_name]
+                )  
+            for checkpoint_dict in checkpoints:
+                cfg_name = generate_new_cfg_name(
+                    base_cfg_name=base_cfg_name,
+                    dataset_name=target_dataset,
+                    iterations=iterations,
+                    crop_size=crop_size,
+                    pretrain_data=checkpoint_dict["dataset_name"]
+                )
+                if unique and cfg_name in os.listdir("work_dirs"):
+                    continue
+                b_data = CFBD._get_cfg_build_data(
+                    cfg_name=cfg_name, 
+                    base_cfg_path=base_cfg_path,
+                    dataset_cfg_path=dataset_info[target_dataset]["cfg_path"],
+                    num_classes=dataset_info[target_dataset]["num_classes"],
+                    pretrained= checkpoint_dict is not _empty_checkpoint, 
+                    checkpoint_path=checkpoint_dict["checkpoint_path"],
+                    pretrain_dataset=checkpoint_dict["dataset_name"], 
+                    save_best=False, 
+                    save_interval=save_interval,
+                    val_interval=val_interval, 
+                    batch_size=2, 
+                    crop_size=crop_size,
+                    iterations=iterations, 
+                    epochs=None, 
+                    dataset_name=target_dataset
+                )
+                cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
+                cfg.work_dir = os.path.join('./work_dirs', b_data["cfg_name"])
+                try:
+                    run_cfg(cfg=cfg)
+                except:
+                    print(f"couldn't run config: {b_data['cfg_name']}")
 
-# def apply_dataset(dataset_info, cfg_name, new_cfg: Config):
-#     num_classes = dataset_info["num_classes"]
-#     class_weight = dataset_info["class_weight"]
-#     if "mask" in cfg_name and "former" in cfg_name:
-#         class_weight = [0.1] + ([1.0] * num_classes)
-#     dataset_cfg = Config.fromfile(
-#         dataset_info["cfg_path"]
-#     )
-#     for key, value in dataset_cfg.items():
-#         new_cfg[key] = value
-#     dict_utils.BFS_change_key(
-#         cfg=new_cfg, 
-#         target_key="num_classes", 
-#         new_value=num_classes
-#     )
-#     dict_utils.BFS_change_key(
-#         cfg=new_cfg,
-#         target_key="class_weight",
-#         new_value=class_weight
-#     )
+def generate_checkpoint_lookup_by_cfg_name(global_config_path = "configs"):
+    
+    lookup_table = {}
+    for project_dir in os.listdir(global_config_path):
+        meta_dict = CDH._read_metafile(
+            project_name=project_dir,
+            config_root_path=global_config_path
+        )
+        model_list = CDH._extract_model_list(metafile_dict=meta_dict)
+        for model_dict in model_list:
+            lookup_table[model_dict["name"]] = {
+                "dataset_name"      :       model_dict["train_data"],
+                "checkpoint_path"   :       model_dict["checkpoint_path"]
+            }
+    return lookup_table
+def generate_new_cfg_name(
+    base_cfg_name : str, 
+    dataset_name : str, 
+    iterations : int,
+    crop_size : tuple,
+    pretrain_data : str = "",
+    device_info : str = "1xb2"
+):
+    # make new name 
+    # basename with split at xb
+    method_name = base_cfg_name.split("xb")[0][:-2]
+    
+    new_name = method_name + f"_{device_info}"
+    if pretrain_data is not None and pretrain_data != "": 
+        new_name += f'-pre-{pretrain_data.lower().replace(" ", "")}'
+    new_name += f"-{int(iterations/1000)}k"
+    new_name += f"_{dataset_name}"
+    new_name += f"-{crop_size[0]}x{crop_size[1]}"
+    return new_name
+
+
+def test(
+    config_dir_path = "configs/my_configs",
+    datasets = ["irl_vision_sim", "hots-v1"],
+    crop_size = (512, 512),
+    iterations = 2000,
+    save_interval = 500,
+    val_interval = 500,
+    unique = True,
+    pretrained = True
+):
+    
+    checkpoint_lookup_table = generate_checkpoint_lookup_by_cfg_name()
+    
+    for base_cfg_name in os.listdir(config_dir_path):
+    # for base_cfg_name in ["fcn_hr18s_4xb4-20k_voc12aug-512x512.py"]:
+        base_cfg_path = os.path.join(config_dir_path, base_cfg_name)
+        base_cfg_name = base_cfg_path.split("/")[-1].replace(".py", "")
+        # print(base_cfg_name)
+        for target_dataset in datasets:
+            checkpoints = [_empty_checkpoint]
+            if pretrained:
+                checkpoints.append(
+                    checkpoint_lookup_table[base_cfg_name]
+                )  
+            for checkpoint_dict in checkpoints:
+                cfg_name = generate_new_cfg_name(
+                    base_cfg_name=base_cfg_name,
+                    dataset_name=target_dataset,
+                    iterations=iterations,
+                    crop_size=crop_size,
+                    pretrain_data=checkpoint_dict["dataset_name"]
+                )
+                if unique and cfg_name in os.listdir("work_dirs"):
+                    continue
+                b_data = CFBD._get_cfg_build_data(
+                    cfg_name=cfg_name, 
+                    base_cfg_path=base_cfg_path,
+                    dataset_cfg_path=dataset_info[target_dataset]["cfg_path"],
+                    num_classes=dataset_info[target_dataset]["num_classes"],
+                    pretrained= checkpoint_dict is not _empty_checkpoint, 
+                    checkpoint_path=checkpoint_dict["checkpoint_path"],
+                    pretrain_dataset=checkpoint_dict["dataset_name"], 
+                    save_best=False, 
+                    save_interval=save_interval,
+                    val_interval=val_interval, 
+                    batch_size=2, 
+                    crop_size=crop_size,
+                    iterations=iterations, 
+                    epochs=None, 
+                    dataset_name=target_dataset
+                )
+                cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
+                cfg.work_dir = os.path.join('./work_dirs', b_data["cfg_name"])
+                try:
+                    run_cfg(cfg=cfg)
+                except:
+                    print(f"couldn't run config: {b_data['cfg_name']}")
+
 
 def main():
+    # test()
     train_my_configs()
 
 
 if __name__ == '__main__':
     main()
-# def get_my_models(
-#     args,
-#     my_models_path = "my_projects/best_models/hots_v1", 
-#     target_data_set = "irl_vision_sim"
-# ):
-#     config_build_data_list = []
-#     for model_dir_name in os.listdir(my_models_path):
-#         model_dir_path = os.path.join(my_models_path, model_dir_name)
-#         model_dict = {
-#             "checkpoint_path"       :       os.path.join(
-#                                                 model_dir_path, "iter_500.pth")
-#         }
-#         checkpoint_paths = ArgHand._get_checkpoint_paths(
-#             args=args, model_dict=model_dict
-#         )
-#         for checkpoint_pth in checkpoint_paths:
-#             build_dict = CFBD._get_empty_cfg_build_data()
-#             pre_train_data = ""
-#             if "-pre-" in model_dir_name:
-#                 name = model_dir_name
-#                 pre_train_data = name[
-#                     name.index("-pre-"):].replace("-pre-","").split("-")[0]
-
-#             build_dict["cfg_name"] = ArgHand._generate_config_name(
-#                 args=args, model_dict={}, 
-#                 method_name=model_dir_name.split('1xb')[0],
-#                 pretrained=bool(checkpoint_pth), pretrain_data=pre_train_data
-                
-#             )
-#             base_cfg = [
-#                 file_ for file_ in os.listdir(model_dir_path) if '.py' in file_
-#             ][0]
-            
-#             build_dict["base_cfg_path"] = os.path.join(model_dir_path, base_cfg)
-#             build_dict["dataset_cfg_path"] = dataset_info[args.dataset]
-            
-    
-# base_cfg = Config.fromfile(filename=cfg_build_data["base_cfg_path"])
-# new_cfg_dict = base_cfg.to_dict()
-# new_cfg = Config(cfg_dict=new_cfg_dict) 
-
-# additional_configs = []
-
-# ConfigDictGenerator.apply_dataset(
-#     cfg_build_data=cfg_build_data,
-#     new_cfg=new_cfg
-# )
-
-# def apply_dataset(cfg_build_data: dict, new_cfg: Config):
-#     dataset_info = dataset_info[cfg_build_data["dataset"]]
-#     num_classes = dataset_info["num_classes"]
-#     class_weight = dataset_info["class_weight"]
-#     if "mask" in cfg_build_data["cfg_name"] and "former" in cfg_build_data["cfg_name"]:
-#         class_weight = [0.1] + ([1.0] * num_classes)
-#     dataset_cfg = Config.fromfile(
-#         dataset_info["cfg_path"]
-#     )
-#     for key, value in dataset_cfg.items():
-#         new_cfg[key] = value
-#     dict_utils.BFS_change_key(
-#         cfg=new_cfg, 
-#         target_key="num_classes", 
-#         new_value=num_classes
-#     )
-#     dict_utils.BFS_change_key(
-#         cfg=new_cfg,
-#         target_key="class_weight",
-#         new_value=class_weight
-#     )

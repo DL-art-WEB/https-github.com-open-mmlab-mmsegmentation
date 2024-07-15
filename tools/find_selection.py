@@ -803,4 +803,11 @@ for dataset_name in TrimData.accepted_dataset_list:
     print('#' * 80)
 
 # for model_dict in sel
+
 write_selected_files(selected_model_dict_list=selected_model_dict_list)
+
+print("SELECTED MODELS:")
+for model_dict in selected_model_dict_list:
+    for key, val in model_dict.items():
+        print(f"{key} : {val}")
+    print()

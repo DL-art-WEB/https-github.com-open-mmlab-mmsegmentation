@@ -18,7 +18,7 @@ for project_name in os.listdir("."):
             log_file_path = os.path.join(exp_dir_path, file_name)
             with open(log_file_path, 'r') as log_file:
                 data = log_file.readlines()[-1]
-                data = data.split("[17/17]")[-1].split()
+                data = data.split("]")[-1].split()
                 
                 data_dict = {}
                 data_dict["project"] = project_name

@@ -45,13 +45,13 @@ class CustomIoUMetric(BaseMetric):
 
     def __init__(self,
                  ignore_index: int = 255,
-                 iou_metrics: List[str] = ['mIoU', 'mDice', 'mFscore', 'mIoUvPr'],
+                 iou_metrics: List[str] = ['mIoU'],
                  nan_to_num: Optional[int] = None,
                  beta: int = 1,
                  collect_device: str = 'cpu',
                  output_dir: Optional[str] = None,
                  format_only: bool = False,
-                 prefix: Optional[str] = "_",
+                 prefix: Optional[str] = None,
                  **kwargs) -> None:
         super().__init__(collect_device=collect_device, prefix=prefix)
 
@@ -115,28 +115,22 @@ class CustomIoUMetric(BaseMetric):
         if self.format_only:
             logger.info(f'results are saved to {osp.dirname(self.output_dir)}')
             return OrderedDict()
-        # convert list of tuples to tuple of lists, e.g.
-        # [(A_1, B_1, C_1, D_1), ...,  (A_n, B_n, C_n, D_n)] to
-        # ([A_1, ..., A_n], ..., [D_1, ..., D_n])
         results = tuple(zip(*results))
         assert len(results) == 4
-
-        total_area_intersect = sum(results[0])
-        total_area_union = sum(results[1])
-        total_area_pred_label = sum(results[2])
-        total_area_label = sum(results[3])
+        area_intersect = np.asarray([res.numpy() for res in results[0]])
+        area_union = np.asarray([res.numpy() for res in results[1]])
+        area_pred_label = np.asarray([res.numpy() for res in results[2]])
+        area_label = np.asarray([res.numpy() for res in results[3]])
+        
         ret_metrics = self.total_area_to_metrics(
-            total_area_intersect, total_area_union, total_area_pred_label,
-            total_area_label, self.metrics, self.nan_to_num, self.beta)
+            area_intersect, area_union, area_pred_label,
+            area_label, self.metrics, self.nan_to_num, self.beta)
 
         class_names = self.dataset_meta['classes']
-  
-        
         # summary table
         ret_metrics_summary = OrderedDict({
             ret_metric: np.round(np.nanmean(ret_metric_value) * 100, 2)
-            for ret_metric, ret_metric_value in ret_metrics.items() 
-                
+            for ret_metric, ret_metric_value in ret_metrics.items()
         })
         metrics = dict()
         for key, val in ret_metrics_summary.items():
@@ -144,7 +138,7 @@ class CustomIoUMetric(BaseMetric):
                 metrics[key] = val
             else:
                 metrics['m' + key] = val
-       
+
         # each class table
         ret_metrics.pop('aAcc', None)
         ret_metrics_class = OrderedDict({
@@ -202,22 +196,22 @@ class CustomIoUMetric(BaseMetric):
         return area_intersect, area_union, area_pred_label, area_label
 
     @staticmethod
-    def total_area_to_metrics(total_area_intersect: np.ndarray,
-                              total_area_union: np.ndarray,
-                              total_area_pred_label: np.ndarray,
-                              total_area_label: np.ndarray,
-                              metrics: List[str] = ['mIoU', 'mDice', 'mFscore', 'mIoUvPr'],
+    def total_area_to_metrics(area_intersect: np.ndarray,
+                              area_union: np.ndarray,
+                              area_pred_label: np.ndarray,
+                              area_label: np.ndarray,
+                              metrics: List[str] = ['mIoU'],
                               nan_to_num: Optional[int] = None,
                               beta: int = 1):
         """Calculate evaluation metrics
         Args:
-            total_area_intersect (np.ndarray): The intersection of prediction
-                and ground truth histogram on all classes.
-            total_area_union (np.ndarray): The union of prediction and ground
+            area_intersect (np.ndarray): The intersection of prediction
+                and ground truth histogram on all classes. 
+            area_union (np.ndarray): The union of prediction and ground
                 truth histogram on all classes.
-            total_area_pred_label (np.ndarray): The prediction histogram on
+            area_pred_label (np.ndarray): The prediction histogram on
                 all classes.
-            total_area_label (np.ndarray): The ground truth histogram on
+            area_label (np.ndarray): The ground truth histogram on
                 all classes.
             metrics (List[str] | str): Metrics to be evaluated, 'mIoU' and
                 'mDice'.
@@ -229,73 +223,41 @@ class CustomIoUMetric(BaseMetric):
             Dict[str, np.ndarray]: per category evaluation metrics,
                 shape (num_classes, ).
         """
-
-        def f_score(precision, recall, beta=1):
-            """calculate the f-score value.
-
-            Args:
-                precision (float | torch.Tensor): The precision value.
-                recall (float | torch.Tensor): The recall value.
-                beta (int): Determines the weight of recall in the combined
-                    score. Default: 1.
-
-            Returns:
-                [torch.tensor]: The f-score value.
-            """
-            score = (1 + beta**2) * (precision * recall) / (
-                (beta**2 * precision) + recall)
-            return score
-
-        if isinstance(metrics, str):
-            metrics = [metrics]
-        allowed_metrics = ['mIoU', 'mDice', 'mFscore', 'mIoUvPr']
-        if not set(metrics).issubset(set(allowed_metrics)):
-            raise KeyError(f'metrics {metrics} is not supported')
-
-        all_acc = total_area_intersect.sum() / total_area_label.sum()
-        ret_metrics = OrderedDict({'aAcc': all_acc})
-        for metric in metrics:
-            if metric == 'mIoU':
-                iou = total_area_intersect / total_area_union
-                acc = total_area_intersect / total_area_label
-                ret_metrics['IoU'] = iou
-                ret_metrics['Acc'] = acc
-            elif metric == 'mDice':
-                dice = 2 * total_area_intersect / (
-                    total_area_pred_label + total_area_label)
-                acc = total_area_intersect / total_area_label
-                ret_metrics['Dice'] = dice
-                ret_metrics['Acc'] = acc
-            elif metric == 'mFscore':
-                precision = total_area_intersect / total_area_pred_label
-                recall = total_area_intersect / total_area_label
-                f_value = torch.tensor([
-                    f_score(x[0], x[1], beta) for x in zip(precision, recall)
-                ])
-                ret_metrics['Fscore'] = f_value
-                ret_metrics['Precision'] = precision
-                ret_metrics['Recall'] = recall
-            elif metric ==  'mIoUvPr':
-                iou = total_area_intersect / total_area_union
-                PRs = []
-                
-                thresholds = np.arange(0.5, 1.0, 0.1)
-                for threshold in thresholds:
-                    score = (iou > threshold)
-                    print(f"score.shape : {score.shape}")
-                    PRs.append(score)
-                iou_ = iou.mean()
-                for th_idx in range(len(thresholds)):
-                    thres = thresholds[th_idx]
-                
-                    ret_metrics[f'Pr@{(thres * 10):.2f}']  = PRs[th_idx]              
-        ret_metrics = {
-            metric: value.numpy()
-            for metric, value in ret_metrics.items()
-        }
-        if nan_to_num is not None:
-            ret_metrics = OrderedDict({
-                metric: np.nan_to_num(metric_value, nan=nan_to_num)
-                for metric, metric_value in ret_metrics.items()
-            })
+        
+        n_samples = area_intersect.shape[0]
+        n_classes = area_intersect.shape[1]
+        iou_per_sample_list = np.zeros((n_samples, n_classes))
+        ret_metrics = OrderedDict()
+        # iou per sample
+        for sample_idx in range(n_samples):
+            
+            inter = area_intersect[sample_idx]
+            union = area_union[sample_idx]
+            pred = area_pred_label[sample_idx]
+            gt = area_label[sample_idx]
+            iou = inter / union
+            iou_per_sample_list[sample_idx] = iou
+        for thres in np.arange(0.5, 1.0, 0.1):
+            
+            score = np.mean((iou_per_sample_list > thres), 0)
+            ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = score
+        
+        total_iou = np.sum(area_intersect, 0) / np.sum(area_union, 0) 
+        ret_metrics["IoU"] = total_iou
+        
+        
+        # ret_metrics = {
+        #     metric: value.numpy()
+        #     for metric, value in ret_metrics.items()
+        # }
+        # if nan_to_num is not None:
+        ret_metrics = OrderedDict({
+            metric: np.nan_to_num(metric_value, nan=0.0)
+            for metric, metric_value in ret_metrics.items()
+        })
+        # print("ret: ")
+        # for key, val in ret_metrics.items():
+        #     print(f"{key} : {val}")
+        # print()
+        
         return ret_metrics

@@ -22,7 +22,7 @@ class ArgumentHandler:
                 )
                 for checkpoint_path in checkpoint_paths:
                     cfg_name = ArgumentHandler._generate_config_name(
-                        args=args, model_dict=model_dict, 
+                        args=args, 
                         method_name=method_name, 
                         pretrained=bool(checkpoint_path),
                         pretrain_data=model_dict["train_data"]
@@ -96,7 +96,7 @@ class ArgumentHandler:
     
     @staticmethod        
     def _generate_config_name(
-        args, model_dict: dict, method_name: str, 
+        args, method_name: str, 
         pretrained: bool, pretrain_data:  str
     ) -> str:
         
