@@ -210,9 +210,12 @@ def main():
     #     test_results_path=test_results_path,
     #     unique=(not one_test)
     # )
+    
     print(project_names)
     # project_names = ["bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512"]
     for project_name in project_names:
+        if "-5k" not in project_name:
+            continue
         print(f"evaluating project: {project_name}")
         project_path = os.path.join(work_dir_path, project_name)
         # checkpoint_names = trimmed_checkpoints(
@@ -220,10 +223,32 @@ def main():
         #     work_dir_path=work_dir_path,
         #     test_results_path=test_results_path
         # )
-        
+        if not os.path.exists(project_path):
+            continue
         checkpoint_names = [    
             file for file in os.listdir(project_path) if ".pth" in file
         ]
+        # TODO temp #################################
+        if not checkpoint_names:
+            continue
+        best_checkpoint_names = [
+            checkpoint_name for checkpoint_name in checkpoint_names
+                if "best" in checkpoint_name
+        ]
+        if best_checkpoint_names:
+            checkpoint_names = best_checkpoint_names
+        else:
+            max_check = checkpoint_names[0]
+            max_iter = int(max_check.split("_")[-1].replace(".pth", ""))
+            for checkpoint_name in checkpoint_names:
+                iter = int(checkpoint_name.split("_")[-1].replace(".pth", ""))
+                
+                if iter > max_iter:
+                    max_check = checkpoint_name
+                    max_iter = iter
+            checkpoint_names = [max_check]
+        
+        ####################################################
         for checkpoint_name in checkpoint_names:
             config_name = [file_name for file_name in os.listdir(project_path) if ".py" in file_name][0]
             config_path = os.path.join(project_path, config_name)
@@ -256,8 +281,9 @@ def main():
                 
                 metrics = runner.test()
                 
-            except:
-                print(f"cfg: {test_name} did not work")
+            except Exception as exp:
+                print(f"cfg: {test_name} test did not work")
+                print(exp)
                 continue
                 
             try:
@@ -267,8 +293,9 @@ def main():
                     verbose=False,
                     work_dir_path=test_name + "/bench"
                 )    
-            except:
+            except Exception as exp:
                 print(f"cfg: {test_name} benchmark did not work")
+                print(exp)
                 continue
             
             results.append(
@@ -295,6 +322,27 @@ def main():
         for key, val in result["benchmark_dict"].items():
             print(f"{key} : {val}")
         print("-" * 80)
-            
+    
+    # order by config:
+    grouped_dict = {}
+    for result in results:
+        name = result["benchmark_dict"]["config"]
+        if name not in grouped_dict.keys():
+            grouped_dict[name] = result
+        
+        if result["metric_dict"]["mIoU"] > grouped_dict[name]["metric_dict"]["mIoU"]:
+            grouped_dict[name] = result
+    
+    print('#' * 80)
+    for name, result in grouped_dict.items():
+        print(f"name: {name}")
+        print("metrics:")
+        for key, val in result["metric_dict"].items():
+            print(f"{key} : {val}")
+        print("benchmark: ")
+        for key, val in result["benchmark_dict"].items():
+            print(f"{key} : {val}")
+        print('-' * 80)
+
 if __name__ == '__main__':
     main()

@@ -133,6 +133,16 @@ class ConfigDictGenerator:
                 schedule["end"] = iteration + iterations_per_step
                 iteration += iterations_per_step
             param_scheduler[-1]["end"] = cfg_build_data["iterations"]
+            # # TODO temp
+            # param_scheduler = [
+            #     dict(
+            #         begin=0, by_epoch=False, end=cfg_build_data["iterations"],
+            #         start_factor=1.0, end_factor = 0.01,
+            #         type='LinearLR'
+            #     )
+            # ]
+            # new_cfg["param_scheduler"] = param_scheduler
+            
             
             additional_configs.append(
                 dict(

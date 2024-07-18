@@ -40,25 +40,45 @@ def run_cfg(cfg):
 
 
 def train_my_configs(
-    config_dir_path = "configs/my_configs",
+    config_dir_path = "my_projects/configs",
     datasets = ["irl_vision_sim", "hots-v1"],
     crop_size = (512, 512),
-    iterations = 2000,
-    save_interval = 500,
-    val_interval = 500,
+    iterations = 5000,
+    save_interval = 1000,
+    val_interval = 1000,
     unique = True,
-    pretrained = True
+    pretrained = True,
+    save_best = True,
+    exclude_names = []
 ):
     
     checkpoint_lookup_table = generate_checkpoint_lookup_by_cfg_name()
     
+    cfg_names = [
+        "fpn_poolformer_m36_8xb4-40k_ade20k-512x512",
+        "knet-s3_r50-d8_fcn_8xb2-adamw-80k_ade20k-512x512",
+        "mask2former_r50_8xb2-160k_ade20k-512x512",
+        "ocrnet_hr18s_4xb4-40k_voc12aug-512x512",
+        "segnext_mscan-t_1xb16-adamw-160k_ade20k-512x512",
+        "twins_svt-b_fpn_fpnhead_8xb4-80k_ade20k-512x512"
+    ]
+    expection_log_path = "my_projects/exception_log.log"
     for base_cfg_name in os.listdir(config_dir_path):
+        # if len(
+        #     [name for name in exclude_names if name in base_cfg_name]
+        # ) > 0:
+        #     continue
     # for base_cfg_name in ["fcn_hr18s_4xb4-20k_voc12aug-512x512.py"]:
         base_cfg_path = os.path.join(config_dir_path, base_cfg_name)
         base_cfg_name = base_cfg_path.split("/")[-1].replace(".py", "")
+        
+        if base_cfg_name not in cfg_names:
+            continue
         # print(base_cfg_name)
         for target_dataset in datasets:
             checkpoints = [_empty_checkpoint]
+            # TODO temp
+            checkpoints = []
             if pretrained:
                 checkpoints.append(
                     checkpoint_lookup_table[base_cfg_name]
@@ -81,7 +101,7 @@ def train_my_configs(
                     pretrained= checkpoint_dict is not _empty_checkpoint, 
                     checkpoint_path=checkpoint_dict["checkpoint_path"],
                     pretrain_dataset=checkpoint_dict["dataset_name"], 
-                    save_best=False, 
+                    save_best=save_best, 
                     save_interval=save_interval,
                     val_interval=val_interval, 
                     batch_size=2, 
@@ -91,12 +111,25 @@ def train_my_configs(
                     dataset_name=target_dataset
                 )
                 cfg = ConfigDictGenerator._generate_config_from_build_data(cfg_build_data=b_data)
+                # change_lr(cfg=cfg, lr=0.01)
                 cfg.work_dir = os.path.join('./work_dirs', b_data["cfg_name"])
                 try:
                     run_cfg(cfg=cfg)
-                except:
+                except Exception as exp:
+                    
                     print(f"couldn't run config: {b_data['cfg_name']}")
-
+                    print(f"excep:\n{exp}")
+                    with open(expection_log_path, 'a') as ex_log:
+                        log_line = f"cfg: {b_data['cfg_name']}\nexcept: {exp}"
+                        ex_log.write(log_line)
+                    
+def change_lr(cfg, lr = 0.1, weight_decay = 0):
+    cfg.optimizer["lr"] = lr
+    cfg.optimizer["weight_decay"] = weight_decay
+    cfg.optim_wrapper.optimizer["lr"] = lr
+    cfg.optim_wrapper.optimizer["weight_decay"] = weight_decay
+    
+    
 def generate_checkpoint_lookup_by_cfg_name(global_config_path = "configs"):
     
     lookup_table = {}
@@ -112,6 +145,7 @@ def generate_checkpoint_lookup_by_cfg_name(global_config_path = "configs"):
                 "checkpoint_path"   :       model_dict["checkpoint_path"]
             }
     return lookup_table
+
 def generate_new_cfg_name(
     base_cfg_name : str, 
     dataset_name : str, 

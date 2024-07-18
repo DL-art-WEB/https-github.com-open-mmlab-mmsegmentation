@@ -1,0 +1,211 @@
+--------------------------------------------------------------------------------
+name: my_projects/work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_hots-v1-512x512/20240716_233725.py
+metrics:
+mPr@50.0 : 86.88
+mPr@60.0 : 85.82
+mPr@70.0 : 81.56
+mPr@80.0 : 76.24
+mPr@90.0 : 55.85
+mIoU : 79.16
+benchmark: 
+config : my_projects/work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_hots-v1-512x512/20240716_233725.py
+unit : img / s
+overall_fps_1 : 23.57
+average_fps : 23.57
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+name: my_projects/work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_irl_vision_sim-512x512/20240716_220759.py
+metrics:
+mPr@50.0 : 88.36
+mPr@60.0 : 87.13
+mPr@70.0 : 86.27
+mPr@80.0 : 85.53
+mPr@90.0 : 78.56
+mIoU : 83.64
+benchmark: 
+config : my_projects/work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_irl_vision_sim-512x512/20240716_220759.py
+unit : img / s
+overall_fps_1 : 23.02
+average_fps : 23.02
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+
+
+
+name: my_projects/work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/20240717_014233.py
+metrics:
+mPr@50.0 : 82.27
+mPr@60.0 : 75.89
+mPr@70.0 : 69.86
+mPr@80.0 : 55.67
+mPr@90.0 : 28.9
+mIoU : 72.87
+benchmark: 
+config : my_projects/work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/20240717_014233.py
+unit : img / s
+overall_fps_1 : 97.42
+average_fps : 97.42
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+name: my_projects/work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_irl_vision_sim-512x512/20240717_005146.py
+metrics:
+mPr@50.0 : 85.17
+mPr@60.0 : 84.55
+mPr@70.0 : 84.35
+mPr@80.0 : 78.84
+mPr@90.0 : 46.06
+mIoU : 74.34
+benchmark: 
+config : my_projects/work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_irl_vision_sim-512x512/20240717_005146.py
+unit : img / s
+overall_fps_1 : 91.42
+average_fps : 91.42
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 61.7
+mPr@60.0 : 58.87
+mPr@70.0 : 49.82
+mPr@80.0 : 45.74
+mPr@90.0 : 16.84
+mIoU : 56.69
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_hots-v1-512x512/20240715_102735.py
+unit : img / s
+overall_fps_1 : 62.89
+average_fps : 62.89
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 76.09
+mPr@60.0 : 72.72
+mPr@70.0 : 69.93
+mPr@80.0 : 61.43
+mPr@90.0 : 39.87
+mIoU : 64.41
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/20240715_101848.py
+unit : img / s
+overall_fps_1 : 61.74
+average_fps : 61.74
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+
+
+
+--------------------------------------------------------------------------------
+name: work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+metrics:
+mPr@50.0 : 65.43
+mPr@60.0 : 62.23
+mPr@70.0 : 58.51
+mPr@80.0 : 51.06
+mPr@90.0 : 35.28
+mIoU : 60.67
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+unit : img / s
+overall_fps_1 : 53.34
+average_fps : 53.34
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+name: work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+metrics:
+mPr@50.0 : 73.01
+mPr@60.0 : 70.81
+mPr@70.0 : 68.08
+mPr@80.0 : 62.42
+mPr@90.0 : 49.02
+mIoU : 60.62
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+unit : img / s
+overall_fps_1 : 48.51
+average_fps : 48.51
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------
+name: work_dirs/mask2former_r50_1xb2-pre-ade20k-5k_hots-v1-512x512/20240718_054029.py
+metrics:
+mPr@50.0 : 96.1
+mPr@60.0 : 95.04
+mPr@70.0 : 95.04
+mPr@80.0 : 84.04
+mPr@90.0 : 57.45
+mIoU : 86.22
+benchmark: 
+config : work_dirs/mask2former_r50_1xb2-pre-ade20k-5k_hots-v1-512x512/20240718_054029.py
+unit : img / s
+overall_fps_1 : 14.38
+average_fps : 14.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+name: work_dirs/mask2former_r50_1xb2-pre-ade20k-5k_irl_vision_sim-512x512/20240718_050609.py
+metrics:
+mPr@50.0 : 93.5
+mPr@60.0 : 93.22
+mPr@70.0 : 93.22
+mPr@80.0 : 92.94
+mPr@90.0 : 88.9
+mIoU : 85.93
+benchmark: 
+config : work_dirs/mask2former_r50_1xb2-pre-ade20k-5k_irl_vision_sim-512x512/20240718_050609.py
+unit : img / s
+overall_fps_1 : 15.27
+average_fps : 15.27
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+
+
+
+
+name: work_dirs/segnext_mscan-t_1xb2-pre-ade20k-5k_hots-v1-512x512/20240718_070719.py
+metrics:
+mPr@50.0 : 85.46
+mPr@60.0 : 82.27
+mPr@70.0 : 75.18
+mPr@80.0 : 65.78
+mPr@90.0 : 49.65
+mIoU : 78.61
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-5k_hots-v1-512x512/20240718_070719.py
+unit : img / s
+overall_fps_1 : 56.02
+average_fps : 56.02
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+name: work_dirs/segnext_mscan-t_1xb2-pre-ade20k-5k_irl_vision_sim-512x512/20240718_065323.py
+metrics:
+mPr@50.0 : 90.9
+mPr@60.0 : 89.42
+mPr@70.0 : 86.99
+mPr@80.0 : 85.03
+mPr@90.0 : 75.19
+mIoU : 83.5
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-5k_irl_vision_sim-512x512/20240718_065323.py
+unit : img / s
+overall_fps_1 : 54.04
+average_fps : 54.04
+fps_variance : 0.0
+--------------------------------------------------------------------------------

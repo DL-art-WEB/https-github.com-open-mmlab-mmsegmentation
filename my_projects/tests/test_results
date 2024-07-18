@@ -1,0 +1,4671 @@
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.99
+mPr@60.0 : 3.46
+mPr@70.0 : 2.93
+mPr@80.0 : 2.39
+mPr@90.0 : 1.33
+mIoU : 7.05
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_023302.py
+unit : img / s
+overall_fps_1 : 98.15
+average_fps : 98.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 3.72
+mPr@70.0 : 3.19
+mPr@80.0 : 2.93
+mPr@90.0 : 2.13
+mIoU : 10.87
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_023302.py
+unit : img / s
+overall_fps_1 : 99.01
+average_fps : 99.01
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 5.32
+mPr@60.0 : 3.99
+mPr@70.0 : 3.46
+mPr@80.0 : 2.93
+mPr@90.0 : 1.86
+mIoU : 13.46
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_023302.py
+unit : img / s
+overall_fps_1 : 98.33
+average_fps : 98.33
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.66
+mPr@60.0 : 2.66
+mPr@70.0 : 2.66
+mPr@80.0 : 2.13
+mPr@90.0 : 1.06
+mIoU : 4.27
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_023302.py
+unit : img / s
+overall_fps_1 : 98.73
+average_fps : 98.73
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.61
+mPr@60.0 : 1.59
+mPr@70.0 : 1.57
+mPr@80.0 : 1.52
+mPr@90.0 : 1.44
+mIoU : 3.39
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_022100.py
+unit : img / s
+overall_fps_1 : 91.78
+average_fps : 91.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.83
+mPr@60.0 : 1.74
+mPr@70.0 : 1.66
+mPr@80.0 : 1.56
+mPr@90.0 : 1.52
+mIoU : 4.3
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_022100.py
+unit : img / s
+overall_fps_1 : 94.05
+average_fps : 94.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.91
+mPr@60.0 : 1.85
+mPr@70.0 : 1.7
+mPr@80.0 : 1.58
+mPr@90.0 : 1.51
+mIoU : 4.55
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_022100.py
+unit : img / s
+overall_fps_1 : 92.19
+average_fps : 92.19
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.4
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.31
+mIoU : 1.41
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_022100.py
+unit : img / s
+overall_fps_1 : 91.85
+average_fps : 91.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 8.51
+mPr@60.0 : 8.24
+mPr@70.0 : 7.45
+mPr@80.0 : 5.59
+mPr@90.0 : 4.26
+mIoU : 23.81
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_023739.py
+unit : img / s
+overall_fps_1 : 97.87
+average_fps : 97.87
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 15.69
+mPr@60.0 : 15.43
+mPr@70.0 : 14.89
+mPr@80.0 : 11.17
+mPr@90.0 : 5.85
+mIoU : 42.42
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_023739.py
+unit : img / s
+overall_fps_1 : 98.75
+average_fps : 98.75
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 16.22
+mPr@60.0 : 15.43
+mPr@70.0 : 15.16
+mPr@80.0 : 13.03
+mPr@90.0 : 6.91
+mIoU : 46.88
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_023739.py
+unit : img / s
+overall_fps_1 : 97.77
+average_fps : 97.77
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.72
+mPr@60.0 : 3.46
+mPr@70.0 : 3.19
+mPr@80.0 : 2.66
+mPr@90.0 : 2.66
+mIoU : 8.52
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_023739.py
+unit : img / s
+overall_fps_1 : 97.93
+average_fps : 97.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.73
+mPr@60.0 : 1.68
+mPr@70.0 : 1.61
+mPr@80.0 : 1.52
+mPr@90.0 : 1.41
+mIoU : 3.72
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_022651.py
+unit : img / s
+overall_fps_1 : 93.69
+average_fps : 93.69
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.09
+mPr@60.0 : 2.0
+mPr@70.0 : 1.88
+mPr@80.0 : 1.74
+mPr@90.0 : 1.58
+mIoU : 8.32
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_022651.py
+unit : img / s
+overall_fps_1 : 94.1
+average_fps : 94.1
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.76
+mPr@60.0 : 2.71
+mPr@70.0 : 2.53
+mPr@80.0 : 2.35
+mPr@90.0 : 2.02
+mIoU : 16.06
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_022651.py
+unit : img / s
+overall_fps_1 : 93.96
+average_fps : 93.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.28
+mIoU : 1.33
+benchmark: 
+config : work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_022651.py
+unit : img / s
+overall_fps_1 : 93.61
+average_fps : 93.61
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.13
+mPr@60.0 : 2.13
+mPr@70.0 : 2.13
+mPr@80.0 : 1.86
+mPr@90.0 : 0.53
+mIoU : 2.08
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_030828.py
+unit : img / s
+overall_fps_1 : 20.02
+average_fps : 20.02
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 8.51
+mPr@60.0 : 5.32
+mPr@70.0 : 3.99
+mPr@80.0 : 3.19
+mPr@90.0 : 2.13
+mIoU : 22.44
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_030828.py
+unit : img / s
+overall_fps_1 : 19.93
+average_fps : 19.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 5.32
+mPr@70.0 : 3.99
+mPr@80.0 : 2.66
+mPr@90.0 : 2.13
+mIoU : 21.31
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_030828.py
+unit : img / s
+overall_fps_1 : 19.91
+average_fps : 19.91
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.99
+mPr@60.0 : 3.19
+mPr@70.0 : 2.66
+mPr@80.0 : 2.66
+mPr@90.0 : 1.06
+mIoU : 8.28
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_hots-v1-512x512/20240715_030828.py
+unit : img / s
+overall_fps_1 : 19.88
+average_fps : 19.88
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.97
+mPr@60.0 : 1.83
+mPr@70.0 : 1.73
+mPr@80.0 : 1.61
+mPr@90.0 : 1.35
+mIoU : 6.2
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_024219.py
+unit : img / s
+overall_fps_1 : 19.79
+average_fps : 19.79
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.9
+mPr@60.0 : 2.75
+mPr@70.0 : 2.45
+mPr@80.0 : 2.0
+mPr@90.0 : 1.48
+mIoU : 14.8
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_024219.py
+unit : img / s
+overall_fps_1 : 19.8
+average_fps : 19.8
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 3.56
+mPr@60.0 : 3.2
+mPr@70.0 : 2.68
+mPr@80.0 : 2.21
+mPr@90.0 : 1.63
+mIoU : 22.96
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_024219.py
+unit : img / s
+overall_fps_1 : 19.79
+average_fps : 19.79
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.76
+mPr@60.0 : 1.61
+mPr@70.0 : 1.47
+mPr@80.0 : 1.41
+mPr@90.0 : 1.35
+mIoU : 4.05
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-2k_irl_vision_sim-512x512/20240715_024219.py
+unit : img / s
+overall_fps_1 : 19.8
+average_fps : 19.8
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 13.56
+mPr@60.0 : 13.03
+mPr@70.0 : 12.5
+mPr@80.0 : 8.78
+mPr@90.0 : 3.99
+mIoU : 36.59
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_031941.py
+unit : img / s
+overall_fps_1 : 19.92
+average_fps : 19.92
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.02
+mPr@60.0 : 16.49
+mPr@70.0 : 15.43
+mPr@80.0 : 12.77
+mPr@90.0 : 8.24
+mIoU : 51.2
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_031941.py
+unit : img / s
+overall_fps_1 : 19.88
+average_fps : 19.88
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 15.96
+mPr@70.0 : 15.96
+mPr@80.0 : 13.3
+mPr@90.0 : 7.71
+mIoU : 52.25
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_031941.py
+unit : img / s
+overall_fps_1 : 19.86
+average_fps : 19.86
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 5.59
+mPr@70.0 : 5.05
+mPr@80.0 : 5.05
+mPr@90.0 : 3.46
+mIoU : 16.06
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_031941.py
+unit : img / s
+overall_fps_1 : 19.85
+average_fps : 19.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.3
+mPr@60.0 : 2.21
+mPr@70.0 : 2.12
+mPr@80.0 : 1.96
+mPr@90.0 : 1.57
+mIoU : 10.47
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_025509.py
+unit : img / s
+overall_fps_1 : 19.78
+average_fps : 19.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.79
+mPr@60.0 : 3.71
+mPr@70.0 : 3.55
+mPr@80.0 : 3.24
+mPr@90.0 : 2.41
+mIoU : 29.65
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_025509.py
+unit : img / s
+overall_fps_1 : 19.77
+average_fps : 19.77
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.43
+mPr@60.0 : 4.32
+mPr@70.0 : 4.03
+mPr@80.0 : 3.7
+mPr@90.0 : 2.72
+mIoU : 38.9
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_025509.py
+unit : img / s
+overall_fps_1 : 19.76
+average_fps : 19.76
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.53
+mPr@60.0 : 1.52
+mPr@70.0 : 1.46
+mPr@80.0 : 1.44
+mPr@90.0 : 1.38
+mIoU : 2.07
+benchmark: 
+config : work_dirs/bisenetv1_r50-d32-in1k-pre_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_025509.py
+unit : img / s
+overall_fps_1 : 19.78
+average_fps : 19.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 4.79
+mPr@60.0 : 3.99
+mPr@70.0 : 3.46
+mPr@80.0 : 3.46
+mPr@90.0 : 2.66
+mIoU : 11.28
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_035948.py
+unit : img / s
+overall_fps_1 : 35.56
+average_fps : 35.56
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 5.85
+mPr@60.0 : 5.32
+mPr@70.0 : 4.52
+mPr@80.0 : 3.99
+mPr@90.0 : 2.66
+mIoU : 15.88
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_035948.py
+unit : img / s
+overall_fps_1 : 35.47
+average_fps : 35.47
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 5.85
+mPr@70.0 : 4.79
+mPr@80.0 : 3.72
+mPr@90.0 : 2.93
+mIoU : 16.33
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_035948.py
+unit : img / s
+overall_fps_1 : 35.42
+average_fps : 35.42
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.72
+mPr@60.0 : 3.72
+mPr@70.0 : 2.93
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 7.33
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_035948.py
+unit : img / s
+overall_fps_1 : 35.47
+average_fps : 35.47
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.51
+mPr@80.0 : 1.47
+mPr@90.0 : 1.43
+mIoU : 2.21
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_034532.py
+unit : img / s
+overall_fps_1 : 34.91
+average_fps : 34.91
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.41
+mIoU : 2.31
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_034532.py
+unit : img / s
+overall_fps_1 : 34.93
+average_fps : 34.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.42
+mIoU : 2.06
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_034532.py
+unit : img / s
+overall_fps_1 : 35.04
+average_fps : 35.04
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.41
+mPr@60.0 : 1.4
+mPr@70.0 : 1.4
+mPr@80.0 : 1.39
+mPr@90.0 : 1.35
+mIoU : 1.64
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_034532.py
+unit : img / s
+overall_fps_1 : 35.01
+average_fps : 35.01
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 4.79
+mPr@60.0 : 4.26
+mPr@70.0 : 3.99
+mPr@80.0 : 3.46
+mPr@90.0 : 2.93
+mIoU : 12.1
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_040611.py
+unit : img / s
+overall_fps_1 : 35.48
+average_fps : 35.48
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 6.65
+mPr@70.0 : 6.12
+mPr@80.0 : 4.79
+mPr@90.0 : 3.46
+mIoU : 16.69
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_040611.py
+unit : img / s
+overall_fps_1 : 35.52
+average_fps : 35.52
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 6.38
+mPr@70.0 : 6.12
+mPr@80.0 : 4.52
+mPr@90.0 : 3.72
+mIoU : 18.15
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_040611.py
+unit : img / s
+overall_fps_1 : 35.45
+average_fps : 35.45
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.46
+mPr@60.0 : 2.93
+mPr@70.0 : 2.66
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 6.64
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_040611.py
+unit : img / s
+overall_fps_1 : 35.39
+average_fps : 35.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.54
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.15
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_035235.py
+unit : img / s
+overall_fps_1 : 34.94
+average_fps : 34.94
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.45
+mIoU : 2.1
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_035235.py
+unit : img / s
+overall_fps_1 : 35.06
+average_fps : 35.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.48
+mIoU : 2.02
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_035235.py
+unit : img / s
+overall_fps_1 : 35.05
+average_fps : 35.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.43
+mPr@60.0 : 1.43
+mPr@70.0 : 1.42
+mPr@80.0 : 1.41
+mPr@90.0 : 1.35
+mIoU : 1.53
+benchmark: 
+config : work_dirs/deeplabv3_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_035235.py
+unit : img / s
+overall_fps_1 : 35.06
+average_fps : 35.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 8.78
+mPr@60.0 : 7.71
+mPr@70.0 : 6.65
+mPr@80.0 : 5.32
+mPr@90.0 : 2.39
+mIoU : 26.5
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/20240715_050724.py
+unit : img / s
+overall_fps_1 : 7.19
+average_fps : 7.19
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 14.89
+mPr@60.0 : 13.83
+mPr@70.0 : 12.5
+mPr@80.0 : 9.84
+mPr@90.0 : 4.26
+mIoU : 39.09
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/20240715_050724.py
+unit : img / s
+overall_fps_1 : 7.16
+average_fps : 7.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 15.43
+mPr@60.0 : 14.89
+mPr@70.0 : 14.63
+mPr@80.0 : 12.77
+mPr@90.0 : 5.85
+mIoU : 46.64
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/20240715_050724.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 5.05
+mPr@60.0 : 4.26
+mPr@70.0 : 3.46
+mPr@80.0 : 3.46
+mPr@90.0 : 2.39
+mIoU : 13.11
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_hots-v1-512x512/20240715_050724.py
+unit : img / s
+overall_fps_1 : 7.14
+average_fps : 7.14
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.79
+mPr@60.0 : 1.7
+mPr@70.0 : 1.59
+mPr@80.0 : 1.48
+mPr@90.0 : 1.39
+mIoU : 4.59
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/20240715_041233.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.04
+mPr@60.0 : 1.94
+mPr@70.0 : 1.81
+mPr@80.0 : 1.73
+mPr@90.0 : 1.57
+mIoU : 7.69
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/20240715_041233.py
+unit : img / s
+overall_fps_1 : 7.14
+average_fps : 7.14
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.47
+mPr@60.0 : 2.3
+mPr@70.0 : 2.16
+mPr@80.0 : 1.92
+mPr@90.0 : 1.58
+mIoU : 12.38
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/20240715_041233.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.63
+mPr@60.0 : 1.59
+mPr@70.0 : 1.58
+mPr@80.0 : 1.52
+mPr@90.0 : 1.43
+mIoU : 3.1
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-2k_irl_vision_sim-512x512/20240715_041233.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 14.89
+mPr@60.0 : 14.36
+mPr@70.0 : 13.56
+mPr@80.0 : 9.84
+mPr@90.0 : 6.12
+mIoU : 43.03
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/20240715_062623.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 16.76
+mPr@70.0 : 15.43
+mPr@80.0 : 13.03
+mPr@90.0 : 6.12
+mIoU : 51.82
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/20240715_062623.py
+unit : img / s
+overall_fps_1 : 7.13
+average_fps : 7.13
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.62
+mPr@60.0 : 17.82
+mPr@70.0 : 17.02
+mPr@80.0 : 14.63
+mPr@90.0 : 7.71
+mIoU : 56.64
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/20240715_062623.py
+unit : img / s
+overall_fps_1 : 7.12
+average_fps : 7.12
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 9.04
+mPr@60.0 : 6.65
+mPr@70.0 : 5.85
+mPr@80.0 : 5.05
+mPr@90.0 : 3.19
+mIoU : 24.62
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_hots-v1-512x512/20240715_062623.py
+unit : img / s
+overall_fps_1 : 7.12
+average_fps : 7.12
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.7
+mPr@60.0 : 1.6
+mPr@70.0 : 1.55
+mPr@80.0 : 1.49
+mPr@90.0 : 1.43
+mIoU : 3.63
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/20240715_055851.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.17
+mPr@60.0 : 2.11
+mPr@70.0 : 1.98
+mPr@80.0 : 1.88
+mPr@90.0 : 1.6
+mIoU : 8.25
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/20240715_055851.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.31
+mPr@60.0 : 2.21
+mPr@70.0 : 2.13
+mPr@80.0 : 1.93
+mPr@90.0 : 1.69
+mIoU : 9.44
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/20240715_055851.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.53
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.45
+mIoU : 1.98
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff10k-2k_irl_vision_sim-512x512/20240715_055851.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.73
+mPr@60.0 : 1.71
+mPr@70.0 : 1.63
+mPr@80.0 : 1.61
+mPr@90.0 : 1.48
+mIoU : 4.51
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_043949.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.83
+mPr@60.0 : 1.8
+mPr@70.0 : 1.75
+mPr@80.0 : 1.7
+mPr@90.0 : 1.55
+mIoU : 5.24
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_043949.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.03
+mPr@60.0 : 1.94
+mPr@70.0 : 1.87
+mPr@80.0 : 1.79
+mPr@90.0 : 1.63
+mIoU : 7.35
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_043949.py
+unit : img / s
+overall_fps_1 : 7.15
+average_fps : 7.15
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.44
+mIoU : 2.17
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_irl_vision_sim-512x512/20240715_043949.py
+unit : img / s
+overall_fps_1 : 7.16
+average_fps : 7.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.19
+mPr@60.0 : 2.66
+mPr@70.0 : 2.39
+mPr@80.0 : 2.13
+mPr@90.0 : 1.06
+mIoU : 5.09
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_hots-v1-512x512/20240715_070905.py
+unit : img / s
+overall_fps_1 : 192.29
+average_fps : 192.29
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.46
+mPr@60.0 : 3.19
+mPr@70.0 : 2.93
+mPr@80.0 : 2.13
+mPr@90.0 : 1.6
+mIoU : 7.06
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_hots-v1-512x512/20240715_070905.py
+unit : img / s
+overall_fps_1 : 192.7
+average_fps : 192.7
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.52
+mPr@60.0 : 3.72
+mPr@70.0 : 2.66
+mPr@80.0 : 2.13
+mPr@90.0 : 1.6
+mIoU : 7.44
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_hots-v1-512x512/20240715_070905.py
+unit : img / s
+overall_fps_1 : 193.79
+average_fps : 193.79
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.39
+mPr@60.0 : 2.39
+mPr@70.0 : 2.13
+mPr@80.0 : 1.33
+mPr@90.0 : 0.8
+mIoU : 2.99
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_hots-v1-512x512/20240715_070905.py
+unit : img / s
+overall_fps_1 : 187.39
+average_fps : 187.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.42
+mPr@60.0 : 1.41
+mPr@70.0 : 1.4
+mPr@80.0 : 1.39
+mPr@90.0 : 1.33
+mIoU : 1.61
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_irl_vision_sim-512x512/20240715_065207.py
+unit : img / s
+overall_fps_1 : 174.03
+average_fps : 174.03
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.49
+mPr@60.0 : 1.46
+mPr@70.0 : 1.43
+mPr@80.0 : 1.4
+mPr@90.0 : 1.37
+mIoU : 2.03
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_irl_vision_sim-512x512/20240715_065207.py
+unit : img / s
+overall_fps_1 : 176.24
+average_fps : 176.24
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.48
+mPr@60.0 : 1.46
+mPr@70.0 : 1.44
+mPr@80.0 : 1.41
+mPr@90.0 : 1.37
+mIoU : 2.0
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_irl_vision_sim-512x512/20240715_065207.py
+unit : img / s
+overall_fps_1 : 176.28
+average_fps : 176.28
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.44
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-2k_irl_vision_sim-512x512/20240715_065207.py
+unit : img / s
+overall_fps_1 : 175.67
+average_fps : 175.67
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.19
+mPr@60.0 : 3.19
+mPr@70.0 : 3.19
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 6.56
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_071500.py
+unit : img / s
+overall_fps_1 : 189.96
+average_fps : 189.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.99
+mPr@60.0 : 3.72
+mPr@70.0 : 3.46
+mPr@80.0 : 2.93
+mPr@90.0 : 2.13
+mIoU : 9.18
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_071500.py
+unit : img / s
+overall_fps_1 : 193.17
+average_fps : 193.17
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 5.05
+mPr@60.0 : 4.52
+mPr@70.0 : 3.72
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 10.55
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_071500.py
+unit : img / s
+overall_fps_1 : 178.91
+average_fps : 178.91
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.13
+mPr@60.0 : 2.13
+mPr@70.0 : 2.13
+mPr@80.0 : 2.13
+mPr@90.0 : 1.86
+mIoU : 2.83
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_071500.py
+unit : img / s
+overall_fps_1 : 189.32
+average_fps : 189.32
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.44
+mPr@60.0 : 1.43
+mPr@70.0 : 1.42
+mPr@80.0 : 1.4
+mPr@90.0 : 1.39
+mIoU : 1.49
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_070035.py
+unit : img / s
+overall_fps_1 : 175.66
+average_fps : 175.66
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.46
+mPr@60.0 : 1.43
+mPr@70.0 : 1.43
+mPr@80.0 : 1.41
+mPr@90.0 : 1.39
+mIoU : 1.54
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_070035.py
+unit : img / s
+overall_fps_1 : 172.76
+average_fps : 172.76
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.44
+mPr@60.0 : 1.43
+mPr@70.0 : 1.43
+mPr@80.0 : 1.4
+mPr@90.0 : 1.39
+mIoU : 1.49
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_070035.py
+unit : img / s
+overall_fps_1 : 175.92
+average_fps : 175.92
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.3
+benchmark: 
+config : work_dirs/fast_scnn_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_070035.py
+unit : img / s
+overall_fps_1 : 173.08
+average_fps : 173.08
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 17.29
+mPr@60.0 : 14.36
+mPr@70.0 : 12.5
+mPr@80.0 : 10.11
+mPr@90.0 : 4.79
+mIoU : 45.59
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_hots-v1-512x512/20240715_072857.py
+unit : img / s
+overall_fps_1 : 57.11
+average_fps : 57.11
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 18.09
+mPr@60.0 : 16.76
+mPr@70.0 : 15.16
+mPr@80.0 : 11.97
+mPr@90.0 : 5.32
+mIoU : 53.01
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_hots-v1-512x512/20240715_072857.py
+unit : img / s
+overall_fps_1 : 53.91
+average_fps : 53.91
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 17.02
+mPr@70.0 : 14.89
+mPr@80.0 : 12.5
+mPr@90.0 : 6.38
+mIoU : 53.12
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_hots-v1-512x512/20240715_072857.py
+unit : img / s
+overall_fps_1 : 57.0
+average_fps : 57.0
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 10.64
+mPr@60.0 : 9.31
+mPr@70.0 : 7.71
+mPr@80.0 : 4.79
+mPr@90.0 : 2.66
+mIoU : 26.62
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_hots-v1-512x512/20240715_072857.py
+unit : img / s
+overall_fps_1 : 58.63
+average_fps : 58.63
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.2
+mPr@60.0 : 2.17
+mPr@70.0 : 2.02
+mPr@80.0 : 1.82
+mPr@90.0 : 1.59
+mIoU : 7.71
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/20240715_072056.py
+unit : img / s
+overall_fps_1 : 54.78
+average_fps : 54.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.34
+mPr@60.0 : 3.15
+mPr@70.0 : 2.76
+mPr@80.0 : 2.36
+mPr@90.0 : 1.76
+mIoU : 19.74
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/20240715_072056.py
+unit : img / s
+overall_fps_1 : 55.05
+average_fps : 55.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 3.67
+mPr@60.0 : 3.37
+mPr@70.0 : 3.17
+mPr@80.0 : 2.83
+mPr@90.0 : 1.99
+mIoU : 25.38
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/20240715_072056.py
+unit : img / s
+overall_fps_1 : 56.41
+average_fps : 56.41
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.59
+mPr@60.0 : 1.55
+mPr@70.0 : 1.52
+mPr@80.0 : 1.49
+mPr@90.0 : 1.48
+mIoU : 2.63
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-2k_irl_vision_sim-512x512/20240715_072056.py
+unit : img / s
+overall_fps_1 : 54.98
+average_fps : 54.98
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 3.99
+mPr@70.0 : 3.19
+mPr@80.0 : 2.66
+mPr@90.0 : 2.39
+mIoU : 9.35
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_073237.py
+unit : img / s
+overall_fps_1 : 57.1
+average_fps : 57.1
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 7.18
+mPr@60.0 : 6.38
+mPr@70.0 : 5.59
+mPr@80.0 : 5.32
+mPr@90.0 : 4.26
+mIoU : 21.19
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_073237.py
+unit : img / s
+overall_fps_1 : 57.98
+average_fps : 57.98
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 9.04
+mPr@60.0 : 7.71
+mPr@70.0 : 6.38
+mPr@80.0 : 5.05
+mPr@90.0 : 4.26
+mIoU : 22.18
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_073237.py
+unit : img / s
+overall_fps_1 : 58.22
+average_fps : 58.22
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.93
+mPr@60.0 : 2.66
+mPr@70.0 : 2.66
+mPr@80.0 : 2.39
+mPr@90.0 : 2.39
+mIoU : 5.31
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_073237.py
+unit : img / s
+overall_fps_1 : 58.14
+average_fps : 58.14
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.53
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.46
+mIoU : 1.95
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_072455.py
+unit : img / s
+overall_fps_1 : 55.42
+average_fps : 55.42
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.48
+mIoU : 1.98
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_072455.py
+unit : img / s
+overall_fps_1 : 55.76
+average_fps : 55.76
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.63
+mPr@60.0 : 1.61
+mPr@70.0 : 1.61
+mPr@80.0 : 1.59
+mPr@90.0 : 1.54
+mIoU : 3.05
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_072455.py
+unit : img / s
+overall_fps_1 : 53.06
+average_fps : 53.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.42
+mIoU : 2.03
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_072455.py
+unit : img / s
+overall_fps_1 : 51.75
+average_fps : 51.75
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 7.45
+mPr@60.0 : 6.91
+mPr@70.0 : 5.85
+mPr@80.0 : 5.05
+mPr@90.0 : 3.99
+mIoU : 21.17
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_074020.py
+unit : img / s
+overall_fps_1 : 58.32
+average_fps : 58.32
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 10.64
+mPr@60.0 : 8.51
+mPr@70.0 : 7.45
+mPr@80.0 : 5.59
+mPr@90.0 : 3.99
+mIoU : 27.05
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_074020.py
+unit : img / s
+overall_fps_1 : 58.77
+average_fps : 58.77
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 11.97
+mPr@60.0 : 10.37
+mPr@70.0 : 8.78
+mPr@80.0 : 7.18
+mPr@90.0 : 4.79
+mIoU : 30.71
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_074020.py
+unit : img / s
+overall_fps_1 : 58.23
+average_fps : 58.23
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 5.32
+mPr@60.0 : 5.32
+mPr@70.0 : 5.32
+mPr@80.0 : 5.05
+mPr@90.0 : 3.19
+mIoU : 13.37
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_074020.py
+unit : img / s
+overall_fps_1 : 57.07
+average_fps : 57.07
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.07
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_073618.py
+unit : img / s
+overall_fps_1 : 54.89
+average_fps : 54.89
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.03
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_073618.py
+unit : img / s
+overall_fps_1 : 56.45
+average_fps : 56.45
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.01
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_073618.py
+unit : img / s
+overall_fps_1 : 56.81
+average_fps : 56.81
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.35
+mIoU : 1.38
+benchmark: 
+config : work_dirs/fcn_hr18s_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_073618.py
+unit : img / s
+overall_fps_1 : 56.36
+average_fps : 56.36
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.8
+mPr@60.0 : 1.78
+mPr@70.0 : 1.68
+mPr@80.0 : 1.64
+mPr@90.0 : 1.55
+mIoU : 4.22
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/20240715_074400.py
+unit : img / s
+overall_fps_1 : 30.3
+average_fps : 30.3
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.31
+mPr@60.0 : 2.19
+mPr@70.0 : 2.08
+mPr@80.0 : 1.88
+mPr@90.0 : 1.7
+mIoU : 8.72
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/20240715_074400.py
+unit : img / s
+overall_fps_1 : 30.31
+average_fps : 30.31
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.65
+mPr@60.0 : 2.51
+mPr@70.0 : 2.35
+mPr@80.0 : 2.16
+mPr@90.0 : 1.84
+mIoU : 13.08
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/20240715_074400.py
+unit : img / s
+overall_fps_1 : 30.17
+average_fps : 30.17
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.54
+mPr@60.0 : 1.51
+mPr@70.0 : 1.49
+mPr@80.0 : 1.46
+mPr@90.0 : 1.44
+mIoU : 2.04
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_irl_vision_sim-512x512/20240715_074400.py
+unit : img / s
+overall_fps_1 : 29.63
+average_fps : 29.63
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 4.52
+mPr@60.0 : 3.99
+mPr@70.0 : 3.72
+mPr@80.0 : 2.93
+mPr@90.0 : 2.13
+mIoU : 10.26
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_080255.py
+unit : img / s
+overall_fps_1 : 30.43
+average_fps : 30.43
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 7.71
+mPr@60.0 : 7.18
+mPr@70.0 : 5.05
+mPr@80.0 : 4.26
+mPr@90.0 : 3.19
+mIoU : 16.99
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_080255.py
+unit : img / s
+overall_fps_1 : 30.75
+average_fps : 30.75
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 8.24
+mPr@60.0 : 7.71
+mPr@70.0 : 7.18
+mPr@80.0 : 6.12
+mPr@90.0 : 4.26
+mIoU : 21.66
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_080255.py
+unit : img / s
+overall_fps_1 : 31.21
+average_fps : 31.21
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.93
+mPr@60.0 : 2.39
+mPr@70.0 : 2.39
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 5.7
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_080255.py
+unit : img / s
+overall_fps_1 : 31.04
+average_fps : 31.04
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.45
+mIoU : 1.86
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_075021.py
+unit : img / s
+overall_fps_1 : 30.7
+average_fps : 30.7
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.53
+mPr@60.0 : 1.53
+mPr@70.0 : 1.51
+mPr@80.0 : 1.47
+mPr@90.0 : 1.44
+mIoU : 2.17
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_075021.py
+unit : img / s
+overall_fps_1 : 30.61
+average_fps : 30.61
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.61
+mPr@60.0 : 1.54
+mPr@70.0 : 1.53
+mPr@80.0 : 1.5
+mPr@90.0 : 1.46
+mIoU : 2.63
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_075021.py
+unit : img / s
+overall_fps_1 : 30.12
+average_fps : 30.12
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.44
+mPr@60.0 : 1.43
+mPr@70.0 : 1.43
+mPr@80.0 : 1.42
+mPr@90.0 : 1.35
+mIoU : 1.49
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_075021.py
+unit : img / s
+overall_fps_1 : 29.84
+average_fps : 29.84
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 7.98
+mPr@60.0 : 6.91
+mPr@70.0 : 6.38
+mPr@80.0 : 5.59
+mPr@90.0 : 3.99
+mIoU : 21.67
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_081526.py
+unit : img / s
+overall_fps_1 : 31.6
+average_fps : 31.6
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 9.84
+mPr@60.0 : 8.78
+mPr@70.0 : 8.24
+mPr@80.0 : 7.18
+mPr@90.0 : 4.52
+mIoU : 27.5
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_081526.py
+unit : img / s
+overall_fps_1 : 29.75
+average_fps : 29.75
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 11.17
+mPr@60.0 : 10.11
+mPr@70.0 : 9.31
+mPr@80.0 : 7.45
+mPr@90.0 : 4.79
+mIoU : 30.06
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_081526.py
+unit : img / s
+overall_fps_1 : 30.29
+average_fps : 30.29
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 3.99
+mPr@70.0 : 3.99
+mPr@80.0 : 3.46
+mPr@90.0 : 3.19
+mIoU : 11.41
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_081526.py
+unit : img / s
+overall_fps_1 : 30.59
+average_fps : 30.59
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.48
+mIoU : 2.02
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_080856.py
+unit : img / s
+overall_fps_1 : 30.93
+average_fps : 30.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.02
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_080856.py
+unit : img / s
+overall_fps_1 : 30.97
+average_fps : 30.97
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.53
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.48
+mIoU : 2.26
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_080856.py
+unit : img / s
+overall_fps_1 : 29.67
+average_fps : 29.67
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.42
+mPr@60.0 : 1.41
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.32
+mIoU : 1.71
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-pre-pascalvoc2012+aug-2k_irl_vision_sim-512x512/20240715_080856.py
+unit : img / s
+overall_fps_1 : 30.63
+average_fps : 30.63
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 18.35
+mPr@60.0 : 17.82
+mPr@70.0 : 17.02
+mPr@80.0 : 14.89
+mPr@90.0 : 11.44
+mIoU : 57.53
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_hots-v1-512x512/20240715_012338.py
+unit : img / s
+overall_fps_1 : 10.27
+average_fps : 10.27
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 18.88
+mPr@60.0 : 18.09
+mPr@70.0 : 17.55
+mPr@80.0 : 16.49
+mPr@90.0 : 11.97
+mIoU : 63.67
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_hots-v1-512x512/20240715_012338.py
+unit : img / s
+overall_fps_1 : 10.24
+average_fps : 10.24
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 19.95
+mPr@60.0 : 19.41
+mPr@70.0 : 18.62
+mPr@80.0 : 17.02
+mPr@90.0 : 12.5
+mIoU : 66.46
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_hots-v1-512x512/20240715_012338.py
+unit : img / s
+overall_fps_1 : 10.23
+average_fps : 10.23
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 12.23
+mPr@60.0 : 11.17
+mPr@70.0 : 10.11
+mPr@80.0 : 9.31
+mPr@90.0 : 6.65
+mIoU : 33.34
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_hots-v1-512x512/20240715_012338.py
+unit : img / s
+overall_fps_1 : 10.24
+average_fps : 10.24
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.39
+mPr@60.0 : 2.33
+mPr@70.0 : 2.12
+mPr@80.0 : 1.87
+mPr@90.0 : 1.67
+mIoU : 9.85
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/20240715_005709.py
+unit : img / s
+overall_fps_1 : 9.96
+average_fps : 9.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.25
+mPr@60.0 : 3.01
+mPr@70.0 : 2.8
+mPr@80.0 : 2.44
+mPr@90.0 : 2.05
+mIoU : 21.56
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/20240715_005709.py
+unit : img / s
+overall_fps_1 : 9.98
+average_fps : 9.98
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.2
+mPr@60.0 : 3.97
+mPr@70.0 : 3.61
+mPr@80.0 : 2.99
+mPr@90.0 : 2.51
+mIoU : 34.0
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/20240715_005709.py
+unit : img / s
+overall_fps_1 : 9.97
+average_fps : 9.97
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.62
+mPr@60.0 : 1.56
+mPr@70.0 : 1.52
+mPr@80.0 : 1.49
+mPr@90.0 : 1.46
+mIoU : 2.98
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-2k_irl_vision_sim-512x512/20240715_005709.py
+unit : img / s
+overall_fps_1 : 9.97
+average_fps : 9.97
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 16.76
+mPr@60.0 : 16.22
+mPr@70.0 : 16.22
+mPr@80.0 : 15.69
+mPr@90.0 : 12.23
+mIoU : 50.7
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/20240715_013603.py
+unit : img / s
+overall_fps_1 : 10.23
+average_fps : 10.23
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 19.41
+mPr@60.0 : 18.88
+mPr@70.0 : 17.82
+mPr@80.0 : 16.49
+mPr@90.0 : 12.23
+mIoU : 62.9
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/20240715_013603.py
+unit : img / s
+overall_fps_1 : 10.22
+average_fps : 10.22
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 19.68
+mPr@60.0 : 19.15
+mPr@70.0 : 18.62
+mPr@80.0 : 17.55
+mPr@90.0 : 13.3
+mIoU : 64.8
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/20240715_013603.py
+unit : img / s
+overall_fps_1 : 10.21
+average_fps : 10.21
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 11.44
+mPr@60.0 : 10.11
+mPr@70.0 : 9.04
+mPr@80.0 : 7.45
+mPr@90.0 : 5.32
+mIoU : 30.44
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_hots-v1-512x512/20240715_013603.py
+unit : img / s
+overall_fps_1 : 10.21
+average_fps : 10.21
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.82
+mPr@60.0 : 1.77
+mPr@70.0 : 1.71
+mPr@80.0 : 1.62
+mPr@90.0 : 1.55
+mIoU : 5.31
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/20240715_010948.py
+unit : img / s
+overall_fps_1 : 9.96
+average_fps : 9.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.59
+mPr@60.0 : 2.51
+mPr@70.0 : 2.34
+mPr@80.0 : 2.25
+mPr@90.0 : 1.98
+mIoU : 11.75
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/20240715_010948.py
+unit : img / s
+overall_fps_1 : 9.95
+average_fps : 9.95
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.97
+mPr@60.0 : 2.88
+mPr@70.0 : 2.8
+mPr@80.0 : 2.6
+mPr@90.0 : 2.29
+mIoU : 17.45
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/20240715_010948.py
+unit : img / s
+overall_fps_1 : 9.95
+average_fps : 9.95
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.49
+mIoU : 2.05
+benchmark: 
+config : work_dirs/fcn_hr48_1xb2-pre-pascalcontext59-2k_irl_vision_sim-512x512/20240715_010948.py
+unit : img / s
+overall_fps_1 : 9.96
+average_fps : 9.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 14.1
+mPr@60.0 : 13.56
+mPr@70.0 : 12.77
+mPr@80.0 : 9.84
+mPr@90.0 : 5.32
+mIoU : 39.54
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_053310.py
+unit : img / s
+overall_fps_1 : 7.16
+average_fps : 7.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.55
+mPr@60.0 : 16.76
+mPr@70.0 : 15.69
+mPr@80.0 : 13.03
+mPr@90.0 : 7.18
+mIoU : 53.64
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_053310.py
+unit : img / s
+overall_fps_1 : 7.14
+average_fps : 7.14
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.88
+mPr@60.0 : 18.62
+mPr@70.0 : 18.09
+mPr@80.0 : 14.36
+mPr@90.0 : 9.04
+mIoU : 57.95
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_053310.py
+unit : img / s
+overall_fps_1 : 7.13
+average_fps : 7.13
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 10.37
+mPr@60.0 : 8.24
+mPr@70.0 : 7.18
+mPr@80.0 : 6.12
+mPr@90.0 : 3.99
+mIoU : 27.7
+benchmark: 
+config : work_dirs/deeplabv3_r50-d8_1xb2-pre-coco-stuff164k-2k_hots-v1-512x512/20240715_053310.py
+unit : img / s
+overall_fps_1 : 7.13
+average_fps : 7.13
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 16.22
+mPr@60.0 : 15.16
+mPr@70.0 : 14.36
+mPr@80.0 : 11.44
+mPr@90.0 : 6.38
+mIoU : 46.64
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_hots-v1-512x512/20240715_075655.py
+unit : img / s
+overall_fps_1 : 31.43
+average_fps : 31.43
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 17.29
+mPr@70.0 : 15.69
+mPr@80.0 : 12.77
+mPr@90.0 : 7.18
+mIoU : 54.64
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_hots-v1-512x512/20240715_075655.py
+unit : img / s
+overall_fps_1 : 30.8
+average_fps : 30.8
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.09
+mPr@60.0 : 17.55
+mPr@70.0 : 16.49
+mPr@80.0 : 13.83
+mPr@90.0 : 7.45
+mIoU : 56.34
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_hots-v1-512x512/20240715_075655.py
+unit : img / s
+overall_fps_1 : 31.03
+average_fps : 31.03
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fcn_hr18_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 11.44
+mPr@60.0 : 9.57
+mPr@70.0 : 7.71
+mPr@80.0 : 6.12
+mPr@90.0 : 2.93
+mIoU : 29.87
+benchmark: 
+config : work_dirs/fcn_hr18_1xb2-2k_hots-v1-512x512/20240715_075655.py
+unit : img / s
+overall_fps_1 : 31.31
+average_fps : 31.31
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 6.12
+mPr@70.0 : 6.12
+mPr@80.0 : 5.32
+mPr@90.0 : 3.99
+mIoU : 16.56
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_123011.py
+unit : img / s
+overall_fps_1 : 115.66
+average_fps : 115.66
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 9.04
+mPr@60.0 : 7.71
+mPr@70.0 : 7.45
+mPr@80.0 : 5.85
+mPr@90.0 : 3.99
+mIoU : 23.63
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_123011.py
+unit : img / s
+overall_fps_1 : 116.11
+average_fps : 116.11
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 9.31
+mPr@60.0 : 8.24
+mPr@70.0 : 7.45
+mPr@80.0 : 6.12
+mPr@90.0 : 3.99
+mIoU : 25.51
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_123011.py
+unit : img / s
+overall_fps_1 : 111.84
+average_fps : 111.84
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.46
+mPr@60.0 : 3.19
+mPr@70.0 : 2.66
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 5.97
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_123011.py
+unit : img / s
+overall_fps_1 : 114.73
+average_fps : 114.73
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.51
+mPr@60.0 : 1.5
+mPr@70.0 : 1.48
+mPr@80.0 : 1.46
+mPr@90.0 : 1.44
+mIoU : 1.77
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/20240715_014828.py
+unit : img / s
+overall_fps_1 : 29.51
+average_fps : 29.51
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.51
+mPr@60.0 : 1.45
+mPr@70.0 : 1.44
+mPr@80.0 : 1.42
+mPr@90.0 : 1.39
+mIoU : 1.85
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/20240715_014828.py
+unit : img / s
+overall_fps_1 : 29.52
+average_fps : 29.52
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.66
+mPr@60.0 : 1.59
+mPr@70.0 : 1.56
+mPr@80.0 : 1.46
+mPr@90.0 : 1.37
+mIoU : 2.14
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/20240715_014828.py
+unit : img / s
+overall_fps_1 : 29.5
+average_fps : 29.5
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.47
+mPr@90.0 : 1.42
+mIoU : 1.71
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_irl_vision_sim-512x512/20240715_014828.py
+unit : img / s
+overall_fps_1 : 29.49
+average_fps : 29.49
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 8.24
+mPr@60.0 : 7.71
+mPr@70.0 : 6.38
+mPr@80.0 : 4.79
+mPr@90.0 : 2.39
+mIoU : 20.27
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_100300.py
+unit : img / s
+overall_fps_1 : 41.38
+average_fps : 41.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 8.78
+mPr@60.0 : 7.18
+mPr@70.0 : 6.38
+mPr@80.0 : 5.05
+mPr@90.0 : 2.66
+mIoU : 23.6
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_100300.py
+unit : img / s
+overall_fps_1 : 41.36
+average_fps : 41.36
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 10.9
+mPr@60.0 : 8.78
+mPr@70.0 : 7.18
+mPr@80.0 : 6.12
+mPr@90.0 : 3.46
+mIoU : 28.93
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_100300.py
+unit : img / s
+overall_fps_1 : 41.31
+average_fps : 41.31
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 3.99
+mPr@70.0 : 3.99
+mPr@80.0 : 3.19
+mPr@90.0 : 2.66
+mIoU : 9.85
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_hots-v1-512x512/20240715_100300.py
+unit : img / s
+overall_fps_1 : 41.37
+average_fps : 41.37
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 10.9
+mPr@60.0 : 10.64
+mPr@70.0 : 9.57
+mPr@80.0 : 8.51
+mPr@90.0 : 5.85
+mIoU : 34.21
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_021243.py
+unit : img / s
+overall_fps_1 : 30.42
+average_fps : 30.42
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 13.3
+mPr@60.0 : 12.5
+mPr@70.0 : 11.7
+mPr@80.0 : 10.37
+mPr@90.0 : 6.12
+mIoU : 40.83
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_021243.py
+unit : img / s
+overall_fps_1 : 30.38
+average_fps : 30.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 14.63
+mPr@60.0 : 13.3
+mPr@70.0 : 10.9
+mPr@80.0 : 9.31
+mPr@90.0 : 6.65
+mIoU : 46.21
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_021243.py
+unit : img / s
+overall_fps_1 : 30.39
+average_fps : 30.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 6.38
+mPr@70.0 : 5.32
+mPr@80.0 : 4.79
+mPr@90.0 : 3.72
+mIoU : 20.85
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_021243.py
+unit : img / s
+overall_fps_1 : 30.35
+average_fps : 30.35
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.59
+mPr@60.0 : 2.52
+mPr@70.0 : 2.43
+mPr@80.0 : 2.29
+mPr@90.0 : 2.12
+mIoU : 11.14
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_015629.py
+unit : img / s
+overall_fps_1 : 29.5
+average_fps : 29.5
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.48
+mPr@60.0 : 3.39
+mPr@70.0 : 3.33
+mPr@80.0 : 3.17
+mPr@90.0 : 2.88
+mIoU : 22.68
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_015629.py
+unit : img / s
+overall_fps_1 : 29.51
+average_fps : 29.51
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 3.78
+mPr@60.0 : 3.71
+mPr@70.0 : 3.61
+mPr@80.0 : 3.45
+mPr@90.0 : 3.17
+mIoU : 27.21
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_015629.py
+unit : img / s
+overall_fps_1 : 29.53
+average_fps : 29.53
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.86
+mPr@60.0 : 1.83
+mPr@70.0 : 1.69
+mPr@80.0 : 1.62
+mPr@90.0 : 1.52
+mIoU : 4.56
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_015629.py
+unit : img / s
+overall_fps_1 : 29.55
+average_fps : 29.55
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.56
+mPr@60.0 : 1.55
+mPr@70.0 : 1.52
+mPr@80.0 : 1.5
+mPr@90.0 : 1.44
+mIoU : 1.62
+benchmark: 
+config : work_dirs/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/20240715_082126.py
+unit : img / s
+overall_fps_1 : 23.14
+average_fps : 23.14
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.59
+mPr@60.0 : 1.53
+mPr@70.0 : 1.5
+mPr@80.0 : 1.47
+mPr@90.0 : 1.41
+mIoU : 1.75
+benchmark: 
+config : work_dirs/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/20240715_082126.py
+unit : img / s
+overall_fps_1 : 23.16
+average_fps : 23.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.67
+mPr@60.0 : 1.6
+mPr@70.0 : 1.55
+mPr@80.0 : 1.47
+mPr@90.0 : 1.38
+mIoU : 2.17
+benchmark: 
+config : work_dirs/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/20240715_082126.py
+unit : img / s
+overall_fps_1 : 23.16
+average_fps : 23.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 0.01
+mPr@60.0 : 0.0
+mPr@70.0 : 0.0
+mPr@80.0 : 0.0
+mPr@90.0 : 0.0
+mIoU : 0.02
+benchmark: 
+config : work_dirs/maskformer_swin-t_upernet_1xb2-2k_irl_vision_sim-512x512/20240715_082126.py
+unit : img / s
+overall_fps_1 : 23.16
+average_fps : 23.16
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 10.64
+mPr@60.0 : 8.51
+mPr@70.0 : 6.65
+mPr@80.0 : 5.85
+mPr@90.0 : 3.46
+mIoU : 31.73
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/20240715_092538.py
+unit : img / s
+overall_fps_1 : 28.32
+average_fps : 28.32
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 12.23
+mPr@60.0 : 11.44
+mPr@70.0 : 9.84
+mPr@80.0 : 6.65
+mPr@90.0 : 3.72
+mIoU : 40.66
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/20240715_092538.py
+unit : img / s
+overall_fps_1 : 28.99
+average_fps : 28.99
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 15.96
+mPr@60.0 : 14.63
+mPr@70.0 : 13.03
+mPr@80.0 : 9.04
+mPr@90.0 : 5.85
+mIoU : 49.38
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/20240715_092538.py
+unit : img / s
+overall_fps_1 : 27.76
+average_fps : 27.76
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 6.38
+mPr@60.0 : 4.26
+mPr@70.0 : 3.72
+mPr@80.0 : 2.66
+mPr@90.0 : 2.13
+mIoU : 15.36
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-2k_hots-v1-512x512/20240715_092538.py
+unit : img / s
+overall_fps_1 : 28.43
+average_fps : 28.43
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 11.17
+mPr@60.0 : 10.11
+mPr@70.0 : 8.51
+mPr@80.0 : 5.32
+mPr@90.0 : 3.19
+mIoU : 32.24
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_093259.py
+unit : img / s
+overall_fps_1 : 28.5
+average_fps : 28.5
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 15.16
+mPr@60.0 : 13.56
+mPr@70.0 : 11.44
+mPr@80.0 : 7.18
+mPr@90.0 : 4.26
+mIoU : 38.5
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_093259.py
+unit : img / s
+overall_fps_1 : 27.62
+average_fps : 27.62
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 14.63
+mPr@60.0 : 14.1
+mPr@70.0 : 11.7
+mPr@80.0 : 8.78
+mPr@90.0 : 5.32
+mIoU : 39.96
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_093259.py
+unit : img / s
+overall_fps_1 : 28.61
+average_fps : 28.61
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 5.05
+mPr@60.0 : 4.79
+mPr@70.0 : 4.52
+mPr@80.0 : 3.72
+mPr@90.0 : 2.39
+mIoU : 13.27
+benchmark: 
+config : work_dirs/ocrnet_hr18s_1xb2-pre-pascalvoc2012+aug-2k_hots-v1-512x512/20240715_093259.py
+unit : img / s
+overall_fps_1 : 28.55
+average_fps : 28.55
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.61
+mPr@60.0 : 1.61
+mPr@70.0 : 1.59
+mPr@80.0 : 1.57
+mPr@90.0 : 1.46
+mIoU : 3.08
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_094947.py
+unit : img / s
+overall_fps_1 : 40.69
+average_fps : 40.69
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.62
+mPr@60.0 : 1.6
+mPr@70.0 : 1.57
+mPr@80.0 : 1.56
+mPr@90.0 : 1.49
+mIoU : 2.85
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_094947.py
+unit : img / s
+overall_fps_1 : 40.67
+average_fps : 40.67
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.62
+mPr@60.0 : 1.6
+mPr@70.0 : 1.56
+mPr@80.0 : 1.54
+mPr@90.0 : 1.48
+mIoU : 2.94
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_094947.py
+unit : img / s
+overall_fps_1 : 40.73
+average_fps : 40.73
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.47
+mPr@60.0 : 1.47
+mPr@70.0 : 1.46
+mPr@80.0 : 1.43
+mPr@90.0 : 1.33
+mIoU : 2.03
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-2k_irl_vision_sim-512x512/20240715_094947.py
+unit : img / s
+overall_fps_1 : 40.78
+average_fps : 40.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 5.59
+mPr@60.0 : 5.05
+mPr@70.0 : 4.79
+mPr@80.0 : 3.72
+mPr@90.0 : 2.93
+mIoU : 13.05
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_100852.py
+unit : img / s
+overall_fps_1 : 41.59
+average_fps : 41.59
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 7.71
+mPr@60.0 : 6.65
+mPr@70.0 : 5.85
+mPr@80.0 : 4.52
+mPr@90.0 : 3.46
+mIoU : 21.08
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_100852.py
+unit : img / s
+overall_fps_1 : 41.52
+average_fps : 41.52
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 8.24
+mPr@60.0 : 7.98
+mPr@70.0 : 6.91
+mPr@80.0 : 5.85
+mPr@90.0 : 4.52
+mIoU : 25.58
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_100852.py
+unit : img / s
+overall_fps_1 : 41.54
+average_fps : 41.54
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.19
+mPr@60.0 : 2.93
+mPr@70.0 : 2.93
+mPr@80.0 : 2.66
+mPr@90.0 : 2.66
+mIoU : 6.18
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_hots-v1-512x512/20240715_100852.py
+unit : img / s
+overall_fps_1 : 41.43
+average_fps : 41.43
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.43
+mIoU : 2.03
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_095613.py
+unit : img / s
+overall_fps_1 : 40.66
+average_fps : 40.66
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.48
+mPr@90.0 : 1.41
+mIoU : 1.96
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_095613.py
+unit : img / s
+overall_fps_1 : 40.7
+average_fps : 40.7
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.46
+mIoU : 2.01
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_095613.py
+unit : img / s
+overall_fps_1 : 40.82
+average_fps : 40.82
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.3
+benchmark: 
+config : work_dirs/pspnet_r18b-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_095613.py
+unit : img / s
+overall_fps_1 : 40.85
+average_fps : 40.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 11.44
+mPr@60.0 : 10.37
+mPr@70.0 : 8.78
+mPr@80.0 : 6.38
+mPr@90.0 : 3.46
+mIoU : 33.61
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_hots-v1-512x512/20240715_102735.py
+unit : img / s
+overall_fps_1 : 68.12
+average_fps : 68.12
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 16.49
+mPr@60.0 : 15.43
+mPr@70.0 : 13.83
+mPr@80.0 : 11.44
+mPr@90.0 : 4.79
+mIoU : 49.34
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_hots-v1-512x512/20240715_102735.py
+unit : img / s
+overall_fps_1 : 68.6
+average_fps : 68.6
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.35
+mPr@60.0 : 17.55
+mPr@70.0 : 15.43
+mPr@80.0 : 13.83
+mPr@90.0 : 6.12
+mIoU : 56.69
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_hots-v1-512x512/20240715_102735.py
+unit : img / s
+overall_fps_1 : 68.39
+average_fps : 68.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.46
+mPr@60.0 : 3.19
+mPr@70.0 : 2.66
+mPr@80.0 : 2.39
+mPr@90.0 : 1.86
+mIoU : 7.92
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_hots-v1-512x512/20240715_102735.py
+unit : img / s
+overall_fps_1 : 68.24
+average_fps : 68.24
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.25
+mPr@60.0 : 2.14
+mPr@70.0 : 1.98
+mPr@80.0 : 1.81
+mPr@90.0 : 1.56
+mIoU : 9.0
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/20240715_101848.py
+unit : img / s
+overall_fps_1 : 65.65
+average_fps : 65.65
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.85
+mPr@60.0 : 4.68
+mPr@70.0 : 4.31
+mPr@80.0 : 3.71
+mPr@90.0 : 2.79
+mIoU : 46.38
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/20240715_101848.py
+unit : img / s
+overall_fps_1 : 65.22
+average_fps : 65.22
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 5.73
+mPr@60.0 : 5.56
+mPr@70.0 : 5.34
+mPr@80.0 : 4.87
+mPr@90.0 : 3.54
+mIoU : 62.8
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/20240715_101848.py
+unit : img / s
+overall_fps_1 : 65.38
+average_fps : 65.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.37
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-2k_irl_vision_sim-512x512/20240715_101848.py
+unit : img / s
+overall_fps_1 : 65.36
+average_fps : 65.36
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 10.37
+mPr@60.0 : 9.31
+mPr@70.0 : 8.24
+mPr@80.0 : 6.38
+mPr@90.0 : 3.19
+mIoU : 30.79
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_103129.py
+unit : img / s
+overall_fps_1 : 68.22
+average_fps : 68.22
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 15.96
+mPr@70.0 : 14.36
+mPr@80.0 : 11.44
+mPr@90.0 : 5.05
+mIoU : 51.77
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_103129.py
+unit : img / s
+overall_fps_1 : 68.24
+average_fps : 68.24
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.09
+mPr@60.0 : 17.02
+mPr@70.0 : 15.16
+mPr@80.0 : 13.56
+mPr@90.0 : 6.65
+mIoU : 56.81
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_103129.py
+unit : img / s
+overall_fps_1 : 68.38
+average_fps : 68.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.93
+mPr@60.0 : 2.66
+mPr@70.0 : 2.39
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 5.82
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_103129.py
+unit : img / s
+overall_fps_1 : 68.64
+average_fps : 68.64
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.48
+mPr@60.0 : 2.33
+mPr@70.0 : 2.2
+mPr@80.0 : 2.0
+mPr@90.0 : 1.72
+mIoU : 12.78
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_102304.py
+unit : img / s
+overall_fps_1 : 65.73
+average_fps : 65.73
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 5.09
+mPr@60.0 : 4.89
+mPr@70.0 : 4.59
+mPr@80.0 : 4.11
+mPr@90.0 : 2.99
+mIoU : 48.74
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_102304.py
+unit : img / s
+overall_fps_1 : 65.63
+average_fps : 65.63
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 5.71
+mPr@60.0 : 5.5
+mPr@70.0 : 5.3
+mPr@80.0 : 4.74
+mPr@90.0 : 3.48
+mIoU : 60.63
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_102304.py
+unit : img / s
+overall_fps_1 : 65.29
+average_fps : 65.29
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.3
+benchmark: 
+config : work_dirs/segformer_mit-b0_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_102304.py
+unit : img / s
+overall_fps_1 : 65.36
+average_fps : 65.36
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 6.91
+mPr@60.0 : 6.12
+mPr@70.0 : 4.79
+mPr@80.0 : 3.19
+mPr@90.0 : 2.39
+mIoU : 16.61
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/20240715_104953.py
+unit : img / s
+overall_fps_1 : 22.26
+average_fps : 22.26
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 7.71
+mPr@60.0 : 7.45
+mPr@70.0 : 5.32
+mPr@80.0 : 4.26
+mPr@90.0 : 2.66
+mIoU : 22.29
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/20240715_104953.py
+unit : img / s
+overall_fps_1 : 22.08
+average_fps : 22.08
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 8.78
+mPr@60.0 : 8.24
+mPr@70.0 : 6.91
+mPr@80.0 : 4.79
+mPr@90.0 : 2.66
+mIoU : 24.35
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/20240715_104953.py
+unit : img / s
+overall_fps_1 : 22.05
+average_fps : 22.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 3.46
+mPr@70.0 : 2.93
+mPr@80.0 : 2.66
+mPr@90.0 : 2.13
+mIoU : 10.39
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_hots-v1-512x512/20240715_104953.py
+unit : img / s
+overall_fps_1 : 22.04
+average_fps : 22.04
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.63
+mPr@60.0 : 3.46
+mPr@70.0 : 3.15
+mPr@80.0 : 2.61
+mPr@90.0 : 1.83
+mIoU : 30.65
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/20240715_103524.py
+unit : img / s
+overall_fps_1 : 21.06
+average_fps : 21.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.26
+mPr@60.0 : 4.0
+mPr@70.0 : 3.67
+mPr@80.0 : 3.17
+mPr@90.0 : 2.13
+mIoU : 39.5
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/20240715_103524.py
+unit : img / s
+overall_fps_1 : 21.1
+average_fps : 21.1
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.65
+mPr@60.0 : 4.41
+mPr@70.0 : 4.05
+mPr@80.0 : 3.48
+mPr@90.0 : 2.34
+mIoU : 44.95
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/20240715_103524.py
+unit : img / s
+overall_fps_1 : 21.1
+average_fps : 21.1
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.26
+mPr@60.0 : 2.16
+mPr@70.0 : 1.99
+mPr@80.0 : 1.77
+mPr@90.0 : 1.48
+mIoU : 10.61
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-2k_irl_vision_sim-512x512/20240715_103524.py
+unit : img / s
+overall_fps_1 : 21.12
+average_fps : 21.12
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 16.49
+mPr@60.0 : 15.69
+mPr@70.0 : 14.63
+mPr@80.0 : 11.97
+mPr@90.0 : 7.18
+mIoU : 49.33
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_105557.py
+unit : img / s
+overall_fps_1 : 22.05
+average_fps : 22.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.29
+mPr@60.0 : 16.76
+mPr@70.0 : 14.63
+mPr@80.0 : 13.3
+mPr@90.0 : 8.24
+mIoU : 53.15
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_105557.py
+unit : img / s
+overall_fps_1 : 22.06
+average_fps : 22.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 16.76
+mPr@70.0 : 15.16
+mPr@80.0 : 13.56
+mPr@90.0 : 8.24
+mIoU : 53.5
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_105557.py
+unit : img / s
+overall_fps_1 : 22.03
+average_fps : 22.03
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 12.5
+mPr@60.0 : 11.17
+mPr@70.0 : 10.11
+mPr@80.0 : 8.51
+mPr@90.0 : 5.32
+mIoU : 35.23
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_105557.py
+unit : img / s
+overall_fps_1 : 22.02
+average_fps : 22.02
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.87
+mPr@60.0 : 3.73
+mPr@70.0 : 3.5
+mPr@80.0 : 3.07
+mPr@90.0 : 2.15
+mIoU : 32.01
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_104238.py
+unit : img / s
+overall_fps_1 : 21.09
+average_fps : 21.09
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.46
+mPr@60.0 : 4.3
+mPr@70.0 : 4.01
+mPr@80.0 : 3.6
+mPr@90.0 : 2.53
+mIoU : 41.78
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_104238.py
+unit : img / s
+overall_fps_1 : 21.07
+average_fps : 21.07
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.77
+mPr@60.0 : 4.61
+mPr@70.0 : 4.3
+mPr@80.0 : 3.7
+mPr@90.0 : 2.62
+mIoU : 47.03
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_104238.py
+unit : img / s
+overall_fps_1 : 21.08
+average_fps : 21.08
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.93
+mPr@60.0 : 2.81
+mPr@70.0 : 2.58
+mPr@80.0 : 2.24
+mPr@90.0 : 1.73
+mIoU : 16.36
+benchmark: 
+config : work_dirs/segmenter_vit-s_fcn_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_104238.py
+unit : img / s
+overall_fps_1 : 21.11
+average_fps : 21.11
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 13.3
+mPr@60.0 : 10.64
+mPr@70.0 : 9.31
+mPr@80.0 : 6.12
+mPr@90.0 : 3.46
+mIoU : 35.43
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/20240715_111117.py
+unit : img / s
+overall_fps_1 : 36.85
+average_fps : 36.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 13.56
+mPr@60.0 : 12.23
+mPr@70.0 : 10.11
+mPr@80.0 : 7.45
+mPr@90.0 : 4.26
+mIoU : 39.23
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/20240715_111117.py
+unit : img / s
+overall_fps_1 : 36.81
+average_fps : 36.81
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 13.83
+mPr@60.0 : 12.77
+mPr@70.0 : 10.9
+mPr@80.0 : 8.24
+mPr@90.0 : 5.59
+mIoU : 43.3
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/20240715_111117.py
+unit : img / s
+overall_fps_1 : 36.81
+average_fps : 36.81
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 7.18
+mPr@60.0 : 6.38
+mPr@70.0 : 5.32
+mPr@80.0 : 3.72
+mPr@90.0 : 2.93
+mIoU : 17.85
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_hots-v1-512x512/20240715_111117.py
+unit : img / s
+overall_fps_1 : 36.81
+average_fps : 36.81
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.36
+mPr@60.0 : 2.16
+mPr@70.0 : 1.96
+mPr@80.0 : 1.7
+mPr@90.0 : 1.45
+mIoU : 10.82
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/20240715_110203.py
+unit : img / s
+overall_fps_1 : 33.93
+average_fps : 33.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 3.02
+mPr@60.0 : 2.78
+mPr@70.0 : 2.48
+mPr@80.0 : 1.94
+mPr@90.0 : 1.53
+mIoU : 17.13
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/20240715_110203.py
+unit : img / s
+overall_fps_1 : 33.88
+average_fps : 33.88
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 3.16
+mPr@60.0 : 2.96
+mPr@70.0 : 2.58
+mPr@80.0 : 2.05
+mPr@90.0 : 1.59
+mIoU : 21.76
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/20240715_110203.py
+unit : img / s
+overall_fps_1 : 34.0
+average_fps : 34.0
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.64
+mPr@60.0 : 1.58
+mPr@70.0 : 1.52
+mPr@80.0 : 1.46
+mPr@90.0 : 1.42
+mIoU : 2.65
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-2k_irl_vision_sim-512x512/20240715_110203.py
+unit : img / s
+overall_fps_1 : 33.96
+average_fps : 33.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 11.97
+mPr@60.0 : 11.44
+mPr@70.0 : 9.57
+mPr@80.0 : 7.98
+mPr@90.0 : 5.05
+mIoU : 36.05
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_111504.py
+unit : img / s
+overall_fps_1 : 36.89
+average_fps : 36.89
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 13.3
+mPr@60.0 : 12.5
+mPr@70.0 : 11.44
+mPr@80.0 : 9.31
+mPr@90.0 : 5.05
+mIoU : 40.33
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_111504.py
+unit : img / s
+overall_fps_1 : 36.84
+average_fps : 36.84
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 13.56
+mPr@60.0 : 12.23
+mPr@70.0 : 11.44
+mPr@80.0 : 9.84
+mPr@90.0 : 5.85
+mIoU : 40.74
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_111504.py
+unit : img / s
+overall_fps_1 : 36.79
+average_fps : 36.79
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 10.64
+mPr@60.0 : 9.31
+mPr@70.0 : 8.78
+mPr@80.0 : 6.91
+mPr@90.0 : 3.99
+mIoU : 26.91
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_111504.py
+unit : img / s
+overall_fps_1 : 36.85
+average_fps : 36.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 3.99
+mPr@60.0 : 3.81
+mPr@70.0 : 3.56
+mPr@80.0 : 3.07
+mPr@90.0 : 2.26
+mIoU : 34.87
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_110640.py
+unit : img / s
+overall_fps_1 : 33.92
+average_fps : 33.92
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.6
+mPr@60.0 : 4.36
+mPr@70.0 : 4.02
+mPr@80.0 : 3.52
+mPr@90.0 : 2.37
+mIoU : 44.1
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_110640.py
+unit : img / s
+overall_fps_1 : 33.85
+average_fps : 33.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.75
+mPr@60.0 : 4.55
+mPr@70.0 : 4.27
+mPr@80.0 : 3.74
+mPr@90.0 : 2.58
+mIoU : 49.11
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_110640.py
+unit : img / s
+overall_fps_1 : 34.03
+average_fps : 34.03
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 3.07
+mPr@60.0 : 2.94
+mPr@70.0 : 2.62
+mPr@80.0 : 2.34
+mPr@90.0 : 1.83
+mIoU : 20.23
+benchmark: 
+config : work_dirs/segmenter_vit-t_mask_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_110640.py
+unit : img / s
+overall_fps_1 : 34.02
+average_fps : 34.02
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 13.3
+mPr@60.0 : 11.17
+mPr@70.0 : 9.04
+mPr@80.0 : 6.91
+mPr@90.0 : 3.72
+mIoU : 40.34
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_hots-v1-512x512/20240715_113328.py
+unit : img / s
+overall_fps_1 : 56.32
+average_fps : 56.32
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 18.88
+mPr@60.0 : 17.55
+mPr@70.0 : 15.96
+mPr@80.0 : 13.56
+mPr@90.0 : 7.98
+mIoU : 62.11
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_hots-v1-512x512/20240715_113328.py
+unit : img / s
+overall_fps_1 : 56.13
+average_fps : 56.13
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 20.74
+mPr@60.0 : 19.68
+mPr@70.0 : 17.29
+mPr@80.0 : 14.89
+mPr@90.0 : 10.11
+mIoU : 67.04
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_hots-v1-512x512/20240715_113328.py
+unit : img / s
+overall_fps_1 : 56.39
+average_fps : 56.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.13
+mPr@60.0 : 2.13
+mPr@70.0 : 1.86
+mPr@80.0 : 1.86
+mPr@90.0 : 1.33
+mIoU : 2.01
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_hots-v1-512x512/20240715_113328.py
+unit : img / s
+overall_fps_1 : 56.21
+average_fps : 56.21
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.54
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.47
+mPr@90.0 : 1.4
+mIoU : 2.27
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/20240715_112136.py
+unit : img / s
+overall_fps_1 : 54.64
+average_fps : 54.64
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.76
+mPr@60.0 : 2.59
+mPr@70.0 : 2.36
+mPr@80.0 : 2.16
+mPr@90.0 : 1.75
+mIoU : 13.21
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/20240715_112136.py
+unit : img / s
+overall_fps_1 : 54.9
+average_fps : 54.9
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 4.32
+mPr@60.0 : 4.09
+mPr@70.0 : 3.84
+mPr@80.0 : 3.51
+mPr@90.0 : 2.75
+mIoU : 35.96
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/20240715_112136.py
+unit : img / s
+overall_fps_1 : 54.73
+average_fps : 54.73
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.3
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-2k_irl_vision_sim-512x512/20240715_112136.py
+unit : img / s
+overall_fps_1 : 54.49
+average_fps : 54.49
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 13.3
+mPr@60.0 : 11.17
+mPr@70.0 : 10.11
+mPr@80.0 : 7.98
+mPr@90.0 : 5.05
+mIoU : 36.66
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+unit : img / s
+overall_fps_1 : 56.1
+average_fps : 56.1
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.82
+mPr@60.0 : 16.76
+mPr@70.0 : 15.43
+mPr@80.0 : 13.03
+mPr@90.0 : 9.04
+mIoU : 56.57
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+unit : img / s
+overall_fps_1 : 56.26
+average_fps : 56.26
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 19.15
+mPr@60.0 : 18.09
+mPr@70.0 : 16.49
+mPr@80.0 : 14.36
+mPr@90.0 : 10.11
+mIoU : 60.8
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+unit : img / s
+overall_fps_1 : 56.53
+average_fps : 56.53
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.13
+mPr@60.0 : 2.13
+mPr@70.0 : 2.13
+mPr@80.0 : 2.13
+mPr@90.0 : 2.13
+mIoU : 4.58
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_113902.py
+unit : img / s
+overall_fps_1 : 56.37
+average_fps : 56.37
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 2.76
+mPr@60.0 : 2.64
+mPr@70.0 : 2.53
+mPr@80.0 : 2.36
+mPr@90.0 : 1.98
+mIoU : 12.25
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+unit : img / s
+overall_fps_1 : 55.0
+average_fps : 55.0
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 4.92
+mPr@60.0 : 4.73
+mPr@70.0 : 4.42
+mPr@80.0 : 4.1
+mPr@90.0 : 3.39
+mIoU : 46.92
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+unit : img / s
+overall_fps_1 : 54.78
+average_fps : 54.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 5.57
+mPr@60.0 : 5.51
+mPr@70.0 : 5.3
+mPr@80.0 : 5.0
+mPr@90.0 : 4.27
+mIoU : 59.91
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+unit : img / s
+overall_fps_1 : 54.68
+average_fps : 54.68
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.39
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.27
+mIoU : 1.3
+benchmark: 
+config : work_dirs/segnext_mscan-t_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_112728.py
+unit : img / s
+overall_fps_1 : 54.78
+average_fps : 54.78
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 15.69
+mPr@60.0 : 15.16
+mPr@70.0 : 14.1
+mPr@80.0 : 12.5
+mPr@90.0 : 7.98
+mIoU : 46.31
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_hots-v1-512x512/20240715_120032.py
+unit : img / s
+overall_fps_1 : 35.94
+average_fps : 35.94
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 17.29
+mPr@60.0 : 17.02
+mPr@70.0 : 16.22
+mPr@80.0 : 14.36
+mPr@90.0 : 9.31
+mIoU : 55.47
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_hots-v1-512x512/20240715_120032.py
+unit : img / s
+overall_fps_1 : 35.95
+average_fps : 35.95
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 18.35
+mPr@60.0 : 17.29
+mPr@70.0 : 16.22
+mPr@80.0 : 15.43
+mPr@90.0 : 9.04
+mIoU : 58.6
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_hots-v1-512x512/20240715_120032.py
+unit : img / s
+overall_fps_1 : 35.94
+average_fps : 35.94
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 9.57
+mPr@60.0 : 8.51
+mPr@70.0 : 6.91
+mPr@80.0 : 4.79
+mPr@90.0 : 3.19
+mIoU : 24.65
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_hots-v1-512x512/20240715_120032.py
+unit : img / s
+overall_fps_1 : 35.91
+average_fps : 35.91
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.82
+mPr@60.0 : 1.77
+mPr@70.0 : 1.7
+mPr@80.0 : 1.61
+mPr@90.0 : 1.51
+mIoU : 4.14
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_irl_vision_sim-512x512/20240715_114803.py
+unit : img / s
+overall_fps_1 : 35.3
+average_fps : 35.3
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 2.25
+mPr@60.0 : 2.18
+mPr@70.0 : 1.99
+mPr@80.0 : 1.81
+mPr@90.0 : 1.59
+mIoU : 7.49
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_irl_vision_sim-512x512/20240715_114803.py
+unit : img / s
+overall_fps_1 : 35.22
+average_fps : 35.22
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.41
+mPr@60.0 : 2.31
+mPr@70.0 : 2.16
+mPr@80.0 : 2.05
+mPr@90.0 : 1.73
+mIoU : 9.83
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_irl_vision_sim-512x512/20240715_114803.py
+unit : img / s
+overall_fps_1 : 35.28
+average_fps : 35.28
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.49
+mPr@70.0 : 1.49
+mPr@80.0 : 1.45
+mPr@90.0 : 1.38
+mIoU : 2.25
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-2k_irl_vision_sim-512x512/20240715_114803.py
+unit : img / s
+overall_fps_1 : 35.29
+average_fps : 35.29
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 5.05
+mPr@60.0 : 4.52
+mPr@70.0 : 3.72
+mPr@80.0 : 3.46
+mPr@90.0 : 2.66
+mIoU : 14.56
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_120615.py
+unit : img / s
+overall_fps_1 : 35.99
+average_fps : 35.99
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 11.17
+mPr@60.0 : 9.57
+mPr@70.0 : 8.51
+mPr@80.0 : 6.65
+mPr@90.0 : 3.72
+mIoU : 28.42
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_120615.py
+unit : img / s
+overall_fps_1 : 35.98
+average_fps : 35.98
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 10.64
+mPr@60.0 : 10.11
+mPr@70.0 : 9.57
+mPr@80.0 : 7.45
+mPr@90.0 : 4.79
+mIoU : 32.42
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_120615.py
+unit : img / s
+overall_fps_1 : 35.93
+average_fps : 35.93
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 2.66
+mPr@60.0 : 2.39
+mPr@70.0 : 2.39
+mPr@80.0 : 2.39
+mPr@90.0 : 2.13
+mIoU : 4.65
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_hots-v1-512x512/20240715_120615.py
+unit : img / s
+overall_fps_1 : 35.85
+average_fps : 35.85
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.47
+mPr@90.0 : 1.45
+mIoU : 1.95
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_115358.py
+unit : img / s
+overall_fps_1 : 35.3
+average_fps : 35.3
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.51
+mPr@60.0 : 1.5
+mPr@70.0 : 1.48
+mPr@80.0 : 1.46
+mPr@90.0 : 1.44
+mIoU : 2.36
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_115358.py
+unit : img / s
+overall_fps_1 : 35.28
+average_fps : 35.28
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.46
+mIoU : 2.02
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_115358.py
+unit : img / s
+overall_fps_1 : 35.39
+average_fps : 35.39
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.46
+mPr@60.0 : 1.43
+mPr@70.0 : 1.43
+mPr@80.0 : 1.41
+mPr@90.0 : 1.39
+mIoU : 1.5
+benchmark: 
+config : work_dirs/fpn_r50_1xb2-pre-ade20k-2k_irl_vision_sim-512x512/20240715_115358.py
+unit : img / s
+overall_fps_1 : 35.28
+average_fps : 35.28
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 4.52
+mPr@60.0 : 4.26
+mPr@70.0 : 3.46
+mPr@80.0 : 2.93
+mPr@90.0 : 2.13
+mIoU : 9.66
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_hots-v1-512x512/20240715_122536.py
+unit : img / s
+overall_fps_1 : 115.81
+average_fps : 115.81
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 6.65
+mPr@60.0 : 5.85
+mPr@70.0 : 5.32
+mPr@80.0 : 3.72
+mPr@90.0 : 2.13
+mIoU : 17.74
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_hots-v1-512x512/20240715_122536.py
+unit : img / s
+overall_fps_1 : 116.05
+average_fps : 116.05
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 6.91
+mPr@60.0 : 5.85
+mPr@70.0 : 5.05
+mPr@80.0 : 3.46
+mPr@90.0 : 2.39
+mIoU : 19.29
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_hots-v1-512x512/20240715_122536.py
+unit : img / s
+overall_fps_1 : 116.87
+average_fps : 116.87
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 4.79
+mPr@60.0 : 3.99
+mPr@70.0 : 3.72
+mPr@80.0 : 2.13
+mPr@90.0 : 1.33
+mIoU : 9.67
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_hots-v1-512x512/20240715_122536.py
+unit : img / s
+overall_fps_1 : 116.38
+average_fps : 116.38
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.84
+mPr@60.0 : 1.78
+mPr@70.0 : 1.7
+mPr@80.0 : 1.61
+mPr@90.0 : 1.52
+mIoU : 4.42
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/20240715_121346.py
+unit : img / s
+overall_fps_1 : 109.66
+average_fps : 109.66
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.88
+mPr@60.0 : 1.71
+mPr@70.0 : 1.68
+mPr@80.0 : 1.55
+mPr@90.0 : 1.46
+mIoU : 5.18
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/20240715_121346.py
+unit : img / s
+overall_fps_1 : 109.35
+average_fps : 109.35
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 2.0
+mPr@60.0 : 1.87
+mPr@70.0 : 1.73
+mPr@80.0 : 1.63
+mPr@90.0 : 1.47
+mIoU : 6.41
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/20240715_121346.py
+unit : img / s
+overall_fps_1 : 110.06
+average_fps : 110.06
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.49
+mPr@70.0 : 1.49
+mPr@80.0 : 1.42
+mPr@90.0 : 1.4
+mIoU : 2.06
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-2k_irl_vision_sim-512x512/20240715_121346.py
+unit : img / s
+overall_fps_1 : 109.98
+average_fps : 109.98
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.52
+mPr@70.0 : 1.51
+mPr@80.0 : 1.46
+mPr@90.0 : 1.41
+mIoU : 2.42
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_121926.py
+unit : img / s
+overall_fps_1 : 110.17
+average_fps : 110.17
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.03
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_121926.py
+unit : img / s
+overall_fps_1 : 108.96
+average_fps : 108.96
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 1.52
+mPr@60.0 : 1.51
+mPr@70.0 : 1.5
+mPr@80.0 : 1.49
+mPr@90.0 : 1.47
+mIoU : 2.08
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_121926.py
+unit : img / s
+overall_fps_1 : 109.3
+average_fps : 109.3
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 1.4
+mPr@60.0 : 1.39
+mPr@70.0 : 1.39
+mPr@80.0 : 1.39
+mPr@90.0 : 1.32
+mIoU : 1.48
+benchmark: 
+config : work_dirs/icnet_r18-d8_1xb2-pre-cityscapes-2k_irl_vision_sim-512x512/20240715_121926.py
+unit : img / s
+overall_fps_1 : 110.31
+average_fps : 110.31
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/iter_1000.pth
+metrics:
+mPr@50.0 : 0.0
+mPr@60.0 : 0.0
+mPr@70.0 : 0.0
+mPr@80.0 : 0.0
+mPr@90.0 : 0.0
+mIoU : 0.0
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/20240715_020426.py
+unit : img / s
+overall_fps_1 : 30.58
+average_fps : 30.58
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/iter_1500.pth
+metrics:
+mPr@50.0 : 0.0
+mPr@60.0 : 0.0
+mPr@70.0 : 0.0
+mPr@80.0 : 0.0
+mPr@90.0 : 0.0
+mIoU : 0.01
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/20240715_020426.py
+unit : img / s
+overall_fps_1 : 30.53
+average_fps : 30.53
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/iter_2000.pth
+metrics:
+mPr@50.0 : 0.0
+mPr@60.0 : 0.0
+mPr@70.0 : 0.0
+mPr@80.0 : 0.0
+mPr@90.0 : 0.0
+mIoU : 0.01
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/20240715_020426.py
+unit : img / s
+overall_fps_1 : 30.47
+average_fps : 30.47
+fps_variance : 0.0
+--------------------------------------------------------------------------------
+
+name: test_results/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/iter_500.pth
+metrics:
+mPr@50.0 : 0.0
+mPr@60.0 : 0.0
+mPr@70.0 : 0.0
+mPr@80.0 : 0.0
+mPr@90.0 : 0.0
+mIoU : 0.0
+benchmark: 
+config : work_dirs/maskformer_r50-d32_1xb2-2k_hots-v1-512x512/20240715_020426.py
+unit : img / s
+overall_fps_1 : 30.44
+average_fps : 30.44
+fps_variance : 0.0
+--------------------------------------------------------------------------------

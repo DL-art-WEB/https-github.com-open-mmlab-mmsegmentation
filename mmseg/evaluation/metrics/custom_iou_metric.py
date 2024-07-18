@@ -117,6 +117,12 @@ class CustomIoUMetric(BaseMetric):
             return OrderedDict()
         results = tuple(zip(*results))
         assert len(results) == 4
+        # total_area_intersect = sum(results[0])
+        # total_area_union = sum(results[1])
+        # ret_iou_mm = self.mm_iou(
+        #     total_area_intersect=total_area_intersect,
+        #     total_area_union=total_area_union
+        # )
         area_intersect = np.asarray([res.numpy() for res in results[0]])
         area_union = np.asarray([res.numpy() for res in results[1]])
         area_pred_label = np.asarray([res.numpy() for res in results[2]])
@@ -126,6 +132,8 @@ class CustomIoUMetric(BaseMetric):
             area_intersect, area_union, area_pred_label,
             area_label, self.metrics, self.nan_to_num, self.beta)
 
+        # ret_metrics["IoU_mm"] = ret_iou_mm["IoU_mm"]
+        
         class_names = self.dataset_meta['classes']
         # summary table
         ret_metrics_summary = OrderedDict({
@@ -226,24 +234,38 @@ class CustomIoUMetric(BaseMetric):
         
         n_samples = area_intersect.shape[0]
         n_classes = area_intersect.shape[1]
-        iou_per_sample_list = np.zeros((n_samples, n_classes))
+        
         ret_metrics = OrderedDict()
         # iou per sample
-        for sample_idx in range(n_samples):
-            
-            inter = area_intersect[sample_idx]
-            union = area_union[sample_idx]
-            pred = area_pred_label[sample_idx]
-            gt = area_label[sample_idx]
-            iou = inter / union
-            iou_per_sample_list[sample_idx] = iou
         for thres in np.arange(0.5, 1.0, 0.1):
-            
-            score = np.mean((iou_per_sample_list > thres), 0)
-            ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = score
+            class_scores = np.zeros((n_classes))
+            class_counts = np.zeros((n_classes))
+            for sample_idx in range(n_samples):
+                
+                inter = area_intersect[sample_idx]
+                union = area_union[sample_idx]
+                pred = area_pred_label[sample_idx]
+                gt = area_label[sample_idx]
+                iou = inter / union
+                class_scores += (iou > thres).astype(np.int32)
+                class_counts += (gt > 0).astype(np.int32)
+            class_scores /= class_counts
+            ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = class_scores
+                
+                
+                
+
         
+        # for thres in np.arange(0.5, 1.0, 0.1):
+            
+            
+        #     # score = np.mean((iou_per_sample_list > thres), 0)
+        #     # score = (total_iou > thres)
+        #     ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = score
+            
         total_iou = np.sum(area_intersect, 0) / np.sum(area_union, 0) 
         ret_metrics["IoU"] = total_iou
+        
         
         
         # ret_metrics = {
@@ -260,4 +282,25 @@ class CustomIoUMetric(BaseMetric):
         #     print(f"{key} : {val}")
         # print()
         
+        return ret_metrics
+
+    @staticmethod
+    def mm_iou(
+        total_area_intersect: np.ndarray,
+        total_area_union: np.ndarray
+    ):
+        iou = total_area_intersect / total_area_union
+        ret_metrics = OrderedDict({'IoU_mm': iou})
+        
+        
+        
+        ret_metrics = {
+            metric: value.numpy()
+            for metric, value in ret_metrics.items()
+        }
+        # if nan_to_num is not None:
+        #     ret_metrics = OrderedDict({
+        #         metric: np.nan_to_num(metric_value, nan=nan_to_num)
+        #         for metric, metric_value in ret_metrics.items()
+        #     })
         return ret_metrics
