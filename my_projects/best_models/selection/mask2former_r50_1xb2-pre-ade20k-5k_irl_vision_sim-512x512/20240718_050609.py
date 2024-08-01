@@ -24,11 +24,12 @@ data_preprocessor = dict(
     ],
     test_cfg=dict(size_divisor=32),
     type='SegDataPreProcessor')
-data_root = '/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/'
-dataset_type = 'HOTSDataset'
+data_root = '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/'
+dataset_type = 'IRLVisionSimDataset'
 default_hooks = dict(
     checkpoint=dict(
-        by_epoch=False, interval=500, save_best='mIoU', type='CheckpointHook'),
+        by_epoch=False, interval=1000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -148,6 +149,31 @@ model = dict(
                 1.0,
                 1.0,
                 1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
             ],
             loss_weight=2.0,
             reduction='mean',
@@ -166,7 +192,7 @@ model = dict(
             reduction='mean',
             type='mmdet.CrossEntropyLoss',
             use_sigmoid=True),
-        num_classes=47,
+        num_classes=72,
         num_queries=100,
         num_transformer_feat_level=3,
         out_channels=256,
@@ -254,7 +280,7 @@ model = dict(
     test_cfg=dict(mode='whole'),
     train_cfg=dict(),
     type='EncoderDecoder')
-num_classes = 47
+num_classes = 72
 optim_wrapper = dict(
     clip_grad=dict(max_norm=0.01, norm_type=2),
     optimizer=dict(
@@ -285,7 +311,7 @@ optimizer = dict(
     weight_decay=0.05)
 param_scheduler = [
     dict(
-        begin=0, by_epoch=False, end=1000, eta_min=0, power=0.9,
+        begin=0, by_epoch=False, end=5000, eta_min=0, power=0.9,
         type='PolyLR'),
 ]
 resume = False
@@ -294,7 +320,8 @@ test_dataloader = dict(
     batch_size=1,
     dataset=dict(
         data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
-        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
@@ -304,7 +331,7 @@ test_dataloader = dict(
             dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='HOTSDataset'),
+        type='IRLVisionSimDataset'),
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
@@ -321,13 +348,14 @@ test_pipeline = [
     dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(max_iters=1000, type='IterBasedTrainLoop', val_interval=500)
+train_cfg = dict(max_iters=5000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
     batch_size=2,
     dataset=dict(
         data_prefix=dict(
             img_path='img_dir/train', seg_map_path='ann_dir/train'),
-        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations'),
@@ -350,7 +378,7 @@ train_dataloader = dict(
             dict(prob=0.5, type='RandomFlip'),
             dict(type='PackSegInputs'),
         ],
-        type='HOTSDataset'),
+        type='IRLVisionSimDataset'),
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
@@ -406,7 +434,8 @@ val_dataloader = dict(
     batch_size=1,
     dataset=dict(
         data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
-        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
@@ -416,7 +445,7 @@ val_dataloader = dict(
             dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='HOTSDataset'),
+        type='IRLVisionSimDataset'),
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
@@ -442,4 +471,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = './work_dirs/mask2former_r50_1xb2-pre-ade20k-1k_hots-v1-512x512'
+work_dir = './work_dirs/mask2former_r50_1xb2-pre-ade20k-5k_irl_vision_sim-512x512'
