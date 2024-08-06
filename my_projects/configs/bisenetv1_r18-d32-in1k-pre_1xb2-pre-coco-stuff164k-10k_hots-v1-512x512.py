@@ -21,10 +21,12 @@ data_preprocessor = dict(
         57.375,
     ],
     type='SegDataPreProcessor')
-data_root = 'data/coco_stuff164k'
-dataset_type = 'COCOStuffDataset'
+data_root = '/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/'
+dataset_type = 'HOTSDataset'
 default_hooks = dict(
-    checkpoint=dict(by_epoch=False, interval=16000, type='CheckpointHook'),
+    checkpoint=dict(
+        by_epoch=False, interval=1000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -43,7 +45,8 @@ img_ratios = [
     1.5,
     1.75,
 ]
-load_from = None
+launcher = 'none'
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/bisenetv1/bisenetv1_r18-d32_in1k-pre_lr5e-3_4x4_512x512_160k_coco-stuff164k/bisenetv1_r18-d32_in1k-pre_lr5e-3_4x4_512x512_160k_coco-stuff164k_20211023_013100-f700dbf7.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
@@ -57,7 +60,7 @@ model = dict(
             loss_decode=dict(
                 loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
             norm_cfg=dict(requires_grad=True, type='SyncBN'),
-            num_classes=171,
+            num_classes=47,
             num_convs=1,
             type='FCNHead'),
         dict(
@@ -69,7 +72,7 @@ model = dict(
             loss_decode=dict(
                 loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
             norm_cfg=dict(requires_grad=True, type='SyncBN'),
-            num_classes=171,
+            num_classes=47,
             num_convs=1,
             type='FCNHead'),
     ],
@@ -154,7 +157,7 @@ model = dict(
         loss_decode=dict(
             loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
         norm_cfg=dict(requires_grad=True, type='SyncBN'),
-        num_classes=171,
+        num_classes=47,
         num_convs=1,
         type='FCNHead'),
     test_cfg=dict(mode='whole'),
@@ -167,11 +170,11 @@ optim_wrapper = dict(
     type='OptimWrapper')
 optimizer = dict(lr=0.005, momentum=0.9, type='SGD', weight_decay=0.0005)
 param_scheduler = [
-    dict(begin=0, by_epoch=False, end=1000, start_factor=0.1, type='LinearLR'),
+    dict(begin=0, by_epoch=False, end=1500, start_factor=0.1, type='LinearLR'),
     dict(
-        begin=1000,
+        begin=1500,
         by_epoch=False,
-        end=160000,
+        end=10000,
         eta_min=0.0001,
         power=0.9,
         type='PolyLR'),
@@ -181,9 +184,8 @@ test_cfg = dict(type='TestLoop')
 test_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/val2017', seg_map_path='annotations/val2017'),
-        data_root='data/coco_stuff164k',
+        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
@@ -193,8 +195,8 @@ test_dataloader = dict(
             dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='COCOStuffDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 test_evaluator = dict(
@@ -210,14 +212,13 @@ test_pipeline = [
     dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(
-    max_iters=160000, type='IterBasedTrainLoop', val_interval=16000)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
-    batch_size=4,
+    batch_size=2,
     dataset=dict(
         data_prefix=dict(
-            img_path='images/train2017', seg_map_path='annotations/train2017'),
-        data_root='data/coco_stuff164k',
+            img_path='img_dir/train', seg_map_path='ann_dir/train'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations'),
@@ -238,11 +239,10 @@ train_dataloader = dict(
                     512,
                 ), type='RandomCrop'),
             dict(prob=0.5, type='RandomFlip'),
-            dict(type='PhotoMetricDistortion'),
             dict(type='PackSegInputs'),
         ],
-        type='COCOStuffDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
 train_pipeline = [
@@ -264,7 +264,6 @@ train_pipeline = [
         512,
     ), type='RandomCrop'),
     dict(prob=0.5, type='RandomFlip'),
-    dict(type='PhotoMetricDistortion'),
     dict(type='PackSegInputs'),
 ]
 tta_model = dict(type='SegTTAModel')
@@ -297,9 +296,8 @@ val_cfg = dict(type='ValLoop')
 val_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/val2017', seg_map_path='annotations/val2017'),
-        data_root='data/coco_stuff164k',
+        data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
@@ -309,14 +307,23 @@ val_dataloader = dict(
             dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='COCOStuffDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 val_evaluator = dict(
     iou_metrics=[
         'mIoU',
     ], type='IoUMetric')
+val_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
 vis_backends = [
     dict(type='LocalVisBackend'),
 ]
@@ -326,3 +333,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
+work_dir = './work_dirs/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512'

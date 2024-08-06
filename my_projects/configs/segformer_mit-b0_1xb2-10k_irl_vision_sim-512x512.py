@@ -22,10 +22,12 @@ data_preprocessor = dict(
         57.375,
     ],
     type='SegDataPreProcessor')
-data_root = '/media/ids/Ubuntu files/data/ADEChallengeData2016/'
-dataset_type = 'ADE20KDataset'
+data_root = '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/'
+dataset_type = 'IRLVisionSimDataset'
 default_hooks = dict(
-    checkpoint=dict(by_epoch=False, interval=16000, type='CheckpointHook'),
+    checkpoint=dict(
+        by_epoch=False, interval=1000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -44,6 +46,7 @@ img_ratios = [
     1.5,
     1.75,
 ]
+launcher = 'none'
 load_from = None
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
@@ -130,7 +133,7 @@ model = dict(
         loss_decode=dict(
             loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
         norm_cfg=dict(requires_grad=True, type='SyncBN'),
-        num_classes=150,
+        num_classes=72,
         type='SegformerHead'),
     pretrained=None,
     test_cfg=dict(mode='whole'),
@@ -157,7 +160,7 @@ param_scheduler = [
     dict(
         begin=1500,
         by_epoch=False,
-        end=160000,
+        end=10000,
         eta_min=0.0,
         power=1.0,
         type='PolyLR'),
@@ -167,21 +170,20 @@ test_cfg = dict(type='TestLoop')
 test_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='IRLVisionSimDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 test_evaluator = dict(
@@ -194,20 +196,20 @@ test_pipeline = [
         2048,
         512,
     ), type='Resize'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(
-    max_iters=160000, type='IterBasedTrainLoop', val_interval=16000)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
     batch_size=2,
     dataset=dict(
         data_prefix=dict(
-            img_path='images/training', seg_map_path='annotations/training'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+            img_path='img_dir/train', seg_map_path='ann_dir/train'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(
                 keep_ratio=True,
                 ratio_range=(
@@ -225,16 +227,15 @@ train_dataloader = dict(
                     512,
                 ), type='RandomCrop'),
             dict(prob=0.5, type='RandomFlip'),
-            dict(type='PhotoMetricDistortion'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
+        type='IRLVisionSimDataset'),
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(
         keep_ratio=True,
         ratio_range=(
@@ -251,7 +252,6 @@ train_pipeline = [
         512,
     ), type='RandomCrop'),
     dict(prob=0.5, type='RandomFlip'),
-    dict(type='PhotoMetricDistortion'),
     dict(type='PackSegInputs'),
 ]
 tta_model = dict(type='SegTTAModel')
@@ -284,27 +284,35 @@ val_cfg = dict(type='ValLoop')
 val_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='IRLVisionSimDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 val_evaluator = dict(
     iou_metrics=[
         'mIoU',
     ], type='IoUMetric')
+val_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
 vis_backends = [
     dict(type='LocalVisBackend'),
 ]
@@ -314,3 +322,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
+work_dir = './work_dirs/segformer_mit-b0_1xb2-10k_irl_vision_sim-512x512'

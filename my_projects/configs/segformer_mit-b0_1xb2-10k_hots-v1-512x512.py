@@ -1,5 +1,4 @@
-backbone_norm_cfg = dict(eps=1e-06, requires_grad=True, type='LN')
-checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segmenter/vit_tiny_p16_384_20220308-cce8c795.pth'
+checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth'
 crop_size = (
     512,
     512,
@@ -7,9 +6,9 @@ crop_size = (
 data_preprocessor = dict(
     bgr_to_rgb=True,
     mean=[
-        127.5,
-        127.5,
-        127.5,
+        123.675,
+        116.28,
+        103.53,
     ],
     pad_val=0,
     seg_pad_val=255,
@@ -18,15 +17,17 @@ data_preprocessor = dict(
         512,
     ),
     std=[
-        127.5,
-        127.5,
-        127.5,
+        58.395,
+        57.12,
+        57.375,
     ],
     type='SegDataPreProcessor')
-data_root = '/media/ids/Ubuntu files/data/ADEChallengeData2016/'
-dataset_type = 'ADE20KDataset'
+data_root = '/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/'
+dataset_type = 'HOTSDataset'
 default_hooks = dict(
-    checkpoint=dict(by_epoch=False, interval=16000, type='CheckpointHook'),
+    checkpoint=dict(
+        by_epoch=False, interval=1000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -45,6 +46,7 @@ img_ratios = [
     1.5,
     1.75,
 ]
+launcher = 'none'
 load_from = None
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
@@ -53,26 +55,52 @@ model = dict(
         attn_drop_rate=0.0,
         drop_path_rate=0.1,
         drop_rate=0.0,
-        embed_dims=192,
-        final_norm=True,
-        img_size=(
-            512,
-            512,
-        ),
+        embed_dims=32,
         in_channels=3,
-        interpolate_mode='bicubic',
-        norm_cfg=dict(eps=1e-06, requires_grad=True, type='LN'),
-        num_heads=3,
-        num_layers=12,
-        patch_size=16,
-        type='VisionTransformer',
-        with_cls_token=True),
+        init_cfg=dict(
+            checkpoint=
+            'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth',
+            type='Pretrained'),
+        mlp_ratio=4,
+        num_heads=[
+            1,
+            2,
+            5,
+            8,
+        ],
+        num_layers=[
+            2,
+            2,
+            2,
+            2,
+        ],
+        num_stages=4,
+        out_indices=(
+            0,
+            1,
+            2,
+            3,
+        ),
+        patch_sizes=[
+            7,
+            3,
+            3,
+            3,
+        ],
+        qkv_bias=True,
+        sr_ratios=[
+            8,
+            4,
+            2,
+            1,
+        ],
+        type='MixVisionTransformer'),
     data_preprocessor=dict(
         bgr_to_rgb=True,
         mean=[
-            127.5,
-            127.5,
-            127.5,
+            123.675,
+            116.28,
+            103.53,
         ],
         pad_val=0,
         seg_pad_val=255,
@@ -81,44 +109,60 @@ model = dict(
             512,
         ),
         std=[
-            127.5,
-            127.5,
-            127.5,
+            58.395,
+            57.12,
+            57.375,
         ],
         type='SegDataPreProcessor'),
     decode_head=dict(
-        channels=192,
-        dropout_ratio=0.0,
-        embed_dims=192,
-        in_channels=192,
+        align_corners=False,
+        channels=256,
+        dropout_ratio=0.1,
+        in_channels=[
+            32,
+            64,
+            160,
+            256,
+        ],
+        in_index=[
+            0,
+            1,
+            2,
+            3,
+        ],
         loss_decode=dict(
             loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
-        num_classes=150,
-        num_heads=3,
-        num_layers=2,
-        type='SegmenterMaskTransformerHead'),
-    pretrained=
-    'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segmenter/vit_tiny_p16_384_20220308-cce8c795.pth',
-    test_cfg=dict(crop_size=(
-        512,
-        512,
-    ), mode='slide', stride=(
-        480,
-        480,
-    )),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=47,
+        type='SegformerHead'),
+    pretrained=None,
+    test_cfg=dict(mode='whole'),
+    train_cfg=dict(),
     type='EncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
 optim_wrapper = dict(
-    clip_grad=None,
-    optimizer=dict(lr=0.001, momentum=0.9, type='SGD', weight_decay=0.0),
+    optimizer=dict(
+        betas=(
+            0.9,
+            0.999,
+        ), lr=6e-05, type='AdamW', weight_decay=0.01),
+    paramwise_cfg=dict(
+        custom_keys=dict(
+            head=dict(lr_mult=10.0),
+            norm=dict(decay_mult=0.0),
+            pos_block=dict(decay_mult=0.0))),
     type='OptimWrapper')
-optimizer = dict(lr=0.001, momentum=0.9, type='SGD', weight_decay=0.0)
+optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
 param_scheduler = [
     dict(
-        begin=0,
+        begin=0, by_epoch=False, end=1500, start_factor=1e-06,
+        type='LinearLR'),
+    dict(
+        begin=1500,
         by_epoch=False,
-        end=160000,
-        eta_min=0.0001,
-        power=0.9,
+        end=10000,
+        eta_min=0.0,
+        power=1.0,
         type='PolyLR'),
 ]
 resume = False
@@ -126,21 +170,19 @@ test_cfg = dict(type='TestLoop')
 test_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 test_evaluator = dict(
@@ -153,20 +195,19 @@ test_pipeline = [
         2048,
         512,
     ), type='Resize'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(
-    max_iters=160000, type='IterBasedTrainLoop', val_interval=16000)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
-    batch_size=1,
+    batch_size=2,
     dataset=dict(
         data_prefix=dict(
-            img_path='images/training', seg_map_path='annotations/training'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+            img_path='img_dir/train', seg_map_path='ann_dir/train'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(
                 keep_ratio=True,
                 ratio_range=(
@@ -184,16 +225,15 @@ train_dataloader = dict(
                     512,
                 ), type='RandomCrop'),
             dict(prob=0.5, type='RandomFlip'),
-            dict(type='PhotoMetricDistortion'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(
         keep_ratio=True,
         ratio_range=(
@@ -210,7 +250,6 @@ train_pipeline = [
         512,
     ), type='RandomCrop'),
     dict(prob=0.5, type='RandomFlip'),
-    dict(type='PhotoMetricDistortion'),
     dict(type='PackSegInputs'),
 ]
 tta_model = dict(type='SegTTAModel')
@@ -243,27 +282,34 @@ val_cfg = dict(type='ValLoop')
 val_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 val_evaluator = dict(
     iou_metrics=[
         'mIoU',
     ], type='IoUMetric')
+val_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
 vis_backends = [
     dict(type='LocalVisBackend'),
 ]
@@ -273,3 +319,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
+work_dir = './work_dirs/segformer_mit-b0_1xb2-10k_hots-v1-512x512'

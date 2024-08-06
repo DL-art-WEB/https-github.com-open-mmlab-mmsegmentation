@@ -153,52 +153,7 @@ def trigger_visualization_hook(cfg, show_dir):
 
 
     
-
-
-def trimmed_projects(
-    exclude = [], 
-    unique = True, work_dir_path = "work_dirs",
-    test_results_path = "test_results",
-    training_iters = None
-    ):
-    def get_iters(project_name):
-        train_set = project_name.split("_")[-2]
-        iters = train_set.split("-")[-1]
-        if 'k' in iters:
-            iters = iters.replace('k', '000')
-        return int(iters)
-    
-    project_names = os.listdir(work_dir_path)
-    tested_project_names = os.listdir(test_results_path)
-    project_names = [project_name for project_name in project_names if project_names not in exclude]
-    if training_iters is not None:
-        project_names = [project_name for project_name in project_names if training_iters == get_iters(project_name)]
-    if unique:
-        project_names = [project_name for project_name in project_names if project_name not in tested_project_names]
-    # # TODO temp:
-    # project_names = ["maskformer_r50-d32_1xb2-pre-ade20k-1k_hots-v1-512x512"]
-    
-    return project_names
-
-def trimmed_checkpoints(
-    project_name, work_dir_path = "work_dirs",
-    test_results_path = "test_results", 
-    exclude = [], unique = True
-    ):
-    project_path = os.path.join(work_dir_path, project_name)
-    checkpoint_names = [file_name for file_name in os.listdir(project_path) if ".pth" in file_name]
-    test_work_dir_path = os.path.join(test_results_path, project_name)
-    if not os.path.exists(test_work_dir_path):
-        return checkpoint_names
-    tested_checkpoints = os.listdir(test_work_dir_path)
-    if unique:
-        checkpoint_names = [
-            checkpoint_name for checkpoint_name in checkpoint_names
-                if checkpoint_name not in tested_checkpoints
-        ]
-    return checkpoint_names
-    
-def main():
+def get_results_all_workdirs():
     results = []
     test_results_path = "test_results"
     work_dir_path = "work_dirs"
@@ -273,9 +228,7 @@ def main():
             if "hots-v1" in config_name:
                 cfg = fix_test_loader(cfg=cfg, dataset="evaltest")
             
-            # TODO temp####################################################
             
-            ##################################################################
             try:
                 runner = Runner.from_cfg(cfg=cfg)
                 
@@ -312,8 +265,53 @@ def main():
             
             if one_test:
                 exit()
-        
-    for result in results:
+    return results
+
+def trimmed_projects(
+    exclude = [], 
+    unique = True, work_dir_path = "work_dirs",
+    test_results_path = "test_results",
+    training_iters = None
+    ):
+    def get_iters(project_name):
+        train_set = project_name.split("_")[-2]
+        iters = train_set.split("-")[-1]
+        if 'k' in iters:
+            iters = iters.replace('k', '000')
+        return int(iters)
+    
+    project_names = os.listdir(work_dir_path)
+    tested_project_names = os.listdir(test_results_path)
+    project_names = [project_name for project_name in project_names if project_names not in exclude]
+    if training_iters is not None:
+        project_names = [project_name for project_name in project_names if training_iters == get_iters(project_name)]
+    if unique:
+        project_names = [project_name for project_name in project_names if project_name not in tested_project_names]
+    # # TODO temp:
+    # project_names = ["maskformer_r50-d32_1xb2-pre-ade20k-1k_hots-v1-512x512"]
+    
+    return project_names
+
+def trimmed_checkpoints(
+    project_name, work_dir_path = "work_dirs",
+    test_results_path = "test_results", 
+    exclude = [], unique = True
+    ):
+    project_path = os.path.join(work_dir_path, project_name)
+    checkpoint_names = [file_name for file_name in os.listdir(project_path) if ".pth" in file_name]
+    test_work_dir_path = os.path.join(test_results_path, project_name)
+    if not os.path.exists(test_work_dir_path):
+        return checkpoint_names
+    tested_checkpoints = os.listdir(test_work_dir_path)
+    if unique:
+        checkpoint_names = [
+            checkpoint_name for checkpoint_name in checkpoint_names
+                if checkpoint_name not in tested_checkpoints
+        ]
+    return checkpoint_names
+
+def print_result_list(result_list):
+    for result in result_list:
         print(f"\nname: {result['name']}")
         print("metrics:")
         for key, val in result["metric_dict"].items():
@@ -321,28 +319,114 @@ def main():
         print("benchmark: ")
         for key, val in result["benchmark_dict"].items():
             print(f"{key} : {val}")
-        print("-" * 80)
-    
-    # order by config:
-    grouped_dict = {}
-    for result in results:
-        name = result["benchmark_dict"]["config"]
-        if name not in grouped_dict.keys():
-            grouped_dict[name] = result
-        
-        if result["metric_dict"]["mIoU"] > grouped_dict[name]["metric_dict"]["mIoU"]:
-            grouped_dict[name] = result
-    
+        print("-" * 80) 
+
+def get_results_all_checkpoints(
+    work_dir_path = "work_dirs",
+    test_results_path = "test_results"
+    ):
+    results = []
+    for project_name in os.listdir(work_dir_path):
+        project_path = os.path.join(work_dir_path, project_name)
+        cfg_name = [
+            file for file in os.listdir(project_path) if ".py" in file
+        ][0]
+        cfg_path = os.path.join(project_path, cfg_name)
+        for checkpoint_name in os.listdir(project_path):
+            if ".pth" not in checkpoint_name:
+                continue
+            test_work_dir_path = os.path.join(test_results_path, project_name)
+            output_dir = os.path.join(test_work_dir_path, checkpoint_name, "out")
+            show_dir = os.path.join(test_work_dir_path, checkpoint_name, "show")
+            cfg = Config.fromfile(cfg_path)
+            cfg = trigger_visualization_hook(cfg, show_dir)
+            cfg.test_evaluator["output_dir"] = output_dir
+            cfg.test_evaluator["keep_results"] = True
+            torch.cuda.empty_cache()
+            test_name = os.path.join(test_work_dir_path, checkpoint_name)
+            cfg.work_dir = test_name
+            checkpoint_path = os.path.join(project_path, checkpoint_name)
+            cfg.load_from = checkpoint_path
+            cfg.test_evaluator = dict(type="CustomIoUMetric")
+            # cfg.test_evaluator = dict(type="IoUMetricFixed")
+            
+            # TEMP when using test eval merged dataset
+            if "hots-v1" in cfg_name:
+                cfg = fix_test_loader(cfg=cfg, dataset="evaltest")
+            
+            
+            try:
+                runner = Runner.from_cfg(cfg=cfg)
+                
+                metrics = runner.test()
+                
+            except Exception as exp:
+                print(f"cfg: {test_name} test did not work")
+                print(exp)
+                continue
+                
+            try:
+                benchmark_dict = get_benchmark(
+                    config_path=cfg_path,
+                    checkpoint=checkpoint_path,
+                    verbose=False,
+                    work_dir_path=test_name + "/bench"
+                )    
+            except Exception as exp:
+                print(f"cfg: {test_name} benchmark did not work")
+                print(exp)
+                continue
+            
+            results.append(
+                {
+                    "project_name"      :       project_name,
+                    "checkpoint_name"   :       checkpoint_name,
+                    "metric_dict"       :       metrics,
+                    "benchmark_dict"    :       benchmark_dict
+                }
+            )
     print('#' * 80)
-    for name, result in grouped_dict.items():
-        print(f"name: {name}")
-        print("metrics:")
+    for result in results:
+        print(f"\nproject name : {result['project_name']}")
+        print(f"checkpoint_name : {result['checkpoint_name']}")
+        print(f"metric_dict: ")
         for key, val in result["metric_dict"].items():
             print(f"{key} : {val}")
-        print("benchmark: ")
+        print(f"benchmark_dict: ")
         for key, val in result["benchmark_dict"].items():
             print(f"{key} : {val}")
-        print('-' * 80)
+    print('#' * 80)
+    grouped = {}
+    for result in results:
+        if result["project_name"] not in grouped.keys():
+            grouped[result["project_name"]] = []
+        grouped[result["project_name"]].append(
+            {
+                "checkpoint_name"   :       result["checkpoint_name"],
+                "metric_dict"       :       result["metrics"],
+                "benchmark_dict"    :       result["benchmark_dict"]
+            }
+        )  
+    print("GROUPED: ") 
+    print('#' * 80)
+    for project_name, checkpoints in grouped:
+        print(f"project_name : {project_name}")
+        for checkpoint in checkpoints:
+            print(f"checkpoint_name : {checkpoint_name}")
+            print("metrics:")
+            for key, val in checkpoint["metric_dict"].items():
+                print(f"{key} : {val}")
+            print("benchmark: ")
+            for key, val in checkpoint["benchmark_dict"].items():
+                print(f"{key} : {val}") 
+            print('-' * 80)
+    print('#' * 80)
+            
+        
+
+        
+def main():
+    get_results_all_checkpoints()
 
 if __name__ == '__main__':
     main()

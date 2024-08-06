@@ -1,59 +1,9 @@
 auto_scale_lr = dict(base_batch_size=16, enable=False)
-backbone_embed_multi = dict(decay_mult=0.0, lr_mult=0.1)
-backbone_norm_multi = dict(decay_mult=0.0, lr_mult=0.1)
 crop_size = (
     512,
     512,
 )
 custom_imports = dict(allow_failed_imports=False, imports='mmdet.models')
-custom_keys = dict({
-    'absolute_pos_embed':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone':
-    dict(decay_mult=1.0, lr_mult=0.1),
-    'backbone.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.patch_embed.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.0.blocks.0.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.0.blocks.1.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.0.downsample.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.1.blocks.0.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.1.blocks.1.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.1.downsample.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.0.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.1.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.2.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.3.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.4.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.blocks.5.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.2.downsample.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.3.blocks.0.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'backbone.stages.3.blocks.1.norm':
-    dict(decay_mult=0.0, lr_mult=0.1),
-    'level_embed':
-    dict(decay_mult=0.0, lr_mult=1.0),
-    'query_embed':
-    dict(decay_mult=0.0, lr_mult=1.0),
-    'query_feat':
-    dict(decay_mult=0.0, lr_mult=1.0),
-    'relative_position_bias_table':
-    dict(decay_mult=0.0, lr_mult=0.1)
-})
 data_preprocessor = dict(
     bgr_to_rgb=True,
     mean=[
@@ -74,11 +24,11 @@ data_preprocessor = dict(
     ],
     test_cfg=dict(size_divisor=32),
     type='SegDataPreProcessor')
-data_root = '/media/ids/Ubuntu files/data/ADEChallengeData2016/'
-dataset_type = 'ADE20KDataset'
+data_root = '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/'
+dataset_type = 'IRLVisionSimDataset'
 default_hooks = dict(
     checkpoint=dict(
-        by_epoch=False, interval=5000, save_best='mIoU',
+        by_epoch=False, interval=1000, save_best='mIoU',
         type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
@@ -86,12 +36,6 @@ default_hooks = dict(
     timer=dict(type='IterTimerHook'),
     visualization=dict(type='SegVisualizationHook'))
 default_scope = 'mmseg'
-depths = [
-    2,
-    2,
-    6,
-    2,
-]
 embed_multi = dict(decay_mult=0.0, lr_mult=1.0)
 env_cfg = dict(
     cudnn_benchmark=True,
@@ -105,45 +49,26 @@ img_ratios = [
     1.5,
     1.75,
 ]
-load_from = None
+launcher = 'none'
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/mask2former/mask2former_r50_8xb2-160k_ade20k-512x512/mask2former_r50_8xb2-160k_ade20k-512x512_20221204_000055-2d1f55f1.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
     backbone=dict(
-        attn_drop_rate=0.0,
-        depths=[
-            2,
-            2,
-            6,
-            2,
-        ],
-        drop_path_rate=0.3,
-        drop_rate=0.0,
-        embed_dims=96,
+        deep_stem=False,
+        depth=50,
         frozen_stages=-1,
-        init_cfg=dict(
-            checkpoint=
-            'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/swin/swin_tiny_patch4_window7_224_20220317-1cdeb081.pth',
-            type='Pretrained'),
-        mlp_ratio=4,
-        num_heads=[
-            3,
-            6,
-            12,
-            24,
-        ],
+        init_cfg=dict(checkpoint='torchvision://resnet50', type='Pretrained'),
+        norm_cfg=dict(requires_grad=False, type='SyncBN'),
+        num_stages=4,
         out_indices=(
             0,
             1,
             2,
             3,
         ),
-        patch_norm=True,
-        qk_scale=None,
-        qkv_bias=True,
-        type='SwinTransformer',
-        window_size=7,
-        with_cp=False),
+        style='pytorch',
+        type='ResNet'),
     data_preprocessor=dict(
         bgr_to_rgb=True,
         mean=[
@@ -169,164 +94,86 @@ model = dict(
         enforce_decoder_input_project=False,
         feat_channels=256,
         in_channels=[
-            96,
-            192,
-            384,
-            768,
+            256,
+            512,
+            1024,
+            2048,
         ],
         loss_cls=dict(
             class_weight=[
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
                 0.1,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
             ],
             loss_weight=2.0,
             reduction='mean',
@@ -345,7 +192,7 @@ model = dict(
             reduction='mean',
             type='mmdet.CrossEntropyLoss',
             use_sigmoid=True),
-        num_classes=150,
+        num_classes=72,
         num_queries=100,
         num_transformer_feat_level=3,
         out_channels=256,
@@ -433,7 +280,7 @@ model = dict(
     test_cfg=dict(mode='whole'),
     train_cfg=dict(),
     type='EncoderDecoder')
-num_classes = 150
+num_classes = 72
 optim_wrapper = dict(
     clip_grad=dict(max_norm=0.01, norm_type=2),
     optimizer=dict(
@@ -446,54 +293,11 @@ optim_wrapper = dict(
         type='AdamW',
         weight_decay=0.05),
     paramwise_cfg=dict(
-        custom_keys=dict({
-            'absolute_pos_embed':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone':
-            dict(decay_mult=1.0, lr_mult=0.1),
-            'backbone.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.patch_embed.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.0.blocks.0.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.0.blocks.1.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.0.downsample.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.1.blocks.0.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.1.blocks.1.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.1.downsample.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.0.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.1.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.2.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.3.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.4.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.blocks.5.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.2.downsample.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.3.blocks.0.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'backbone.stages.3.blocks.1.norm':
-            dict(decay_mult=0.0, lr_mult=0.1),
-            'level_embed':
-            dict(decay_mult=0.0, lr_mult=1.0),
-            'query_embed':
-            dict(decay_mult=0.0, lr_mult=1.0),
-            'query_feat':
-            dict(decay_mult=0.0, lr_mult=1.0),
-            'relative_position_bias_table':
-            dict(decay_mult=0.0, lr_mult=0.1)
-        }),
+        custom_keys=dict(
+            backbone=dict(decay_mult=1.0, lr_mult=0.1),
+            level_embed=dict(decay_mult=0.0, lr_mult=1.0),
+            query_embed=dict(decay_mult=0.0, lr_mult=1.0),
+            query_feat=dict(decay_mult=0.0, lr_mult=1.0)),
         norm_decay_mult=0.0),
     type='OptimWrapper')
 optimizer = dict(
@@ -507,34 +311,28 @@ optimizer = dict(
     weight_decay=0.05)
 param_scheduler = [
     dict(
-        begin=0,
-        by_epoch=False,
-        end=160000,
-        eta_min=0,
-        power=0.9,
+        begin=0, by_epoch=False, end=10000, eta_min=0, power=0.9,
         type='PolyLR'),
 ]
-pretrained = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/swin/swin_tiny_patch4_window7_224_20220317-1cdeb081.pth'
 resume = False
 test_cfg = dict(type='TestLoop')
 test_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='IRLVisionSimDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 test_evaluator = dict(
@@ -547,86 +345,62 @@ test_pipeline = [
         2048,
         512,
     ), type='Resize'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(
-    max_iters=160000, type='IterBasedTrainLoop', val_interval=5000)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
     batch_size=2,
     dataset=dict(
         data_prefix=dict(
-            img_path='images/training', seg_map_path='annotations/training'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+            img_path='img_dir/train', seg_map_path='ann_dir/train'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(
-                max_size=2048,
-                resize_type='ResizeShortestEdge',
-                scales=[
-                    256,
-                    307,
-                    358,
-                    409,
-                    460,
+                keep_ratio=True,
+                ratio_range=(
+                    0.5,
+                    2.0,
+                ),
+                scale=(
+                    2048,
                     512,
-                    563,
-                    614,
-                    665,
-                    716,
-                    768,
-                    819,
-                    870,
-                    921,
-                    972,
-                    1024,
-                ],
-                type='RandomChoiceResize'),
+                ),
+                type='RandomResize'),
             dict(
                 cat_max_ratio=0.75, crop_size=(
                     512,
                     512,
                 ), type='RandomCrop'),
             dict(prob=0.5, type='RandomFlip'),
-            dict(type='PhotoMetricDistortion'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='IRLVisionSimDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(
-        max_size=2048,
-        resize_type='ResizeShortestEdge',
-        scales=[
-            256,
-            307,
-            358,
-            409,
-            460,
+        keep_ratio=True,
+        ratio_range=(
+            0.5,
+            2.0,
+        ),
+        scale=(
+            2048,
             512,
-            563,
-            614,
-            665,
-            716,
-            768,
-            819,
-            870,
-            921,
-            972,
-            1024,
-        ],
-        type='RandomChoiceResize'),
+        ),
+        type='RandomResize'),
     dict(cat_max_ratio=0.75, crop_size=(
         512,
         512,
     ), type='RandomCrop'),
     dict(prob=0.5, type='RandomFlip'),
-    dict(type='PhotoMetricDistortion'),
     dict(type='PackSegInputs'),
 ]
 tta_model = dict(type='SegTTAModel')
@@ -659,27 +433,35 @@ val_cfg = dict(type='ValLoop')
 val_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
+        data_root=
+        '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='IRLVisionSimDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 val_evaluator = dict(
     iou_metrics=[
         'mIoU',
     ], type='IoUMetric')
+val_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
 vis_backends = [
     dict(type='LocalVisBackend'),
 ]
@@ -689,3 +471,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
+work_dir = './work_dirs/mask2former_r50_1xb2-pre-ade20k-10k_irl_vision_sim-512x512'

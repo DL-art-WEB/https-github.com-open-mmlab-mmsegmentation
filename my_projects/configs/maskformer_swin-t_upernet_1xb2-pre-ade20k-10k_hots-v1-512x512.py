@@ -67,10 +67,12 @@ data_preprocessor = dict(
         57.375,
     ],
     type='SegDataPreProcessor')
-data_root = '/media/ids/Ubuntu files/data/ADEChallengeData2016/'
-dataset_type = 'ADE20KDataset'
+data_root = '/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/'
+dataset_type = 'HOTSDataset'
 default_hooks = dict(
-    checkpoint=dict(by_epoch=False, interval=16000, type='CheckpointHook'),
+    checkpoint=dict(
+        by_epoch=False, interval=5000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -96,7 +98,8 @@ img_ratios = [
     1.5,
     1.75,
 ]
-load_from = None
+launcher = 'none'
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/maskformer/maskformer_swin-t_upernet_8xb2-160k_ade20k-512x512/maskformer_swin-t_upernet_8xb2-160k_ade20k-512x512_20221114_232813-f14e7ce0.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
@@ -132,7 +135,10 @@ model = dict(
         ),
         patch_norm=True,
         patch_size=4,
-        pretrain_img_size=224,
+        pretrain_img_size=(
+            640,
+            480,
+        ),
         qk_scale=None,
         qkv_bias=True,
         strides=(
@@ -180,157 +186,54 @@ model = dict(
         ],
         loss_cls=dict(
             class_weight=[
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
                 0.1,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
             ],
             loss_weight=1.0,
             reduction='mean',
@@ -351,7 +254,7 @@ model = dict(
             reduction='mean',
             type='mmdet.FocalLoss',
             use_sigmoid=True),
-        num_classes=150,
+        num_classes=47,
         num_queries=100,
         out_channels=256,
         pixel_decoder=dict(
@@ -407,7 +310,7 @@ model = dict(
     train_cfg=dict(),
     type='EncoderDecoder')
 norm_cfg = dict(requires_grad=True, type='SyncBN')
-num_classes = 150
+num_classes = 47
 optim_wrapper = dict(
     clip_grad=dict(max_norm=0.01, norm_type=2),
     optimizer=dict(
@@ -470,12 +373,12 @@ optimizer = dict(
     weight_decay=0.01)
 param_scheduler = [
     dict(
-        begin=0, by_epoch=False, end=1500, start_factor=1e-06,
+        begin=0, by_epoch=False, end=5000, start_factor=1e-06,
         type='LinearLR'),
     dict(
-        begin=1500,
+        begin=5000,
         by_epoch=False,
-        end=160000,
+        end=10000,
         eta_min=0.0,
         power=1.0,
         type='PolyLR'),
@@ -485,21 +388,19 @@ test_cfg = dict(type='TestLoop')
 test_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 test_evaluator = dict(
@@ -512,20 +413,19 @@ test_pipeline = [
         2048,
         512,
     ), type='Resize'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(
-    max_iters=160000, type='IterBasedTrainLoop', val_interval=16000)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
     batch_size=2,
     dataset=dict(
         data_prefix=dict(
-            img_path='images/training', seg_map_path='annotations/training'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+            img_path='img_dir/train', seg_map_path='ann_dir/train'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(
                 keep_ratio=True,
                 ratio_range=(
@@ -543,16 +443,15 @@ train_dataloader = dict(
                     512,
                 ), type='RandomCrop'),
             dict(prob=0.5, type='RandomFlip'),
-            dict(type='PhotoMetricDistortion'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
+        type='HOTSDataset'),
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=True, type='InfiniteSampler'))
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(reduce_zero_label=True, type='LoadAnnotations'),
+    dict(type='LoadAnnotations'),
     dict(
         keep_ratio=True,
         ratio_range=(
@@ -569,7 +468,6 @@ train_pipeline = [
         512,
     ), type='RandomCrop'),
     dict(prob=0.5, type='RandomFlip'),
-    dict(type='PhotoMetricDistortion'),
     dict(type='PackSegInputs'),
 ]
 tta_model = dict(type='SegTTAModel')
@@ -602,27 +500,34 @@ val_cfg = dict(type='ValLoop')
 val_dataloader = dict(
     batch_size=1,
     dataset=dict(
-        data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
-        data_root='/media/ids/Ubuntu files/data/ADEChallengeData2016/',
+        data_prefix=dict(img_path='img_dir/eval', seg_map_path='ann_dir/eval'),
+        data_root='/media/ids/Ubuntu files/data/HOTS_v1/SemanticSegmentation/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
                 2048,
                 512,
             ), type='Resize'),
-            dict(reduce_zero_label=True, type='LoadAnnotations'),
+            dict(type='LoadAnnotations'),
             dict(type='PackSegInputs'),
         ],
-        type='ADE20KDataset'),
-    num_workers=4,
+        type='HOTSDataset'),
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
 val_evaluator = dict(
     iou_metrics=[
         'mIoU',
     ], type='IoUMetric')
+val_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='LoadAnnotations'),
+    dict(type='PackSegInputs'),
+]
 vis_backends = [
     dict(type='LocalVisBackend'),
 ]
@@ -632,3 +537,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
+work_dir = './work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_hots-v1-512x512'

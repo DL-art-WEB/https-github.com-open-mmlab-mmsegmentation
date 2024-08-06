@@ -37,10 +37,23 @@ def run_cfg(cfg):
     # start training
     runner.train()
     
-
+def train_best(
+    config_dir_path = "my_projects/configs",
+):
+    
+    for cfg_name in os.listdir(config_dir_path):
+        cfg_path = os.path.join(config_dir_path, cfg_name)
+        cfg = Config.fromfile(cfg_path)
+        cfg.work_dir = os.path.join('./work_dirs', cfg_name)
+        
+        
+        try:
+            run_cfg(cfg=cfg)
+        except:
+            print("failed")
 
 def train_my_configs(
-    config_dir_path = "my_projects/configs",
+    config_dir_path = "my_projects/best_models/selection",
     datasets = ["irl_vision_sim", "hots-v1"],
     crop_size = (512, 512),
     iterations = 5000,
@@ -54,17 +67,17 @@ def train_my_configs(
     
     checkpoint_lookup_table = generate_checkpoint_lookup_by_cfg_name()
     
-    cfg_names = [
-        "fpn_poolformer_m36_8xb4-40k_ade20k-512x512",
-        "knet-s3_r50-d8_fcn_8xb2-adamw-80k_ade20k-512x512",
-        "mask2former_r50_8xb2-160k_ade20k-512x512",
-        "ocrnet_hr18s_4xb4-40k_voc12aug-512x512",
-        "segnext_mscan-t_1xb16-adamw-160k_ade20k-512x512",
-        "twins_svt-b_fpn_fpnhead_8xb4-80k_ade20k-512x512"
-    ]
+    # cfg_names = [
+    #     "fpn_poolformer_m36_8xb4-40k_ade20k-512x512",
+    #     "knet-s3_r50-d8_fcn_8xb2-adamw-80k_ade20k-512x512",
+    #     "mask2former_r50_8xb2-160k_ade20k-512x512",
+    #     "ocrnet_hr18s_4xb4-40k_voc12aug-512x512",
+    #     "segnext_mscan-t_1xb16-adamw-160k_ade20k-512x512",
+    #     "twins_svt-b_fpn_fpnhead_8xb4-80k_ade20k-512x512"
+    # ]
     expection_log_path = "my_projects/exception_log.log"
     for base_cfg_name in os.listdir(config_dir_path):
-        # if len(
+        # if len(b_data["cfg_name"]
         #     [name for name in exclude_names if name in base_cfg_name]
         # ) > 0:
         #     continue
@@ -72,8 +85,8 @@ def train_my_configs(
         base_cfg_path = os.path.join(config_dir_path, base_cfg_name)
         base_cfg_name = base_cfg_path.split("/")[-1].replace(".py", "")
         
-        if base_cfg_name not in cfg_names:
-            continue
+        # if base_cfg_name not in cfg_names:
+        #     continue
         # print(base_cfg_name)
         for target_dataset in datasets:
             checkpoints = [_empty_checkpoint]
@@ -228,8 +241,8 @@ def test(
 
 def main():
     # test()
-    train_my_configs()
-
+    # train_my_configs()
+    train_best()
 
 if __name__ == '__main__':
     main()

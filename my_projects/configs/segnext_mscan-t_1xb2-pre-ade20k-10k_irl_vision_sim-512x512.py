@@ -1,4 +1,4 @@
-checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth'
+checkpoint_file = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segnext/mscan_t_20230227-119e8c9f.pth'
 crop_size = (
     512,
     512,
@@ -21,11 +21,14 @@ data_preprocessor = dict(
         57.12,
         57.375,
     ],
+    test_cfg=dict(size_divisor=32),
     type='SegDataPreProcessor')
 data_root = '/media/ids/Ubuntu files/data/irl_vision_sim/SemanticSegmentation/'
 dataset_type = 'IRLVisionSimDataset'
 default_hooks = dict(
-    checkpoint=dict(by_epoch=False, interval=500, type='CheckpointHook'),
+    checkpoint=dict(
+        by_epoch=False, interval=1000, save_best='mIoU',
+        type='CheckpointHook'),
     logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
@@ -36,6 +39,7 @@ env_cfg = dict(
     cudnn_benchmark=True,
     dist_cfg=dict(backend='nccl'),
     mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+ham_norm_cfg = dict(num_groups=32, requires_grad=True, type='GN')
 img_ratios = [
     0.5,
     0.75,
@@ -45,54 +49,68 @@ img_ratios = [
     1.75,
 ]
 launcher = 'none'
-load_from = None
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/segnext/segnext_mscan-t_1x16_512x512_adamw_160k_ade20k/segnext_mscan-t_1x16_512x512_adamw_160k_ade20k_20230210_140244-05bd8466.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
     backbone=dict(
-        attn_drop_rate=0.0,
+        act_cfg=dict(type='GELU'),
+        attention_kernel_paddings=[
+            2,
+            [
+                0,
+                3,
+            ],
+            [
+                0,
+                5,
+            ],
+            [
+                0,
+                10,
+            ],
+        ],
+        attention_kernel_sizes=[
+            5,
+            [
+                1,
+                7,
+            ],
+            [
+                1,
+                11,
+            ],
+            [
+                1,
+                21,
+            ],
+        ],
+        depths=[
+            3,
+            3,
+            5,
+            2,
+        ],
         drop_path_rate=0.1,
         drop_rate=0.0,
-        embed_dims=32,
-        in_channels=3,
+        embed_dims=[
+            32,
+            64,
+            160,
+            256,
+        ],
         init_cfg=dict(
             checkpoint=
-            'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth',
+            'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segnext/mscan_t_20230227-119e8c9f.pth',
             type='Pretrained'),
-        mlp_ratio=4,
-        num_heads=[
-            1,
-            2,
-            5,
+        mlp_ratios=[
             8,
-        ],
-        num_layers=[
-            2,
-            2,
-            2,
-            2,
-        ],
-        num_stages=4,
-        out_indices=(
-            0,
-            1,
-            2,
-            3,
-        ),
-        patch_sizes=[
-            7,
-            3,
-            3,
-            3,
-        ],
-        qkv_bias=True,
-        sr_ratios=[
             8,
             4,
-            2,
-            1,
+            4,
         ],
-        type='MixVisionTransformer'),
+        norm_cfg=dict(requires_grad=True, type='BN'),
+        type='MSCAN'),
     data_preprocessor=dict(
         bgr_to_rgb=True,
         mean=[
@@ -111,33 +129,39 @@ model = dict(
             57.12,
             57.375,
         ],
+        test_cfg=dict(size_divisor=32),
         type='SegDataPreProcessor'),
     decode_head=dict(
         align_corners=False,
         channels=256,
         dropout_ratio=0.1,
+        ham_channels=256,
+        ham_kwargs=dict(
+            MD_R=16,
+            MD_S=1,
+            eval_steps=7,
+            inv_t=100,
+            rand_init=True,
+            train_steps=6),
         in_channels=[
-            32,
             64,
             160,
             256,
         ],
         in_index=[
-            0,
             1,
             2,
             3,
         ],
         loss_decode=dict(
             loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
-        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        norm_cfg=dict(num_groups=32, requires_grad=True, type='GN'),
         num_classes=72,
-        type='SegformerHead'),
+        type='LightHamHead'),
     pretrained=None,
     test_cfg=dict(mode='whole'),
-    train_cfg=None,
+    train_cfg=dict(),
     type='EncoderDecoder')
-norm_cfg = dict(requires_grad=True, type='SyncBN')
 optim_wrapper = dict(
     optimizer=dict(
         betas=(
@@ -153,12 +177,12 @@ optim_wrapper = dict(
 optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
 param_scheduler = [
     dict(
-        begin=0, by_epoch=False, end=1000, start_factor=1e-06,
+        begin=0, by_epoch=False, end=1500, start_factor=1e-06,
         type='LinearLR'),
     dict(
-        begin=1000,
+        begin=1500,
         by_epoch=False,
-        end=2000,
+        end=10000,
         eta_min=0.0,
         power=1.0,
         type='PolyLR'),
@@ -197,7 +221,7 @@ test_pipeline = [
     dict(type='LoadAnnotations'),
     dict(type='PackSegInputs'),
 ]
-train_cfg = dict(max_iters=2000, type='IterBasedTrainLoop', val_interval=500)
+train_cfg = dict(max_iters=10000, type='IterBasedTrainLoop', val_interval=1000)
 train_dataloader = dict(
     batch_size=2,
     dataset=dict(
@@ -320,4 +344,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = './work_dirs/segformer_mit-b0_8xb2-160k_irl_vision_sim-512x512'
+work_dir = './work_dirs/segnext_mscan-t_1xb2-pre-ade20k-5k_irl_vision_sim-512x512'
