@@ -63,7 +63,7 @@ def calculate_confusion_matrix(dataset, results):
     for idx, per_img_res in enumerate(results):
         res_segm = per_img_res
         gt_segm = dataset[idx]['data_samples'] \
-            .gt_sem_seg.data.squeeze().numpy().astype(np.uint8)
+            .gt_sem_seg.data.squeeze().numpy().astype(np.uint32)
         gt_segm, res_segm = gt_segm.flatten(), res_segm.flatten()
         if reduce_zero_label:
             gt_segm = gt_segm - 1
