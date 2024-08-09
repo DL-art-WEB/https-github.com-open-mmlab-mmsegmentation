@@ -403,10 +403,7 @@ test_dataloader = dict(
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
-test_evaluator = dict(
-    iou_metrics=[
-        'mIoU',
-    ], type='IoUMetric')
+test_evaluator = dict(type="CustomIoUMetric")
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(keep_ratio=True, scale=(
@@ -537,4 +534,4 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = './work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_hots-v1-512x512.py'
+work_dir = './work_dirs/maskformer_swin-t_upernet_1xb2-pre-ade20k-10k_hots-v1-512x512'

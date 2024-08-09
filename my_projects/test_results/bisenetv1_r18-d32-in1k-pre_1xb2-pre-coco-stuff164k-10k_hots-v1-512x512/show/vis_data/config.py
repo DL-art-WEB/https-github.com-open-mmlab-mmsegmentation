@@ -1,4 +1,3 @@
-checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth'
 crop_size = (
     512,
     512,
@@ -32,7 +31,7 @@ default_hooks = dict(
     param_scheduler=dict(type='ParamSchedulerHook'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
     timer=dict(type='IterTimerHook'),
-    visualization=dict(type='SegVisualizationHook'))
+    visualization=dict(draw=True, type='SegVisualizationHook'))
 default_scope = 'mmseg'
 env_cfg = dict(
     cudnn_benchmark=True,
@@ -47,54 +46,88 @@ img_ratios = [
     1.75,
 ]
 launcher = 'none'
-load_from = None
+load_from = 'my_projects/best_models/selection/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/weights.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
+    auxiliary_head=[
+        dict(
+            align_corners=False,
+            channels=64,
+            concat_input=False,
+            in_channels=128,
+            in_index=1,
+            loss_decode=dict(
+                loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=47,
+            num_convs=1,
+            type='FCNHead'),
+        dict(
+            align_corners=False,
+            channels=64,
+            concat_input=False,
+            in_channels=128,
+            in_index=2,
+            loss_decode=dict(
+                loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            num_classes=47,
+            num_convs=1,
+            type='FCNHead'),
+    ],
     backbone=dict(
-        attn_drop_rate=0.0,
-        drop_path_rate=0.1,
-        drop_rate=0.0,
-        embed_dims=32,
+        align_corners=False,
+        backbone_cfg=dict(
+            contract_dilation=True,
+            depth=18,
+            dilations=(
+                1,
+                1,
+                1,
+                1,
+            ),
+            in_channels=3,
+            init_cfg=dict(
+                checkpoint='open-mmlab://resnet18_v1c', type='Pretrained'),
+            norm_cfg=dict(requires_grad=True, type='SyncBN'),
+            norm_eval=False,
+            num_stages=4,
+            out_indices=(
+                0,
+                1,
+                2,
+                3,
+            ),
+            strides=(
+                1,
+                2,
+                2,
+                2,
+            ),
+            style='pytorch',
+            type='ResNet'),
+        context_channels=(
+            128,
+            256,
+            512,
+        ),
         in_channels=3,
-        init_cfg=dict(
-            checkpoint=
-            'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b0_20220624-7e0fe6dd.pth',
-            type='Pretrained'),
-        mlp_ratio=4,
-        num_heads=[
-            1,
-            2,
-            5,
-            8,
-        ],
-        num_layers=[
-            2,
-            2,
-            2,
-            2,
-        ],
-        num_stages=4,
+        init_cfg=None,
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        out_channels=256,
         out_indices=(
             0,
             1,
             2,
-            3,
         ),
-        patch_sizes=[
-            7,
-            3,
-            3,
-            3,
-        ],
-        qkv_bias=True,
-        sr_ratios=[
-            8,
-            4,
-            2,
-            1,
-        ],
-        type='MixVisionTransformer'),
+        spatial_channels=(
+            64,
+            64,
+            64,
+            128,
+        ),
+        type='BiSeNetV1'),
     data_preprocessor=dict(
         bgr_to_rgb=True,
         mean=[
@@ -117,52 +150,33 @@ model = dict(
     decode_head=dict(
         align_corners=False,
         channels=256,
+        concat_input=False,
         dropout_ratio=0.1,
-        in_channels=[
-            32,
-            64,
-            160,
-            256,
-        ],
-        in_index=[
-            0,
-            1,
-            2,
-            3,
-        ],
+        in_channels=256,
+        in_index=0,
         loss_decode=dict(
             loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
         norm_cfg=dict(requires_grad=True, type='SyncBN'),
         num_classes=47,
-        type='SegformerHead'),
-    pretrained=None,
+        num_convs=1,
+        type='FCNHead'),
     test_cfg=dict(mode='whole'),
     train_cfg=dict(),
     type='EncoderDecoder')
 norm_cfg = dict(requires_grad=True, type='SyncBN')
 optim_wrapper = dict(
-    optimizer=dict(
-        betas=(
-            0.9,
-            0.999,
-        ), lr=6e-05, type='AdamW', weight_decay=0.01),
-    paramwise_cfg=dict(
-        custom_keys=dict(
-            head=dict(lr_mult=10.0),
-            norm=dict(decay_mult=0.0),
-            pos_block=dict(decay_mult=0.0))),
+    clip_grad=None,
+    optimizer=dict(lr=0.005, momentum=0.9, type='SGD', weight_decay=0.0005),
     type='OptimWrapper')
-optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
+optimizer = dict(lr=0.005, momentum=0.9, type='SGD', weight_decay=0.0005)
 param_scheduler = [
-    dict(
-        begin=0, by_epoch=False, end=1500, start_factor=1e-06,
-        type='LinearLR'),
+    dict(begin=0, by_epoch=False, end=1500, start_factor=0.1, type='LinearLR'),
     dict(
         begin=1500,
         by_epoch=False,
         end=10000,
-        eta_min=0.0,
-        power=1.0,
+        eta_min=0.0001,
+        power=0.9,
         type='PolyLR'),
 ]
 resume = False
@@ -185,7 +199,11 @@ test_dataloader = dict(
     num_workers=2,
     persistent_workers=True,
     sampler=dict(shuffle=False, type='DefaultSampler'))
-test_evaluator = dict(type="CustomIoUMetric")
+test_evaluator = dict(
+    keep_results=True,
+    output_dir=
+    'my_projects/test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/out/pred_result.pkl',
+    type='CustomIoUMetric')
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(keep_ratio=True, scale=(
@@ -312,8 +330,10 @@ vis_backends = [
 ]
 visualizer = dict(
     name='visualizer',
+    save_dir=
+    'my_projects/test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/show',
     type='SegLocalVisualizer',
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = './work_dirs/segformer_mit-b0_1xb2-10k_hots-v1-512x512'
+work_dir = 'my_projects/test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512'
