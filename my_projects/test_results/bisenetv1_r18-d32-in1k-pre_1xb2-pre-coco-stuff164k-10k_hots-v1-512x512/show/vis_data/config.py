@@ -202,7 +202,7 @@ test_dataloader = dict(
 test_evaluator = dict(
     keep_results=True,
     output_dir=
-    'my_projects/test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/out/pred_result.pkl',
+    'my_projects/test_results/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/pred_results',
     type='CustomIoUMetric')
 test_pipeline = [
     dict(type='LoadImageFromFile'),

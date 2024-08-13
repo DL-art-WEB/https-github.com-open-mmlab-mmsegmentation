@@ -1,0 +1,16 @@
+{
+    "config": "my_projects/best_models/selection/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512/bisenetv1_r18-d32-in1k-pre_1xb2-pre-coco-stuff164k-10k_hots-v1-512x512.py",
+    "unit": "img / s",
+    "overall_fps_1": 98.03,
+    "overall_fps_2": 99.05,
+    "overall_fps_3": 98.81,
+    "overall_fps_4": 98.74,
+    "overall_fps_5": 98.82,
+    "overall_fps_6": 98.82,
+    "overall_fps_7": 98.47,
+    "overall_fps_8": 98.28,
+    "overall_fps_9": 98.21,
+    "overall_fps_10": 92.59,
+    "average_fps": 97.98,
+    "fps_variance": 3.3299
+}

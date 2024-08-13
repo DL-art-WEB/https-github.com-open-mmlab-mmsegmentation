@@ -59,7 +59,25 @@ def run_confusion_matrix(
     
     subprocess.call(call_list)
 
+def run_confusion_analysis(
+    json_path, save_dir_path, top_n = 10
+):
+    call_list = ["python"]
+    call_list.append("tools/analysis_tools/analyze_confusion_matrix_data.py")
 
+    call_list.append(json_path)
+    
+    call_list.append("--top_n")
+    call_list.append(str(top_n))
+    
+    call_list.append("--ignore_background")
+    
+    call_list.append("--save_dir_path")
+    call_list.append(save_dir_path)
+    
+    subprocess.call(call_list)
+    
+    
 def run_flops(
     cfg_path, work_dir_path, shape = [3, 512, 512]
 ):
@@ -67,11 +85,10 @@ def run_flops(
     
     call_list.append(cfg_path)
     
-    shape_str = ""
-    for dim in shape:
-        shape_str += f"{dim} "
     call_list.append("--shape")
-    call_list.append(shape_str)
+    
+    for dim in shape[1:]:
+        call_list.append(str(dim))
     
     call_list.append("--work-dir")
     call_list.append(work_dir_path)
@@ -105,7 +122,7 @@ def main():
         prediction_result_path = os.path.join(
             test_results_path,
             model_name,
-            "out/pred_result.pkl"
+            "pred_results"
         )
         
         
@@ -129,7 +146,7 @@ def main():
             cfg_path=cfg_path,
             checkpoint_path=checkpoint_path,
             work_dir_path=bench_work_dir_path,
-            repeat_times=2
+            repeat_times=10
         )
         
         confusion_matrix_save_path = os.path.join(
@@ -141,6 +158,17 @@ def main():
             cfg_path=cfg_path,
             prediction_result_path=prediction_result_path,
             confusion_matrix_save_path=confusion_matrix_save_path
+        )
+        
+        json_path = os.path.join(
+            confusion_matrix_save_path,
+            "confusion.json"
+        )
+        
+        run_confusion_analysis(
+            json_path=json_path,
+            save_dir_path=confusion_matrix_save_path,
+            top_n=10
         )
         
         save_flops_file_path = os.path.join(

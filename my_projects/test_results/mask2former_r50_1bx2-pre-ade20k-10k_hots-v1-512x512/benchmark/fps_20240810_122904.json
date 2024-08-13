@@ -1,0 +1,16 @@
+{
+    "config": "my_projects/best_models/selection/mask2former_r50_1bx2-pre-ade20k-10k_hots-v1-512x512/mask2former_r50_1bx2-pre-ade20k-10k_hots-v1-512x512.py",
+    "unit": "img / s",
+    "overall_fps_1": 15.12,
+    "overall_fps_2": 15.0,
+    "overall_fps_3": 15.2,
+    "overall_fps_4": 15.12,
+    "overall_fps_5": 15.21,
+    "overall_fps_6": 15.46,
+    "overall_fps_7": 15.46,
+    "overall_fps_8": 15.32,
+    "overall_fps_9": 14.48,
+    "overall_fps_10": 14.68,
+    "average_fps": 15.1,
+    "fps_variance": 0.0892
+}
