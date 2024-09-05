@@ -13,7 +13,7 @@ from mmengine.runner import Runner, load_checkpoint
 from mmengine.utils import mkdir_or_exist
 
 from mmseg.registry import MODELS
-
+from mmengine.device import get_max_cuda_memory
 
 def parse_args():
     parser = argparse.ArgumentParser(description='MMSeg benchmark a model')
@@ -54,6 +54,7 @@ def main():
 
     benchmark_dict = dict(config=args.config, unit='img / s')
     overall_fps_list = []
+    overall_mem_list = []
     cfg.test_dataloader.batch_size = 1
     for time_index in range(repeat_times):
         print(f'Run {time_index + 1}:')
@@ -77,7 +78,7 @@ def main():
         model.eval()
 
         # the first several iterations may be very slow so skip them
-        num_warmup = 5
+        num_warmup = 10
         pure_inf_time = 0
         total_iters = 200
 
@@ -109,11 +110,16 @@ def main():
                 print(f'Overall fps: {fps:.2f} img / s\n')
                 benchmark_dict[f'overall_fps_{time_index + 1}'] = round(fps, 2)
                 overall_fps_list.append(fps)
+                
+                mem = get_max_cuda_memory(torch.cuda.current_device())
+                benchmark_dict[f'overall_memory_{time_index + 1}'] = mem
+                overall_mem_list.append(mem)
                 break
     
-    benchmark_dict['average_fps'] = round(np.mean(overall_fps_list), 2)
-    
+    benchmark_dict['average_fps'] = round(np.mean(overall_fps_list), 2) 
     benchmark_dict['fps_variance'] = round(np.var(overall_fps_list), 4)
+    benchmark_dict['average_mem'] = round(np.mean(overall_mem_list), 2) 
+    benchmark_dict['mem_variance'] = round(np.var(overall_mem_list), 4)
     print(f'Average fps of {repeat_times} evaluations: '
           f'{benchmark_dict["average_fps"]}')
     print(f'The variance of {repeat_times} evaluations: '
