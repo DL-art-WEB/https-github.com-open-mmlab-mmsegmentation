@@ -489,7 +489,7 @@ def hsidrive_palette():
 
 def hots_v1_classes():
     return [
-                    "apple", "banana", "book_blue", "book_white", "book_yellow",
+                    "_background_", "apple", "banana", "book_blue", "book_white", "book_yellow",
                     "bowl", "can_cassis", "can_coke", "can_fanta", "can_jumbo",
                     "can_pepsi", "cup_black", "cup_glass", "cup_red", "fork_black",
                     "fork_silver", "juice_box_green", "juice_box_orange", "juice_box_pink",
@@ -501,7 +501,8 @@ def hots_v1_classes():
                     "spoon_blue", "spoon_silver", "stapler"
     ]
 def hots_v1_palette():
-    return [        [120, 120, 120], [180, 120, 120], [6, 230, 230], [80, 50, 50],
+    return [        [0, 0, 0],
+                    [120, 120, 120], [180, 120, 120], [6, 230, 230], [80, 50, 50],
                     [4, 200, 3], [120, 120, 80], [140, 140, 140], [204, 5, 255],
                     [230, 230, 230], [4, 250, 7], [224, 5, 255], [235, 255, 7],
                     [150, 5, 61], [120, 120, 70], [8, 255, 51], [255, 6, 82],

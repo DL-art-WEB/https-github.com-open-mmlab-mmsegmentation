@@ -13,7 +13,6 @@ from mmengine.registry import init_default_scope
 
 from mmseg.registry import MODELS
 
-import torch
 def parse_row(row_str):
     row_ = row_str.split("|")
     row = []

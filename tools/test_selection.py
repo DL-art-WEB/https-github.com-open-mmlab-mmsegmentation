@@ -132,13 +132,13 @@ def main():
             "show"
         )
         
-        # run_performance_test(
-        #     cfg_path=cfg_path, 
-        #     checkpoint_path=checkpoint_path,
-        #     work_dir_path=work_dir_path, 
-        #     prediction_result_path=prediction_result_path,
-        #     show_dir_path=show_dir_path
-        # )
+        run_performance_test(
+            cfg_path=cfg_path, 
+            checkpoint_path=checkpoint_path,
+            work_dir_path=work_dir_path, 
+            prediction_result_path=prediction_result_path,
+            show_dir_path=show_dir_path
+        )
         
         bench_work_dir_path = os.path.join(work_dir_path, "benchmark")
         
@@ -148,7 +148,7 @@ def main():
             work_dir_path=bench_work_dir_path,
             repeat_times=10
         )
-        continue
+
         confusion_matrix_save_path = os.path.join(
             work_dir_path, 
             "confusion_matrix"

@@ -7,7 +7,7 @@ class IRLVisionSimDataset(BaseSegDataset):
 
     METAINFO = dict(
         classes=(
-                   "_background_", 
+                    "_background_", 
                     "apple", "banana", "book_1", "book_10", 
                     "book_11", "book_15", "book_20", "book_8", 
                     "bowl_1", "bowl_2", "bowl_blue", "bowl_green", 
