@@ -2454,7 +2454,7 @@ class Albu(BaseTransform):
         # back to the original format
         albumentations_results = self.mapper(albumentations_results, self.keymap_back)
 
-        # 更新原始 results 中对应的键
+        # Update corresponding keys in the original `results`
         results.update(albumentations_results)
 
         # update final shape
