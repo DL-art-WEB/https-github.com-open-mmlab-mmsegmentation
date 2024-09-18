@@ -45,6 +45,23 @@ def run_benchmark(
     
     subprocess.call(call_list)
 
+
+def run_clutter_test(
+    cfg_path, checkpoint_path, 
+    work_dir_path
+):
+    call_list = ["python", "tools/clutter_test.py"]
+    call_list.append(cfg_path)
+    call_list.append(checkpoint_path)
+    
+    # specify workdir arg
+    call_list.append("--work-dir")
+    call_list.append(work_dir_path)
+
+    
+    subprocess.call(call_list)
+
+
 def run_confusion_matrix(
     cfg_path, prediction_result_path,
     confusion_matrix_save_path
@@ -95,11 +112,13 @@ def run_flops(
     subprocess.call(call_list)
     
 def main():
-    selection_path = "my_projects/best_models/selection"
-    test_results_path = "my_projects/test_results"
+    selection_path = "my_projects/best_models/selection_trained/arid20_cat"
+    test_results_path = "my_projects/test_results/arid20_cat"
 
     for model_name in os.listdir(selection_path):
-        
+        # TODO temp
+        if not "mask2former" in model_name:
+            continue
         cfg_path = os.path.join(
             selection_path, 
             model_name, 
@@ -138,6 +157,12 @@ def main():
             work_dir_path=work_dir_path, 
             prediction_result_path=prediction_result_path,
             show_dir_path=show_dir_path
+        )
+        
+        run_clutter_test(
+            cfg_path=cfg_path,
+            checkpoint_path=checkpoint_path,
+            work_dir_path=work_dir_path
         )
         
         bench_work_dir_path = os.path.join(work_dir_path, "benchmark")

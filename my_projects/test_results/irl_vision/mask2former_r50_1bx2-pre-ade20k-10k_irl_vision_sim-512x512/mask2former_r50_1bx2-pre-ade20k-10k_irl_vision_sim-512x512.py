@@ -50,7 +50,7 @@ img_ratios = [
     1.75,
 ]
 launcher = 'none'
-load_from = 'my_projects/best_models/selection/mask2former_r50_1bx2-pre-ade20k-10k_irl_vision_sim-512x512/weights.pth'
+load_from = 'my_projects/best_models/selection/mask2former_r50_1xb2-pre-ade20k-10k_irl_vision_sim-512x512/weights.pth'
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
@@ -342,7 +342,7 @@ test_dataloader = dict(
 test_evaluator = dict(
     keep_results=True,
     output_dir=
-    'my_projects/test_results/mask2former_r50_1bx2-pre-ade20k-10k_irl_vision_sim-512x512/pred_results',
+    'my_projects/test_results/mask2former_r50_1xb2-pre-ade20k-10k_irl_vision_sim-512x512/pred_results',
     type='CustomIoUMetric')
 test_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -473,9 +473,9 @@ vis_backends = [
 visualizer = dict(
     name='visualizer',
     save_dir=
-    'my_projects/test_results/mask2former_r50_1bx2-pre-ade20k-10k_irl_vision_sim-512x512/show',
+    'my_projects/test_results/mask2former_r50_1xb2-pre-ade20k-10k_irl_vision_sim-512x512/show',
     type='SegLocalVisualizer',
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = 'my_projects/test_results/mask2former_r50_1bx2-pre-ade20k-10k_irl_vision_sim-512x512'
+work_dir = 'my_projects/test_results/mask2former_r50_1xb2-pre-ade20k-10k_irl_vision_sim-512x512'

@@ -256,13 +256,7 @@ class CustomIoUMetric(BaseMetric):
                 
 
         
-        # for thres in np.arange(0.5, 1.0, 0.1):
-            
-            
-        #     # score = np.mean((iou_per_sample_list > thres), 0)
-        #     # score = (total_iou > thres)
-        #     ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = score
-            
+           
         total_iou = np.sum(area_intersect, 0) / np.sum(area_union, 0) 
         ret_metrics["IoU"] = total_iou
         
@@ -273,10 +267,10 @@ class CustomIoUMetric(BaseMetric):
         #     for metric, value in ret_metrics.items()
         # }
         # if nan_to_num is not None:
-        ret_metrics = OrderedDict({
-            metric: np.nan_to_num(metric_value, nan=0.0)
-            for metric, metric_value in ret_metrics.items()
-        })
+        # ret_metrics = OrderedDict({
+        #     metric: np.nan_to_num(metric_value, nan=0.0)
+        #     for metric, metric_value in ret_metrics.items()
+        # })
         # print("ret: ")
         # for key, val in ret_metrics.items():
         #     print(f"{key} : {val}")
