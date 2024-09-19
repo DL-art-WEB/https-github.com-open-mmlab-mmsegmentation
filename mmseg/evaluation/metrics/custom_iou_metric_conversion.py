@@ -90,17 +90,23 @@ class CustomIoUMetricConversion(BaseMetric):
         for data_sample in data_samples:
             pred_label = data_sample['pred_sem_seg']['data'].squeeze()
             # format_only always for test dataset without ground truth
-            if not self.format_only:
-                label = data_sample['gt_sem_seg']['data'].squeeze().to(
-                    pred_label)
-                self.results.append(
-                    self.intersect_and_union(
-                        pred_label=pred_label,
-                        label=label,
-                        ignore_index=self.ignore_index,
-                        dataset_converter=self.data_converter
-                    )
+            # if not self.format_only:
+            label = data_sample['gt_sem_seg']['data'].squeeze().to(
+                pred_label)
+            pred_label, label = self.data_converter.convert_labels(
+                pred_label=pred_label,
+                gt_label=label
+            )
+            pred_label = torch.tensor(pred_label)
+            label = torch.tensor(label)
+            self.results.append(
+                self.intersect_and_union(
+                    pred_label=pred_label,
+                    label=label,
+                    ignore_index=self.ignore_index,
+                    dataset_converter=self.data_converter
                 )
+            )
         
             
             # format_result
@@ -205,12 +211,12 @@ class CustomIoUMetricConversion(BaseMetric):
             )
         )
         # TODO check
-        pred_label, label = dataset_converter.convert_labels(
-            pred_label=pred_label,
-            gt_label=label
-        )
-        pred_label = torch.tensor(pred_label)
-        label = torch.tensor(label)
+        # pred_label, label = dataset_converter.convert_labels(
+        #     pred_label=pred_label,
+        #     gt_label=label
+        # )
+        # pred_label = torch.tensor(pred_label)
+        # label = torch.tensor(label)
         mask = (label != ignore_index)
         pred_label = pred_label[mask]
         label = label[mask]

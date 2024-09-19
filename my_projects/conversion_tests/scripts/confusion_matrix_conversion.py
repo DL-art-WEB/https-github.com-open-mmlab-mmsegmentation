@@ -10,7 +10,9 @@ from mmengine.registry import init_default_scope
 from mmengine.utils import mkdir_or_exist, progressbar
 from mmengine.fileio import dump
 from PIL import Image
-
+from my_projects.conversion_tests.converters.dataset_converter import (
+    DatasetConverter
+)
 from mmseg.registry import DATASETS
 
 init_default_scope('mmseg')
@@ -25,7 +27,27 @@ def parse_args():
     parser.add_argument(
         'save_dir', help='directory where confusion matrix will be saved')
     parser.add_argument(
-        '--show', action='store_true', help='show confusion matrix')
+        '--test_dataset',
+        '-test_ds',
+        type=str,
+        default="HOTS",
+        choices=["HOTS", "IRL_VISION"]
+    )
+    parser.add_argument(
+        '--output_dataset',
+        '-out_ds',
+        type=str,
+        default="HOTS",
+        choices=["HOTS", "IRL_VISION", "ADE20K"]
+    )
+    parser.add_argument(
+        '--target_dataset',
+        '-tar_ds',
+        type=str,
+        default="HOTS_CAT",
+        choices=["HOTS_CAT", "IRL_VISION_CAT"]
+    )
+   
     parser.add_argument(
         '--color-theme',
         default='winter',
@@ -48,23 +70,38 @@ def parse_args():
     return args
 
 
-def calculate_confusion_matrix(dataset, results):
-    """Calculate the confusion matrix.
+def calculate_confusion_matrix(
+    dataset_converter: DatasetConverter, 
+    test_dataset,
+    results
+):
+    """Calculate the confusion matrix
 
     Args:
-        dataset (Dataset): Test or val dataset.
-        results (list[ndarray]): A list of segmentation results in each image.
+        dataset_converter (DatasetConverter): _description_
+        test_dataset (_type_): _description_
+        results (_type_): results are in target_dataset labels
+
+    Returns:
+        _type_: _description_
     """
-    n = len(dataset.METAINFO['classes'])
+    n = len(
+        dataset_converter.get_class_names(
+            dataset_name=dataset_converter.target_dataset
+        )
+    )
     confusion_matrix = np.zeros(shape=[n, n])
-    assert len(dataset) == len(results)
-    ignore_index = dataset.ignore_index
-    reduce_zero_label = dataset.reduce_zero_label
+    assert len(test_dataset) == len(results)
+    # TODO not sure if should be the test of target dataset
+    ignore_index = test_dataset.ignore_index
+    reduce_zero_label = test_dataset.reduce_zero_label
     prog_bar = progressbar.ProgressBar(len(results))
     for idx, per_img_res in enumerate(results):
         res_segm = per_img_res
-        gt_segm = dataset[idx]['data_samples'] \
+        gt_segm = test_dataset[idx]['data_samples'] \
             .gt_sem_seg.data.squeeze().numpy().astype(np.uint8)
+        
+        gt_segm = dataset_converter.convert_gt_label(label=gt_segm)
         
         gt_segm, res_segm = gt_segm.flatten(), res_segm.flatten()
         if reduce_zero_label:
@@ -86,93 +123,10 @@ def calculate_confusion_matrix(dataset, results):
     return confusion_matrix
 
 
-def plot_confusion_matrix(confusion_matrix,
-                          labels,
-                          save_dir=None,
-                          show=True,
-                          title='Normalized Confusion Matrix',
-                          color_theme='OrRd'):
-    """Draw confusion matrix with matplotlib.
 
-    Args:
-        confusion_matrix (ndarray): The confusion matrix.
-        labels (list[str]): List of class names.
-        save_dir (str|optional): If set, save the confusion matrix plot to the
-            given path. Default: None.
-        show (bool): Whether to show the plot. Default: True.
-        title (str): Title of the plot. Default: `Normalized Confusion Matrix`.
-        color_theme (str): Theme of the matrix color map. Default: `winter`.
-    """
-    # normalize the confusion matrix
-    per_label_sums = confusion_matrix.sum(axis=1)[:, np.newaxis]
-    confusion_matrix = \
-        confusion_matrix.astype(np.float32) / per_label_sums * 100
-    confusion_matrix = np.nan_to_num(confusion_matrix)
-    
-    num_classes = len(labels)
-    fig, ax = plt.subplots(
-        figsize=(min(2 * num_classes, 100), min(2 * num_classes * 0.8, 80)), dpi=300)
-    cmap = plt.get_cmap(color_theme)
-    im = ax.imshow(confusion_matrix, cmap=cmap)
-    colorbar = plt.colorbar(mappable=im, ax=ax)
-    colorbar.ax.tick_params(labelsize=20)  # 设置 colorbar 标签的字体大小
-
-    title_font = {'weight': 'bold', 'size': 20}
-    ax.set_title(title, fontdict=title_font)
-    label_font = {'size': 40}
-    plt.ylabel('Ground Truth Label', fontdict=label_font)
-    plt.xlabel('Prediction Label', fontdict=label_font)
-
-    # draw locator
-    xmajor_locator = MultipleLocator(1)
-    xminor_locator = MultipleLocator(0.5)
-    ax.xaxis.set_major_locator(xmajor_locator)
-    ax.xaxis.set_minor_locator(xminor_locator)
-    ymajor_locator = MultipleLocator(1)
-    yminor_locator = MultipleLocator(0.5)
-    ax.yaxis.set_major_locator(ymajor_locator)
-    ax.yaxis.set_minor_locator(yminor_locator)
-
-    # draw grid
-    ax.grid(True, which='minor', linestyle='-')
-
-    # draw label
-    ax.set_xticks(np.arange(num_classes))
-    ax.set_yticks(np.arange(num_classes))
-    ax.set_xticklabels(labels, fontsize=20)
-    ax.set_yticklabels(labels, fontsize=20)
-    ax.tick_params(
-        axis='x', bottom=False, top=True, labelbottom=False, labeltop=True)
-    plt.setp(
-        ax.get_xticklabels(), rotation=45, ha='left', rotation_mode='anchor')
-
-    # draw confusion matrix value
-    for i in range(num_classes):
-        for j in range(num_classes):
-            ax.text(
-                j,
-                i,
-                '{}%'.format(
-                    round(confusion_matrix[i, j], 2
-                          ) if not np.isnan(confusion_matrix[i, j]) else -1),
-                ha='center',
-                va='center',
-                color='k',
-                size=20)
-    ax.set_ylim(len(confusion_matrix) - 0.5, -0.5)  # matplotlib>3.1.1
-    fig.tight_layout()
-    # if show:
-    #     plt.show()
-    if save_dir is not None:
-        mkdir_or_exist(save_dir)
-        plt.savefig(
-            os.path.join(save_dir, 'confusion_matrix.png'), bbox_inches='tight')
-        
-    if show:
-        plt.show()
 
 def dump_confusion_data(
-    confusion_matrix, labels, 
+    confusion_matrix, dataset_converter: DatasetConverter, 
     min_value = 0.0, save_dir=None,
     ignore_diagonal = True
 ):
@@ -182,6 +136,9 @@ def dump_confusion_data(
     confusion_matrix = np.nan_to_num(confusion_matrix)
     conf_dict_list = []
     # row nr
+    labels = dataset_converter.get_class_names(
+        dataset_name=dataset_converter.target_dataset
+    )
     for gt_label_idx, gt_label in enumerate(labels):
         
         for pred_label_idx, pred_label in enumerate(labels):
@@ -204,11 +161,19 @@ def dump_confusion_data(
         
 def main():
     args = parse_args()
-
+    # cfg should be of test_dataset 
+    # predictions are in target
+    # out_ds?
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
 
+    dataset_converter = DatasetConverter(
+        test_dataset=args.test_dataset,
+        output_dataset=args.output_dataset,
+        target_dataset=args.target_dataset
+    )
+    
     results = []
     for img in sorted(os.listdir(args.prediction_path)):
         img = os.path.join(args.prediction_path, img)
@@ -222,20 +187,17 @@ def main():
     else:
         raise TypeError('invalid type of prediction results')
 
-    dataset = DATASETS.build(cfg.test_dataloader.dataset)
-    confusion_matrix = calculate_confusion_matrix(dataset, results)
+    test_dataset = DATASETS.build(cfg.test_dataloader.dataset)
+    confusion_matrix = calculate_confusion_matrix(
+        dataset_converter=dataset_converter, 
+        test_dataset=test_dataset, 
+        results=results
+    )
     dump_confusion_data(
         confusion_matrix=confusion_matrix,
-        labels=dataset.METAINFO['classes'],
+        dataset_converter=dataset_converter,
         save_dir=args.save_dir
     )
-    plot_confusion_matrix(
-        confusion_matrix,
-        dataset.METAINFO['classes'],
-        save_dir=args.save_dir,
-        show=args.show,
-        title=args.title,
-        color_theme=args.color_theme)
 
 
 if __name__ == '__main__':

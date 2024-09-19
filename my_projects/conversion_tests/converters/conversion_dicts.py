@@ -11,6 +11,7 @@ from mmseg.utils import (
     irl_vision_sim_cat_palette
 )
 
+
 HOTS2HOTS_CAT = {
     0  :  0,
     1  :  1,
@@ -294,13 +295,13 @@ ARID20CAT2IRL_VISION_CAT_CLASS_NAMES = {
 }
 
 SOURCE_TARGET_MAP = {
-    "HOTS"  :   {
+    "HOTS"                  :   {
         "HOTS_CAT"          :   [HOTS2HOTS_CAT],
         "ADE20K"            :   [HOTS2HOTS_CAT, HOTS_CAT2ADE20K],
         "IRL_VISION_CAT"    :   [HOTS2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT]
     },
-    "IRL_VISION"    :   {
-        "IRL_VISION_CAT "   :   [IRL_VISION2IRL_VISION_CAT],
+    "IRL_VISION"            :   {
+        "IRL_VISION_CAT"   :   [IRL_VISION2IRL_VISION_CAT],
         "HOTS_CAT"          :   [
             IRL_VISION2IRL_VISION_CAT, 
             IRL_VISION_CAT2HOTS_CAT

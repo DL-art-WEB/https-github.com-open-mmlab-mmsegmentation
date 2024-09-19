@@ -16,7 +16,9 @@ DATASET_SOURCE_PATH = {
 # TODO maybe add irl2hots later
 DATASET_SETUPS = [
     ("HOTS", "HOTS", "HOTS_CAT"),
-    ("IRL_VISION", "IRL_VISION", "IRL_VISION_CAT")
+    ("IRL_VISION", "IRL_VISION", "IRL_VISION_CAT"),
+    ("IRL_VISION", "IRL_VISION", "HOTS_CAT"),
+    ("HOTS", "HOTS", "IRL_VISION_CAT")
 ]
 
 def run_conversion_test(

@@ -4,7 +4,6 @@ from .conversion_dicts import (
     DATASET_CLASSES as GET_CLASSES,
     DATASET_PALETTE as GET_PALETTE
 )
-
 import torch
 
 # this is very hard coded: converting only works when 1 to 1
@@ -30,6 +29,8 @@ class DatasetConverter:
         self.pred_conv_direct = DatasetConverter.conversions_are_direct(
             conversions=self.pred_conversions
         )
+        
+        
     
     def convert_labels(
         self,
@@ -54,9 +55,6 @@ class DatasetConverter:
             pred_label=pred_label,
             gt_label=gt_label
         )
-        
-        
-        
         assert len(gt_label) == len(pred_label), \
             print(f"invalid gt and pred len: \
                 {len(gt_label)} vs {len(pred_label)} respectively")
@@ -178,7 +176,7 @@ class DatasetConverter:
             return self.convert_any_label_random_choice(
                 label=pred_label,
                 conversions=self.pred_conversions
-            )
+            ).reshape(label_shape)
         pred_label_tmp = self.convert_any_label(
             label=pred_label,
             conversions=self.pred_conversions
@@ -186,7 +184,7 @@ class DatasetConverter:
         return self.convert_pred_label_list(
             pred_label=pred_label_tmp,
             gt_label_converted=gt_label_converted
-        )
+        ).reshape(label_shape)
         
     def convert_pred_label_rand_choice(
         self,
@@ -348,7 +346,9 @@ class DatasetConverter:
     def get_palette(dataset_name):
         return GET_PALETTE[dataset_name]()
     
-    
+    @staticmethod
+    def get_dataset(dataset_name):
+        return DATASETS[dataset_name]
     
     
 # def test():

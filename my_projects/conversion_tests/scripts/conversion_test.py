@@ -7,7 +7,7 @@ from my_projects.conversion_tests.converters.conversion_dicts import(
     DATASET_PALETTE
 )
 from tools.test_selection import (
-    run_performance_test, run_confusion_matrix,
+    run_performance_test,
     run_confusion_analysis
 )
 
@@ -17,10 +17,7 @@ TEST_DATASET_TEMPLATE_PATHS = {
     "IRL_VISION"   : "my_projects/conversion_tests/dataset_template_configs/irl_test_data.py"
 }
 
-TEST_DATASET_RESULTS_DIR_NAME = {
-    "HOTS"          :       "hots_v1",
-    "IRL_VISION"    :       "irl_vision"
-}
+
 
 def arg_parse():
     parser = argparse.ArgumentParser()
@@ -63,11 +60,7 @@ def arg_parse():
         '-g_cfg',
         action='store_true'
     )
-    # parser.add_argument(
-    #     '--cfg_name',
-    #     type=str,
-    #     default=""
-    # )
+    
     parser.add_argument(
         '--cfg_save_dir',
         '-cfg_dir',
@@ -81,7 +74,8 @@ def arg_parse():
 def conversion_test_model(
     model_path: str, 
     cfg_path: str,
-    test_results_path: str
+    test_results_path: str,
+    args
 ):
     model_name = get_model_dir_name(model_path=model_path)
     
@@ -117,7 +111,8 @@ def conversion_test_model(
     run_confusion_matrix(
         cfg_path=cfg_path,
         prediction_result_path=prediction_result_path,
-        confusion_matrix_save_path=confusion_matrix_save_path 
+        confusion_matrix_save_path=confusion_matrix_save_path,
+        args=args 
     )
     
     json_path = os.path.join(
@@ -130,6 +125,28 @@ def conversion_test_model(
         save_dir_path=confusion_matrix_save_path,
         top_n=10
     )
+
+def run_confusion_matrix(
+        cfg_path,
+        prediction_result_path,
+        confusion_matrix_save_path,
+        args
+):
+    subprocess.call(
+        [
+            "python",
+            "my_projects/conversion_tests/scripts/confusion_matrix_conversion.py",
+            cfg_path,               # maybe from TEST_DATASET_TEMPLATE_PATHS
+            prediction_result_path,
+            confusion_matrix_save_path,
+            "--test_dataset",
+            args.test_dataset,
+            "--output_dataset",
+            args.output_dataset,
+            "--target_dataset",
+            args.target_dataset,
+        ]
+    )    
 
 def get_checkpoint_path(model_path: str) -> str:
     return os.path.join(
@@ -230,7 +247,8 @@ def main():
     conversion_test_model(
         model_path=args.model_dir_path,
         cfg_path=conv_cfg_path,
-        test_results_path=args.test_results_path
+        test_results_path=args.test_results_path,
+        args=args
     )
     
     
