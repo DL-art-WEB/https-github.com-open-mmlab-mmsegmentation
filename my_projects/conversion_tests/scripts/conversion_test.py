@@ -6,7 +6,10 @@ from my_projects.conversion_tests.converters.conversion_dicts import(
     DATASET_CLASSES,
     DATASET_PALETTE
 )
-from tools.test_selection import run_performance_test
+from tools.test_selection import (
+    run_performance_test, run_confusion_matrix,
+    run_confusion_analysis
+)
 
 
 TEST_DATASET_TEMPLATE_PATHS = {
@@ -25,7 +28,7 @@ def arg_parse():
         '--model_dir_path',
         '-mdp',
         type=str,
-        default="my_projects/zero_shot/models"
+        default="my_projects/conversion_tests/finegrained_vs_general/selection_trained/hots_v1"
     )
     parser.add_argument(
         '--test_dataset',
@@ -106,7 +109,27 @@ def conversion_test_model(
         prediction_result_path=prediction_result_path,
         show_dir_path=show_dir_path
     )
-
+    
+    confusion_matrix_save_path = os.path.join(
+        work_dir_path, 
+        "confusion_matrix"
+    )
+    run_confusion_matrix(
+        cfg_path=cfg_path,
+        prediction_result_path=prediction_result_path,
+        confusion_matrix_save_path=confusion_matrix_save_path 
+    )
+    
+    json_path = os.path.join(
+            confusion_matrix_save_path,
+            "confusion.json"
+    )
+    
+    run_confusion_analysis(
+        json_path=json_path,
+        save_dir_path=confusion_matrix_save_path,
+        top_n=10
+    )
 
 def get_checkpoint_path(model_path: str) -> str:
     return os.path.join(
@@ -136,7 +159,7 @@ def gen_conversion_cfg(
     cfg.merge_from_dict(
         options=dict(
             test_evaluator = dict(
-                type="CustomIoUMetricZeroShot",
+                type="CustomIoUMetricConversion",
                 test_dataset=args.test_dataset,
                 output_dataset=args.output_dataset,
                 target_dataset=args.target_dataset
@@ -148,7 +171,7 @@ def gen_conversion_cfg(
         options=dict(
             visualizer = dict(
                 name='visualizer',
-                type='SegLocalVisualizerZeroShot',
+                type='SegLocalVisualizerConversion',
                 vis_backends=[
                     dict(type='LocalVisBackend'),
                 ],
@@ -162,11 +185,14 @@ def gen_conversion_cfg(
 
 def dump_conversion_cfg(
     cfg: Config,
-    save_path: str
+    save_dir_path: str,
+    save_file_name: str
 ):
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
-    cfg.dump(save_path)    
+    if not os.path.exists(save_dir_path):
+        os.makedirs(save_dir_path)
+    cfg.dump(
+        os.path.join(save_dir_path, save_file_name)
+    )    
 
 def gen_conversion_cfg_name(args) -> str:
     model_name = get_model_dir_name(model_path=args.model_dir_path)
@@ -177,25 +203,29 @@ def gen_conversion_cfg_name(args) -> str:
     return f"{model_name}_{test}_{out}_{target}.py"
      
    
-def gen_conversion_cfg_path(args):
+def gen_conversion_cfg_dir_path(args):
     return os.path.join(
         args.model_dir_path,
-        args.cfg_save_dir,
-        conv_cfg_name = gen_conversion_cfg_name(args=args)
+        args.cfg_save_dir
     )
     
 
 def main():
     
     args = arg_parse()
-    conv_cfg_path = get_base_cfg_path(args=args)
-    
+    conv_cfg_dir_path = gen_conversion_cfg_dir_path(args=args)
+    conv_file_name = gen_conversion_cfg_name(args=args)
+    conv_cfg_path = os.path.join(conv_cfg_dir_path, conv_file_name)
     if args.gen_cfg or not os.path.exists(conv_cfg_path):
         cfg = gen_conversion_cfg(
             base_cfg_path=get_base_cfg_path(args.model_dir_path),
             args=args
         )
-        dump_conversion_cfg(cfg=cfg, save_path=conv_cfg_path)
+        dump_conversion_cfg(
+            cfg=cfg,
+            save_dir_path=conv_cfg_dir_path,
+            save_file_name=conv_file_name
+        )
     
     conversion_test_model(
         model_path=args.model_dir_path,

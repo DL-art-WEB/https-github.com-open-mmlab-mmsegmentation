@@ -30,8 +30,8 @@ class DatasetConverter:
         self.pred_conv_direct = DatasetConverter.conversions_are_direct(
             conversions=self.pred_conversions
         )
-
-    def get_intersect_and_union(
+    
+    def convert_labels(
         self,
         pred_label,
         gt_label
@@ -42,36 +42,20 @@ class DatasetConverter:
             pred_label=pred_label, 
             gt_label_converted=gt_new
         )
+        return pred_new, gt_new
+        
+    def get_intersect_and_union(
+        self,
+        pred_label,
+        gt_label
+    ):
+        
+        pred_new, gt_new = self.convert_labels(
+            pred_label=pred_label,
+            gt_label=gt_label
+        )
         
         
-        # print(f"pred:\n{np.unique(pred_label)}")
-        # class_names = self.get_class_names(self.output_dataset)
-        # for pred_val in np.unique(pred_label):
-        #     print(f"(idx, label): ({pred_val}, {class_names[pred_val]})")
-        
-        
-        # print(f"prednew:\n{np.unique(pred_new)}")
-        # class_names = self.get_class_names(self.target_dataset)
-        # for pred_val in np.unique(pred_new):
-        #     if pred_val == self.unknown_idx:
-        #         print(f"(idx, label): ({pred_val}, unkown)")
-        #         continue
-        #     print(f"(idx, label): ({pred_val}, {class_names[pred_val]})")
-            
-        
-        # print(f"gt:\n{np.unique(gt_label)}")
-        # class_names = self.get_class_names(self.test_dataset)
-        # for gt_val in np.unique(gt_label):
-        #     print(f"(idx, label): ({gt_val}, {class_names[gt_val]})")
-        
-        # print(f"gtnew:\n{np.unique(gt_new)}")
-        # class_names = self.get_class_names(self.target_dataset)
-        # for gt_val in np.unique(gt_new):
-        #     if gt_val == self.unknown_idx:
-        #         print(f"(idx, label): ({gt_val}, unknown )")
-        #     print(f"(idx, label): ({gt_val}, {class_names[gt_val]})")
-            
-        # print()
         
         assert len(gt_label) == len(pred_label), \
             print(f"invalid gt and pred len: \
@@ -115,6 +99,7 @@ class DatasetConverter:
     
     
     def get_areas_direct(self, gt_converted, pred_converted):
+        
         area_intersect = np.zeros(
             len(GET_CLASSES[self.target_dataset]())
         ).astype(np.uint16)
@@ -139,8 +124,6 @@ class DatasetConverter:
         label: np.ndarray, 
         conversions: list
     ) -> np.ndarray:
-        if type(label) is torch.Tensor:
-            label = np.asarray(label.cpu())
         new_label = np.zeros_like(label)
         for idx, value in enumerate(label):
             val = value
@@ -162,11 +145,15 @@ class DatasetConverter:
         self, 
         label: np.ndarray, 
     ) -> np.ndarray:
+        label_shape = label.shape
+        if type(label) is torch.Tensor:
+            label = np.asarray(label.cpu())
+        label = label.flatten()
         if self.gt_conv_direct:
             return self.convert_direct_label(
                 label=label,
                 conversions=self.gt_conversions
-            )
+            ).reshape(label_shape)
     
         return self.convert_any_label(
             label=label,
@@ -178,11 +165,15 @@ class DatasetConverter:
         pred_label: np.ndarray,
         gt_label_converted: np.ndarray = None
     ):
+        label_shape = pred_label.shape
+        if type(pred_label) is torch.Tensor:
+            pred_label = np.asarray(pred_label.cpu())
+        pred_label = pred_label.flatten()
         if self.pred_conv_direct:
             return self.convert_direct_label(
                 label=pred_label,
                 conversions=self.pred_conversions
-            )
+            ).reshape(label_shape)
         if gt_label_converted is None:
             return self.convert_any_label_random_choice(
                 label=pred_label,

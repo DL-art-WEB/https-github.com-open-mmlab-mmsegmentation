@@ -189,7 +189,7 @@ test_evaluator = dict(
     output_dataset='ADE20K',
     target_dataset='HOTS_CAT',
     test_dataset='HOTS',
-    type='CustomIoUMetricZeroShot')
+    type='CustomIoUMetricConversion')
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(keep_ratio=True, scale=(
@@ -315,7 +315,7 @@ visualizer = dict(
     output_dataset='ADE20K',
     target_dataset='HOTS_CAT',
     test_dataset='HOTS',
-    type='SegLocalVisualizerZeroShot',
+    type='SegLocalVisualizerConversion',
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])

@@ -193,7 +193,7 @@ def gen_cfg(model_path: str, args):
     cfg.merge_from_dict(
         options=dict(
             test_evaluator = dict(
-                type="CustomIoUMetricZeroShot",
+                type="CustomIoUMetricConversion",
                 test_dataset=args.test_dataset,
                 output_dataset=args.output_dataset,
                 target_dataset=args.target_dataset
@@ -205,7 +205,7 @@ def gen_cfg(model_path: str, args):
         options=dict(
             visualizer = dict(
                 name='visualizer',
-                type='SegLocalVisualizerZeroShot',
+                type='SegLocalVisualizerConversion',
                 vis_backends=[
                     dict(type='LocalVisBackend'),
                 ],

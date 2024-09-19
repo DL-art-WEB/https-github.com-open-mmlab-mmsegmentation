@@ -2,11 +2,11 @@
 from .metrics import CityscapesMetric, DepthMetric, IoUMetric
 from .metrics import (
     CustomIoUMetric, IoUMetricG, 
-    IoUMetricFixed, CustomIoUMetricZeroShot
+    IoUMetricFixed, CustomIoUMetricConversion
 )
 
 __all__ = [
     'IoUMetric', 'CityscapesMetric', 'DepthMetric', 
     'CustomIoUMetric', 'IoUMetricFixed', 'IoUMetricG',
-    'CustomIoUMetricZeroShot'
+    'CustomIoUMetricConversion'
 ]

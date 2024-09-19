@@ -17,7 +17,7 @@ from my_projects.conversion_tests.converters.dataset_converter import(
 )
 from copy import deepcopy
 @VISUALIZERS.register_module()
-class SegLocalVisualizerZeroShot(Visualizer):
+class SegLocalVisualizerConversion(Visualizer):
     """Local Visualizer.
 
     Args:

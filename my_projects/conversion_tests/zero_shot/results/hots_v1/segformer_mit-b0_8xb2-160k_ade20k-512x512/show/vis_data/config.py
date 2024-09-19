@@ -193,7 +193,7 @@ test_evaluator = dict(
     'my_projects/zero_shot/results/hots_v1/segformer_mit-b0_8xb2-160k_ade20k-512x512/pred_results',
     target_dataset='HOTS_CAT',
     test_dataset='HOTS',
-    type='CustomIoUMetricZeroShot')
+    type='CustomIoUMetricConversion')
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(keep_ratio=True, scale=(
@@ -321,7 +321,7 @@ visualizer = dict(
     'my_projects/zero_shot/results/hots_v1/segformer_mit-b0_8xb2-160k_ade20k-512x512/show',
     target_dataset='HOTS_CAT',
     test_dataset='HOTS',
-    type='SegLocalVisualizerZeroShot',
+    type='SegLocalVisualizerConversion',
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])

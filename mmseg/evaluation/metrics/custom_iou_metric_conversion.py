@@ -19,7 +19,7 @@ from my_projects.conversion_tests.converters.dataset_converter import(
 
 
 @METRICS.register_module()
-class CustomIoUMetricZeroShot(BaseMetric):
+class CustomIoUMetricConversion(BaseMetric):
     """IoU evaluation metric.
 
     Args:
@@ -199,15 +199,35 @@ class CustomIoUMetricZeroShot(BaseMetric):
             torch.Tensor: The prediction histogram on all classes.
             torch.Tensor: The ground truth histogram on all classes.
         """
-
+        num_classes = len(
+            dataset_converter.get_class_names(
+                dataset_name=dataset_converter.target_dataset
+            )
+        )
+        # TODO check
+        pred_label, label = dataset_converter.convert_labels(
+            pred_label=pred_label,
+            gt_label=label
+        )
+        pred_label = torch.tensor(pred_label)
+        label = torch.tensor(label)
         mask = (label != ignore_index)
         pred_label = pred_label[mask]
         label = label[mask]
 
-        return dataset_converter.get_intersect_and_union(
-            pred_label=pred_label.cpu(),
-            gt_label=label.cpu()
-        )
+        intersect = pred_label[pred_label == label]
+        area_intersect = torch.histc(
+            intersect.float(), bins=(num_classes), min=0,
+            max=num_classes - 1).cpu()
+        area_pred_label = torch.histc(
+            pred_label.float(), bins=(num_classes), min=0,
+            max=num_classes - 1).cpu()
+        area_label = torch.histc(
+            label.float(), bins=(num_classes), min=0,
+            max=num_classes - 1).cpu()
+        area_union = area_pred_label + area_label - area_intersect
+        return area_intersect, area_union, area_pred_label, area_label
+
 
     @staticmethod
     def total_area_to_metrics(area_intersect: np.ndarray,

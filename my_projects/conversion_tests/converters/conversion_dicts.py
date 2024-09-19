@@ -259,6 +259,40 @@ HOTS_CAT2ADE20K = {
     4 : [147]
 }
 
+ARID20CAT2HOTS_CAT_CLASS_NAMES = {
+    "_background_"  :       "_background_", 
+    "apple"         :       "apple", 
+    "banana"        :       "banana", 
+    "bowl"          :       "bowl", 
+    "soda_can"      :       "can", 
+    "keyboard"      :       "keyboard", 
+    "lemon"         :       "lemon", 
+    "marker"        :       "marker", 
+    "orange"        :       "orange", 
+    "peach"         :       "peach", 
+    "pear"          :       "pear", 
+    "stapler"       :       "stapler"
+
+}   
+
+ARID20CAT2IRL_VISION_CAT_CLASS_NAMES = {
+    "_background_"  :       "_background_", 
+    "apple"         :       "apple", 
+    "banana"        :       "banana", 
+    "bowl"          :       "bowl", 
+    "soda_can"      :       "can", 
+    "cereal_box"    :       "cereal", 
+    "flashlight"    :       "flashlight", 
+    "keyboard"      :       "keyboard", 
+    "lemon"         :       "lemon", 
+    "marker"        :       "marker", 
+    "coffee_mug"    :       "mug", 
+    "orange"        :       "orange", 
+    "peach"         :       "peach", 
+    "pear"          :       "pear", 
+    "sponge"        :       "sponge"
+}
+
 SOURCE_TARGET_MAP = {
     "HOTS"  :   {
         "HOTS_CAT"          :   [HOTS2HOTS_CAT],
