@@ -27,7 +27,9 @@ from .refuge import REFUGEDataset
 from .stare import STAREDataset
 from .synapse import SynapseDataset
 from .hots_v1 import HOTSDataset
+from .hots_v1_cat import HOTSCATDataset
 from .irl_vision_sim import IRLVisionSimDataset
+from .irl_vision_sim_cat import IRLVisionSimCATDataset
 from .arid20_cat import ARID20CATDataset
 # yapf: disable
 from .transforms import (CLAHE, AdjustGamma, Albu, BioMedical3DPad,
@@ -64,6 +66,7 @@ __all__ = [
     'MapillaryDataset_v2', 'Albu', 'LEVIRCDDataset',
     'LoadMultipleRSImageFromFile', 'LoadSingleRSImageFromFile',
     'ConcatCDInput', 'BaseCDDataset', 'DSDLSegDataset', 'BDD100KDataset',
-    'NYUDataset', 'HSIDrive20Dataset', 'HOTSDataset', 'IRLVisionSimDataset',
+    'NYUDataset', 'HSIDrive20Dataset', 'HOTSDataset', 'HOTSCATDataset', 
+    'IRLVisionSimDataset', 'IRLVisionSimCATDataset'
     'ARID20CATDataset'
 ]

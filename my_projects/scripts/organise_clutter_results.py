@@ -1,9 +1,7 @@
 import json
 import os
 import argparse
-# TODO load all json for each level of clutter and put together in one json
-# 
-# Put the script in clutter dir
+
 
 def find_json_file(n_objects_dir_path):
     for root, dirs, files in os.walk(os.path.join(n_objects_dir_path)):

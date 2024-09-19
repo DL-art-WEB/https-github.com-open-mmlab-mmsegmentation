@@ -5,6 +5,10 @@ from .iou_metric import IoUMetric
 from .custom_iou_metric import CustomIoUMetric
 from .iou_metric_fixed import IoUMetricFixed
 from .iou_georgios import IoUMetricG
+from .custom_iou_metric_zero_shot import CustomIoUMetricZeroShot
 
-__all__ = ['IoUMetric', 'CityscapesMetric', 'DepthMetric', 
-           'CustomIoUMetric', 'IoUMetricFixed', 'IoUMetricG']
+__all__ = [
+    'IoUMetric', 'CityscapesMetric', 'DepthMetric', 
+    'CustomIoUMetric', 'IoUMetricFixed', 'IoUMetricG',
+    'CustomIoUMetricZeroShot'
+]

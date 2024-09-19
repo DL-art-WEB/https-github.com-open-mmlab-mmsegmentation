@@ -50,6 +50,7 @@ def run_clutter_test(
     cfg_path, checkpoint_path, 
     work_dir_path
 ):
+    # run clutter experiment
     call_list = ["python", "tools/clutter_test.py"]
     call_list.append(cfg_path)
     call_list.append(checkpoint_path)
@@ -57,10 +58,9 @@ def run_clutter_test(
     # specify workdir arg
     call_list.append("--work-dir")
     call_list.append(work_dir_path)
-
-    
     subprocess.call(call_list)
-
+    
+   
 
 def run_confusion_matrix(
     cfg_path, prediction_result_path,
@@ -110,15 +110,64 @@ def run_flops(
     call_list.append("--work-dir")
     call_list.append(work_dir_path)
     subprocess.call(call_list)
+
+# results path is the parent folder of the modeldirs
+def collect_and_organize_all_data(
+    results_path
+):
+    # organize and plot clutterdata per model
+    for model_dir in os.listdir(results_path):
+        if model_dir == "data":
+            continue
+        model_path = os.path.join(results_path, model_dir)
+        if not os.path.isdir(model_path):
+            continue
+        clutter_path = os.path.join(model_path, "clutter")
+        if not os.path.exists(clutter_path):
+            continue
+        model_name = model_dir.split("_")[0]
+        call_list = [
+            "python", 
+            "my_projects/scripts/organise_clutter_results.py",
+            clutter_path
+        ]
+        subprocess.call(call_list)
+        
     
+    # plot clutterdata global and per model 
+    work_dir_name = results_path.split("/")[-2 if results_path[-1] == '/' else -1]
+    data_path = os.path.join(results_path, "data")
+    if not os.path.exists(data_path):
+        os.mkdir(data_path)
+    call_list = [
+        "python",
+        "my_projects/scripts/plot_clutter_data.py",
+        results_path,
+        data_path,
+        "--global_plot",
+        '--per_model'
+    ]
+    subprocess.call(call_list)
+    
+    # generate jsons
+    call_list = [
+        "python",
+        "my_projects/scripts/generate_json_all_test_results.py",
+        "-dsp",
+        results_path,
+        "-si",
+        "-ss"
+    ]
+    subprocess.call(call_list)
+   
 def main():
     selection_path = "my_projects/best_models/selection_trained/arid20_cat"
     test_results_path = "my_projects/test_results/arid20_cat"
 
     for model_name in os.listdir(selection_path):
-        # TODO temp
-        if not "mask2former" in model_name:
+        if model_name == "data":
             continue
+        
         cfg_path = os.path.join(
             selection_path, 
             model_name, 
@@ -206,7 +255,7 @@ def main():
             work_dir_path=save_flops_file_path,
             shape=[3, 512, 512]
         )
-        
+    collect_and_organize_all_data(results_path=test_results_path)    
         
         
         

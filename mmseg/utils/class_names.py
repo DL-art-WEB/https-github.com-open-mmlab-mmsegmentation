@@ -515,8 +515,31 @@ def hots_v1_palette():
         [224, 255, 8], [102, 8, 255], [255, 61, 6], [255, 194, 7],
         [255, 122, 8], [0, 255, 20], [255, 8, 41], [255, 5, 153],
         [6, 51, 255], [235, 12, 255]
-            ]
+    ]
 
+def hots_v1_cat_classes():
+    return [
+        '_background_', 
+        'apple', 'banana', 'book', 'bowl', 
+        'can', 'cup', 'fork', 'juice_box', 
+        'keyboard', 'knife', 'laptop', 'lemon', 
+        'marker', 'milk', 'monitor', 'mouse', 
+        'orange', 'peach', 'pear', 'pen', 
+        'plate', 'pringles', 'scissors', 'spoon', 
+        'stapler'
+    ]
+
+def hots_v1_cat_palette():
+    return [
+        [0, 0, 0], 
+        [120, 120, 120], [180, 120, 120], [6, 230, 230], [120, 120, 80], 
+        [140, 140, 140], [235, 255, 7], [8, 255, 51], [143, 255, 140], 
+        [204, 70, 3], [0, 102, 200], [61, 230, 250], [255, 6, 51], 
+        [11, 102, 255], [255, 9, 224], [220, 220, 220], [255, 9, 92], 
+        [8, 255, 214], [7, 255, 224], [255, 184, 6], [10, 255, 71], 
+        [224, 255, 8], [255, 61, 6], [0, 255, 20], [255, 5, 153], 
+        [235, 12, 255]
+    ]
 def irl_vision_sim_classes():
     return [
         "_background_", 
@@ -566,7 +589,31 @@ def irl_vision_sim_palette():
         [251, 113, 172], [220, 182, 57], [216, 81, 143]
     ]
 
+def irl_vision_sim_cat_classes():
+    return [
+        '_background_', 
+        'apple', 'banana', 'book', 'bowl', 
+        'can', 'cap', 'cereal', 'cup', 
+        'flashlight', 'fork', 'juice_box', 'keyboard', 
+        'knife', 'laptop', 'lemon', 'marker', 
+        'milk', 'monitor', 'mouse', 'mug', 
+        'orange', 'peach', 'pear', 'pen', 
+        'plate', 'pringles', 'scissors', 'sponge', 
+        'spoon'
+    ]
 
+def irl_vision_sim_cat_palette():
+    return [
+        [0, 0, 0], 
+        [139, 152, 218], [37, 121, 67], [238, 247, 243], [154, 38, 123], 
+        [209, 169, 129], [23, 86, 101], [171, 37, 22], [243, 122, 46], 
+        [29, 30, 220], [46, 36, 59], [221, 239, 231], [242, 48, 113], 
+        [238, 1, 11], [214, 135, 52], [107, 225, 139], [10, 17, 218], 
+        [189, 8, 9], [214, 151, 117], [240, 238, 119], [247, 91, 58], 
+        [188, 243, 59], [247, 126, 168], [136, 52, 244], [213, 242, 234], 
+        [83, 193, 216], [105, 135, 229], [30, 131, 132], [72, 125, 9], 
+        [216, 81, 143]
+    ]
 def arid20cat_classes():
     return [
         "_background_", "apple", "ball", "banana", 
@@ -578,7 +625,7 @@ def arid20cat_classes():
         "potato", "shampoo", "soda_can", "sponge", 
         "stapler", "tomato", "toothpaste", "_unknown_"
     ]  
-def arid20cat_pallete():
+def arid20cat_palette():
     return [
         [0, 0, 0], [69, 167, 125], [98, 36, 68], [166, 50, 141], 
         [127, 254, 225], [53, 203, 97], [53, 166, 152], [61, 228, 157], 
@@ -591,7 +638,7 @@ def arid20cat_pallete():
     ] 
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
-    'ade': ['ade', 'ade20k'],
+    'ade': ['ade', 'ade20k', 'ADE20K'],
     'voc': ['voc', 'pascal_voc', 'voc12', 'voc12aug'],
     'pcontext': ['pcontext', 'pascal_context', 'voc2010'],
     'loveda': ['loveda'],
@@ -612,8 +659,14 @@ dataset_aliases = {
         'hsidrive', 'HSIDrive', 'HSI-Drive', 'hsidrive20', 'HSIDrive20',
         'HSI-Drive20'
     ],
-    'hots_v1' : ['hots_v1', 'HOTS_v1'],
-    'irl_vision_sim' : ['irl_vision_sim', 'irl_vision'],
+    'hots_v1' : ['hots_v1', 'HOTS_v1', 'HOTS'],
+    'hots_v1_cat'   : ["hots_v1_cat", 'HOTS_v1_cat', 'HOTS_CAT'],
+    'irl_vision_sim' : ['irl_vision_sim', 'irl_vision', 'IRL_VISION'],
+    'irl_vision_sim_cat' : [
+        'irl_vision_sim_cat', 
+        'irl_vision_cat', 
+        'IRL_VISION_CAT'
+    ],
     'arid20_cat'    :   ['arid20cat', 'arid20_cat', 'ARID20_CAT', 'ARID20CAT']
 }
 

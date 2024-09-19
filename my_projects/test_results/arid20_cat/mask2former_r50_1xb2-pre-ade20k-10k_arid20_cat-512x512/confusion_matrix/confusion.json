@@ -32,7 +32,7 @@
     {
         "gt_label": "_background_",
         "pred_label": "cereal_box",
-        "score": 0.08642780083449768
+        "score": 0.08643062094089747
     },
     {
         "gt_label": "_background_",

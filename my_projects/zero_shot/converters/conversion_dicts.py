@@ -1,3 +1,16 @@
+from mmseg.utils import (
+    hots_v1_classes, 
+    hots_v1_palette,
+    irl_vision_sim_classes,
+    irl_vision_sim_palette,
+    ade_classes, 
+    ade_palette,
+    hots_v1_cat_classes, 
+    hots_v1_cat_palette,
+    irl_vision_sim_cat_classes,
+    irl_vision_sim_cat_palette
+)
+
 HOTS2HOTS_CAT = {
     0  :  0,
     1  :  1,
@@ -177,4 +190,113 @@ HOTS_CAT2IRL_VISION_CAT = {
     22  :  26,
     23  :  27,
     24  :  29
+}
+
+ADE20K2HOTS_CAT_CLASS_NAMES = {
+    "box"           :   ["juice_box", "milk"],
+    "book"          :   ["book"],
+    "computer"      :   [
+        "laptop",
+        "monitor",
+        "mouse",
+        "keyboard"
+    ], 
+    "food"          :   [
+        "apple",
+        "banana",
+        "lemon",
+        "orange",
+        "peach",
+        "pear",
+        "pringles"
+    ], # solid food
+    "screen"        :   [
+        "laptop",
+        "monitor"
+    ],
+    "crt screen"    :   [
+        "laptop",
+        "monitor"
+    ],
+    "plate"         :   ["plate"],
+    "monitor"       :   [
+        "laptop",
+        "monitor"
+    ],
+    "glass"         :   ["cup", "bowl"]
+    
+}
+
+ADE20K2HOTS_CAT  = {
+    41 : [8, 14],
+    67 : [3],
+    74 : [11, 15, 16, 9],
+    120 : [1, 2, 12, 17, 18, 19, 22],
+    130 : [11, 15],
+    141 : [11, 15],
+    142 : [21],
+    143 : [11, 15],
+    147 : [6, 4]
+}
+
+HOTS_CAT2ADE20K = {
+    8 : [41],
+    14 : [41],
+    3 : [67],
+    11 : [74, 130, 141, 143],
+    15 : [74, 130, 141, 143],
+    16 : [74],
+    9 : [74],
+    1 : [120],
+    2 : [120],
+    12 : [120],
+    17 : [120],
+    18 : [120],
+    19 : [120],
+    22 : [120],
+    21 : [142],
+    6 : [147],
+    4 : [147]
+}
+
+SOURCE_TARGET_MAP = {
+    "HOTS"  :   {
+        "HOTS_CAT"          :   [HOTS2HOTS_CAT],
+        "ADE20K"            :   [HOTS2HOTS_CAT, HOTS_CAT2ADE20K],
+        "IRL_VISION_CAT"    :   [HOTS2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT]
+    },
+    "IRL_VISION"    :   {
+        "IRL_VISION_CAT "   :   [IRL_VISION2IRL_VISION_CAT],
+        "HOTS_CAT"          :   [
+            IRL_VISION2IRL_VISION_CAT, 
+            IRL_VISION_CAT2HOTS_CAT
+        ]
+    },
+    "ADE20K"    :   {
+        "HOTS_CAT"      :   [ADE20K2HOTS_CAT]
+    },
+    "IRL_VISION_CAT"    :   {
+        "HOTS_CAT"  :   [IRL_VISION_CAT2HOTS_CAT]
+    },
+    "HOTS_CAT"          :   {
+        "IRL_VISION_CAT"    :   [HOTS_CAT2IRL_VISION_CAT]
+    }
+}
+
+
+
+DATASET_CLASSES = {
+    "HOTS"          :   hots_v1_classes,
+    "HOTS_CAT"      :   hots_v1_cat_classes,
+    "IRL_VISION"    :   irl_vision_sim_classes,
+    "IRL_VISION_CAT":   irl_vision_sim_cat_classes,
+    "ADE20K"        :   ade_classes 
+}
+
+DATASET_PALETTE = {
+    "HOTS"          :   hots_v1_palette,
+    "HOTS_CAT"      :   hots_v1_cat_palette,
+    "IRL_VISION"    :   irl_vision_sim_palette,
+    "IRL_VISION_CAT":   irl_vision_sim_cat_palette,
+    "ADE20K"        :   ade_palette 
 }

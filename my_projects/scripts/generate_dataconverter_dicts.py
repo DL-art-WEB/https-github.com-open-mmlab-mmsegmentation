@@ -1,4 +1,10 @@
 from mmseg.utils import irl_vision_sim_classes, hots_v1_classes
+from mmseg.utils import irl_vision_sim_palette, hots_v1_palette
+
+
+
+
+
 
 # hots to hots_simple
 #  dict["unique_name"] = [idxs]
@@ -14,10 +20,29 @@ for class_idx, class_name in enumerate(hots_v1_classes()):
     hots_to_cat[class_cat_name].append(class_idx)
 
 
-for idx, (key, val) in enumerate(hots_to_cat.items()):
+# for idx, (key, val) in enumerate(hots_to_cat.items()):
     
-    print(f"cat name {key}, idx {idx}:\n members: {[hots_v1_classes()[item] for item in val]}")
+#     print(f"cat name {key}, idx {idx}:\n members: {[hots_v1_classes()[item] for item in val]}")
 
+print_str = ""
+items_per_line = 4
+print("CLASSES HOTS CAT")
+for idx, (key, val) in enumerate(hots_to_cat.items()):
+    print_str += f"'{key}', "
+    if idx >= len(hots_to_cat.items()) - 1 or idx % items_per_line == 0:
+        print(print_str)
+        print_str = ""
+
+print("\nPALETTE HOTS CAT")
+for idx, (key, val) in enumerate(hots_to_cat.items()):
+    if len(val) > 0:
+        color = hots_v1_palette()[val[0]]
+        print_str += f"{color}, "
+    if idx >= len(hots_to_cat.items()) - 1 or idx % items_per_line == 0:
+        print(print_str)
+        print_str = ""
+        
+print()
 sum_ = sum(len(val) for key, val in hots_to_cat.items())
 print(f"total classes accounted for: {sum_}")
 
@@ -35,9 +60,27 @@ for class_idx, class_name in enumerate(irl_vision_sim_classes()):
     irl_vision_to_cat[class_cat_name].append(class_idx)
 
 
-for idx, (key, val) in enumerate(irl_vision_to_cat.items()):
+# for idx, (key, val) in enumerate(irl_vision_to_cat.items()):
     
-    print(f"cat name {key}, idx {idx}:\n members: {[irl_vision_sim_classes()[item] for item in val]}")
+#     print(f"cat name {key}, idx {idx}:\n members: {[irl_vision_sim_classes()[item] for item in val]}")
+
+print_str = ""
+items_per_line = 4
+print("CLASSES IRL CAT")
+for idx, (key, val) in enumerate(irl_vision_to_cat.items()):
+    print_str += f"'{key}', "
+    if idx >= len(irl_vision_to_cat.items()) - 1 or idx % items_per_line == 0:
+        print(print_str)
+        print_str = ""
+    
+print("\nPALETTE IRL CAT")
+for idx, (key, val) in enumerate(irl_vision_to_cat.items()):
+    if len(val) > 0:
+        color = irl_vision_sim_palette()[val[0]]
+        print_str += f"{color}, "
+    if idx >= len(irl_vision_to_cat.items()) - 1 or idx % items_per_line == 0:
+        print(print_str)
+        print_str = ""   
 
 sum_ = sum(len(val) for key, val in irl_vision_to_cat.items())
 print(f"total classes accounted for: {sum_}")
@@ -57,6 +100,7 @@ for key, val in hots_to_cat.items():
 
 print(f"len irl,hots: {len(irl_vision_to_cat)}, {len(hots_to_cat)}")
 
+exit()
     
 #### HERE THE DICTS ARE CREATED ####
 hots2hots_cat = {}

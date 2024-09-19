@@ -189,7 +189,7 @@ class CustomIoUMetric(BaseMetric):
         mask = (label != ignore_index)
         pred_label = pred_label[mask]
         label = label[mask]
-
+        
         intersect = pred_label[pred_label == label]
         area_intersect = torch.histc(
             intersect.float(), bins=(num_classes), min=0,

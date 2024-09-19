@@ -10,7 +10,12 @@ from .class_names import (ade_classes, ade_palette, bdd100k_classes,
                           synapse_classes, synapse_palette, vaihingen_classes,
                           vaihingen_palette, voc_classes, voc_palette,
                           hots_v1_classes, hots_v1_palette, 
-                          irl_vision_sim_classes, irl_vision_sim_palette)
+                          hots_v1_cat_classes, hots_v1_cat_palette, 
+                          irl_vision_sim_classes, irl_vision_sim_palette,
+                          irl_vision_sim_cat_classes, 
+                          irl_vision_sim_cat_palette,
+                          arid20cat_classes, arid20cat_palette
+                        )
 # yapf: enable
 from .collect_env import collect_env
 from .get_templates import get_predefined_templates
@@ -71,6 +76,12 @@ __all__ = [
     'bdd100k_palette',
     'hots_v1_classes', 
     'hots_v1_palette', 
+    'hots_v1_cat_classes',
+    'hots_v1_cat_palette'
     'irl_vision_sim_classes', 
-    'irl_vision_sim_palette'
+    'irl_vision_sim_palette',
+    'irl_vision_sim_cat_classes', 
+    'irl_vision_sim_cat_palette',
+    'arid20cat_classes',
+    'arid20cat_palette'
 ]

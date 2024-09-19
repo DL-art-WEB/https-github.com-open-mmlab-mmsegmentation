@@ -59,6 +59,8 @@ def main():
     ):
         if n_objects_dir in ["test", "train", "eval", "val"]:
             continue
+        if not n_objects_dir.isnumeric():
+            continue
         test_dataloader["dataset"]["data_prefix"] = dict(
             img_path=f"img_dir/{n_objects_dir}",
             seg_map_path=f"ann_dir/{n_objects_dir}"
