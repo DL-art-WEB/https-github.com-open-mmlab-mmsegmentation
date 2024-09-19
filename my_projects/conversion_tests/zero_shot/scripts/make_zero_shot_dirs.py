@@ -1,6 +1,6 @@
 import os
 import subprocess
-from parse_model_data import get_all_model_dicts
+from my_projects.scripts.parse_model_data import get_all_model_dicts
 from copy import deepcopy
 import shutil 
 project_list = [

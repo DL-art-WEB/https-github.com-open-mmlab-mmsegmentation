@@ -1,8 +1,7 @@
 from mmseg.utils import irl_vision_sim_classes, hots_v1_classes
 from mmseg.utils import cocostuff_classes, ade_classes
 from mmseg.utils import irl_vision_sim_cat_classes, hots_v1_cat_classes
-
-from my_projects.zero_shot.converters.conversion_dicts import (
+from my_projects.conversion_tests.converters.conversion_dicts import (
     HOTS2HOTS_CAT, IRL_VISION2IRL_VISION_CAT, 
     IRL_VISION_CAT2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT,
     ADE20K2HOTS_CAT_CLASS_NAMES

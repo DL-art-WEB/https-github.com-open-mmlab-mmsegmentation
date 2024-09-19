@@ -2,7 +2,7 @@ from mmengine import Config
 import argparse
 import os
 import subprocess
-from my_projects.zero_shot.converters.conversion_dicts import (
+from my_projects.conversion_tests.converters.conversion_dicts import(
     DATASET_CLASSES,
     DATASET_PALETTE
 )

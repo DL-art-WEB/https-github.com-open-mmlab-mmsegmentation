@@ -12,7 +12,9 @@ from mmengine.visualization import Visualizer
 from mmseg.registry import VISUALIZERS
 from mmseg.structures import SegDataSample
 from mmseg.utils import get_classes, get_palette
-from my_projects.zero_shot.converters.dataset_converter import DatasetConverter
+from my_projects.conversion_tests.converters.dataset_converter import(
+    DatasetConverter
+)
 from copy import deepcopy
 @VISUALIZERS.register_module()
 class SegLocalVisualizerZeroShot(Visualizer):

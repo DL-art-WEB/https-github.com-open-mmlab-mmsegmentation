@@ -13,7 +13,9 @@ from PIL import Image
 from prettytable import PrettyTable
 
 from mmseg.registry import METRICS
-from my_projects.zero_shot.converters.dataset_converter import DatasetConverter
+from my_projects.conversion_tests.converters.dataset_converter import(
+    DatasetConverter
+)
 
 
 @METRICS.register_module()
@@ -43,7 +45,7 @@ class CustomIoUMetricZeroShot(BaseMetric):
             If prefix is not provided in the argument, self.default_prefix
             will be used instead. Defaults to None.
     """
-    # TODO make converter instead of dict, let converter determine reduce zero_label
+    # TODO let converter determine reduce zero_label
     def __init__(self,
         test_dataset: str = "HOTS",
         output_dataset: str = "ADE20K",
@@ -100,21 +102,21 @@ class CustomIoUMetricZeroShot(BaseMetric):
                     )
                 )
         
-            # TODO maybe later
+            
             # format_result
-            # if self.output_dir is not None:
-            #     basename = osp.splitext(osp.basename(
-            #         data_sample['img_path']))[0]
-            #     png_filename = osp.abspath(
-            #         osp.join(self.output_dir, f'{basename}.png'))
-            #     output_mask = pred_label.cpu().numpy()
-            #     # The index range of official ADE20k dataset is from 0 to 150.
-            #     # But the index range of output is from 0 to 149.
-            #     # That is because we set reduce_zero_label=True.
-            #     if data_sample.get('reduce_zero_label', False):
-            #         output_mask = output_mask + 1
-            #     output = Image.fromarray(output_mask.astype(np.uint8))
-            #     output.save(png_filename)
+            if self.output_dir is not None:
+                basename = osp.splitext(osp.basename(
+                    data_sample['img_path']))[0]
+                png_filename = osp.abspath(
+                    osp.join(self.output_dir, f'{basename}.png'))
+                output_mask = pred_label.cpu().numpy()
+                # The index range of official ADE20k dataset is from 0 to 150.
+                # But the index range of output is from 0 to 149.
+                # That is because we set reduce_zero_label=True.
+                if data_sample.get('reduce_zero_label', False):
+                    output_mask = output_mask + 1
+                output = Image.fromarray(output_mask.astype(np.uint8))
+                output.save(png_filename)
 
     def compute_metrics(self, results: list) -> Dict[str, float]:
         """Compute the metrics from processed results.
