@@ -1,9 +1,7 @@
 import numpy as np
-from mmseg.utils import hots_v1_classes
 from .conversion_dicts import (
     SOURCE_TARGET_MAP as CONV_MAP,
     DATASET_CLASSES as GET_CLASSES,
-    ADE20K2HOTS_CAT,
     DATASET_PALETTE as GET_PALETTE
 )
 
@@ -78,9 +76,15 @@ class DatasetConverter:
         assert len(gt_label) == len(pred_label), \
             print(f"invalid gt and pred len: \
                 {len(gt_label)} vs {len(pred_label)} respectively")
+            
         return self.get_areas(gt_converted=gt_new, pred_converted=pred_new)
     
     def get_areas(self, gt_converted, pred_converted):
+        if self.gt_conv_direct and self.pred_conv_direct:
+            return self.get_areas_direct(
+                gt_converted=gt_converted,
+                pred_converted=pred_converted
+            )
         # area_intersect is of shape (n_classes_target_dataset)
         area_intersect = np.zeros(
             len(GET_CLASSES[self.target_dataset]())
@@ -94,39 +98,53 @@ class DatasetConverter:
             if gt_val != self.unknown_idx:
                 area_gt[gt_val] += 1
             if type(pred_val) is list:
-
                 for pred_val_idx in pred_val:
                     # TODO pred vals are unique but this could be extreme
                     if gt_val == pred_val_idx and gt_val != self.unknown_idx:
                         area_intersect[gt_val] += 1
                     # TODO devided due to it being a list and it could be either
-                        area_pred_label[pred_val_idx] += 1
-                    
-                            
+                        area_pred_label[pred_val_idx] += 1                 
             else:
                 if pred_val == gt_val:
                     area_intersect[gt_val] += 1
                 if pred_val != self.unknown_idx:
                     area_pred_label[pred_val] += 1
-        # area_pred_label = np.rint(area_pred_label).astype(np.uint16)
         area_union = area_pred_label + area_gt - area_intersect
-        # print(f"intersect: \n{area_intersect}")
-        # print(f"area_union: \n{area_union}")
-        # print(f"area_pred: \n{area_pred_label}")
-        # print(f"area_gt: \n{area_gt}")
+       
         return area_intersect, area_union, area_pred_label, area_gt
     
+    
+    def get_areas_direct(self, gt_converted, pred_converted):
+        area_intersect = np.zeros(
+            len(GET_CLASSES[self.target_dataset]())
+        ).astype(np.uint16)
+        area_gt = np.zeros_like(area_intersect)
+        area_pred_label = np.zeros_like(area_intersect)
+        
+        for (gt_val, pred_val) in zip(gt_converted, pred_converted):
+            if pred_val == self.unknown_idx and gt_val == self.unknown_idx:
+                continue
+            if gt_val != self.unknown_idx:
+                area_gt[gt_val] += 1
+            if pred_val == gt_val:
+                area_intersect[gt_val] += 1
+            if pred_val != self.unknown_idx:
+                area_pred_label[pred_val] += 1
+        
+        area_union = area_pred_label + area_gt - area_intersect
+        return area_intersect, area_union, area_pred_label, area_gt
     
     def convert_direct_label(
         self, 
         label: np.ndarray, 
+        conversions: list
     ) -> np.ndarray:
         if type(label) is torch.Tensor:
             label = np.asarray(label.cpu())
         new_label = np.zeros_like(label)
         for idx, value in enumerate(label):
             val = value
-            for conversion in self.gt_conversions:
+            for conversion in conversions:
                 if type(val) is list:
                     print(f"dataconverter.convert_gt_label: \
                             dict value should not be a list")
@@ -139,33 +157,37 @@ class DatasetConverter:
                 
             
          
-    # alsways known_dataset to known_dataset_cat (unless cat dataset)
+    # always known_dataset to known_dataset_cat (unless cat dataset)
     def convert_gt_label(
         self, 
         label: np.ndarray, 
     ) -> np.ndarray:
-        if type(label) is torch.Tensor:
-            label = np.asarray(label.cpu())
-        new_label = np.zeros_like(label)
-        for idx, value in enumerate(label):
-            val = value
-            for conversion in self.gt_conversions:
-                if type(val) is list:
-                    print(f"dataconverter.convert_gt_label: \
-                            dict value should not be a list")
-                if val in conversion.keys():
-                    val = conversion[val]
-                else:
-                    val = self.unknown_idx
-            new_label[idx] = val
-        return new_label
+        if self.gt_conv_direct:
+            return self.convert_direct_label(
+                label=label,
+                conversions=self.gt_conversions
+            )
+    
+        return self.convert_any_label(
+            label=label,
+            conversions=self.gt_conversions 
+        ) 
     
     def convert_pred_label(
         self, 
         pred_label: np.ndarray,
-        gt_label_converted: np.ndarray
+        gt_label_converted: np.ndarray = None
     ):
-        
+        if self.pred_conv_direct:
+            return self.convert_direct_label(
+                label=pred_label,
+                conversions=self.pred_conversions
+            )
+        if gt_label_converted is None:
+            return self.convert_any_label_random_choice(
+                label=pred_label,
+                conversions=self.pred_conversions
+            )
         pred_label_tmp = self.convert_any_label(
             label=pred_label,
             conversions=self.pred_conversions
@@ -237,12 +259,7 @@ class DatasetConverter:
                     val = self.unknown_idx
             new_label[idx] = val
         return new_label
-    # converted_vals = []
-    #                 for val_ in val:
-    #                     if val_ in conversion.keys():
-    #                         converted_vals.append(conversion[val_]) 
-    #                 val = converted_vals
-    #                 continue
+    
     def convert_any_label_random_choice(
         self, 
         label: np.ndarray, 
@@ -343,15 +360,15 @@ class DatasetConverter:
     
     
     
-def test():
-    gt_label = np.zeros(shape=30)
-    for idx, val in enumerate(gt_label):
-        gt_label[idx] = np.random.choice(list(ADE20K2HOTS_CAT.keys()))
-    print(f"gt_label:\n{gt_label}")
-    ds_convert = DatasetConverter()
-    conversions = CONV_MAP["ADE20K"]["HOTS_CAT"]
-    new_gt = ds_convert.convert_label(label=gt_label, conversions=conversions)
-    print(f"new gt:\n{new_gt}")
-    print(f'type index: {type(CONV_MAP["ADE20K"]["HOTS_CAT"][0][75])}')
+# def test():
+#     gt_label = np.zeros(shape=30)
+#     for idx, val in enumerate(gt_label):
+#         gt_label[idx] = np.random.choice(list(ADE20K2HOTS_CAT.keys()))
+#     print(f"gt_label:\n{gt_label}")
+#     ds_convert = DatasetConverter()
+#     conversions = CONV_MAP["ADE20K"]["HOTS_CAT"]
+#     new_gt = ds_convert.convert_label(label=gt_label, conversions=conversions)
+#     print(f"new gt:\n{new_gt}")
+#     print(f'type index: {type(CONV_MAP["ADE20K"]["HOTS_CAT"][0][75])}')
 
-# test()
+# # test()
