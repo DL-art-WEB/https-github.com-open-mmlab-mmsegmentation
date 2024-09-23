@@ -16,7 +16,7 @@ except ImportError:
     gdal = None
 
 from mmseg.registry import MODELS
-from .utils import _preprare_data
+from .utils import _prepare_data
 
 
 class RSImage:
@@ -224,7 +224,7 @@ class RSInferencer:
                 self.read_buffer.put(self.END_FLAG)
                 self.write_buffer.put(item)
                 break
-            data, _ = _preprare_data(item[1], self.model)
+            data, _ = _prepare_data(item[1], self.model)
             with torch.no_grad():
                 result = self.model.test_step(data)
             item[1] = result[0].pred_sem_seg.cpu().data.numpy()[0]
