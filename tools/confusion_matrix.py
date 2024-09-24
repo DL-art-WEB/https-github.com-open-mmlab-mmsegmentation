@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import mmcv
 import numpy as np
 from matplotlib.ticker import MultipleLocator
-from mmcv import Config, DictAction
+from mmengine.config import Config, DictAction
 
 from mmseg.datasets import build_dataset
 

@@ -2,7 +2,7 @@
 import argparse
 import os.path as osp
 
-from mmcv import Config
+from mmengine.config import Config
 
 
 def parse_args():

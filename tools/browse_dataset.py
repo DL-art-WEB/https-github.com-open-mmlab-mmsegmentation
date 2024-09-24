@@ -6,7 +6,7 @@ from pathlib import Path
 
 import mmcv
 import numpy as np
-from mmcv import Config, DictAction
+from mmengine.config import Config, DictAction
 
 from mmseg.datasets.builder import build_dataset
 

@@ -3,7 +3,7 @@ import glob
 import os
 from os.path import dirname, exists, isdir, join, relpath
 
-from mmcv import Config
+from mmengine.config import Config
 from torch import nn
 
 from mmseg.models import build_segmentor
@@ -67,7 +67,7 @@ def test_config_data_pipeline():
         xdoctest -m tests/test_config.py test_config_build_data_pipeline
     """
     import numpy as np
-    from mmcv import Config
+    from mmengine.config import Config
 
     from mmseg.datasets.pipelines import Compose
 

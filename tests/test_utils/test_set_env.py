@@ -5,7 +5,7 @@ import platform
 
 import cv2
 import pytest
-from mmcv import Config
+from mmengine.config import Config
 
 from mmseg.utils import setup_multi_processes
 

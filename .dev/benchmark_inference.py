@@ -7,7 +7,7 @@ import warnings
 from argparse import ArgumentParser
 
 import requests
-from mmcv import Config
+from mmengine.config import Config
 
 from mmseg.apis import inference_segmentor, init_segmentor, show_result_pyplot
 from mmseg.utils import get_root_logger

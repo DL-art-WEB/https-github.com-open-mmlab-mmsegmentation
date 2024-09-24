@@ -2,7 +2,7 @@
 import argparse
 import warnings
 
-from mmcv import Config, DictAction
+from mmengine.config import Config, DictAction
 
 from mmseg.apis import init_segmentor
 
