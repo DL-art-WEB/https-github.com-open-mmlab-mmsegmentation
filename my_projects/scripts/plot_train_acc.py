@@ -1,9 +1,9 @@
 import subprocess
 import os
 import argparse
-import re
+import plotting_utils as p_utils
 import json
-# TODO make:
+
 
 
 MODEL_NAMES = [
@@ -140,7 +140,7 @@ def main():
                     jsons[dataset_name] = json_path
         call_list = [
             "python",
-            "tools/analysis_tools/analyze_logs_.py"
+            "my_projects/scripts/analyze_logs.py"
         ]
         for json_path in jsons.values():
             call_list.append(json_path)
@@ -151,7 +151,7 @@ def main():
         
         call_list.append("--legend")
         for dataset_name in jsons.keys():
-            call_list.append(dataset_name)
+            call_list.append(p_utils.map_dataset_name(dataset_name))
         
         call_list.append("--out")
         call_list.append(f"my_projects/training_data/{model_name}_learning.png")

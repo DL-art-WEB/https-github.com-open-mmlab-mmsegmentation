@@ -153,7 +153,7 @@ def global_plot(args):
     make_plot(
         clutter_data_dict=global_miou_dict,
         save_path=save_path,
-        xlabel="n_objects", ylabel="mIoU"
+        xlabel="n objects", ylabel="mIoU"
     )
  
 def main():

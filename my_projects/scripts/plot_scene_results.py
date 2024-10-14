@@ -6,6 +6,8 @@ import argparse
 import plotting_utils as p_utils
 
 
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -56,6 +58,11 @@ def parse_args():
         '-incl',
         action='store_true'
     )
+    parser.add_argument(
+        '--plot_sep',
+        '-sep',
+        action='store_true'
+    )
     
     
       
@@ -101,8 +108,23 @@ def global_data_grouped_by_scene(
     
     return grouped_dict
 
-def relative():
-    pass
+def seperate_by_scene_type(
+    grouped_by_scene,
+    scene_type_sets = {
+        "viewpoint"     :       ["bottom", "top"],
+        "place"         :       ["floor", "table"]
+    }
+):
+    seperated = {}
+    for scene_type, scene_type_names in scene_type_sets.items():
+        seperated[scene_type] = {
+            scene_name : scene_data 
+                for scene_name, scene_data in grouped_by_scene.items()
+                    if scene_name in scene_type_names
+        }
+    return seperated
+    
+                    
 
 def global_plot(
     data_dict,
@@ -110,24 +132,58 @@ def global_plot(
     save_file_name = "global",
     save = True,
     show = False,
-    fig_size = (16, 8),
     metric = "mIoU",
-    include_av = False
+    include_av = False,
+    plot_sep = False
 ):
-    p_utils.set_params(param_dict=p_utils.scenes_plot_global)
-    models = tuple(data_dict.keys()) 
-    x_axis = np.arange(len(models))
+    
+    models = tuple(
+        p_utils.map_model_name(model_name=model_name) 
+            for model_name in data_dict.keys()
+    ) 
     data_dict = fix_metric_keys_global_data_dict(data_dict=data_dict)
     grouped_by_scene = global_data_grouped_by_scene(
         data_dict=data_dict,
         metric=metric,
         include_av=include_av
     )
-    plt.figure(figsize=fig_size)
+    param_dict = p_utils.scenes_plot_global
+    seperated_by_scene_type = {
+        "all"   :   grouped_by_scene
+    }
+   
+    if plot_sep:
+        seperated_by_scene_type = seperate_by_scene_type(
+            grouped_by_scene=grouped_by_scene
+        )
+        param_dict = p_utils.scenes_plot_global_per_scene_type
+    for scene_type, scene_data in seperated_by_scene_type.items():
+        plot_global_plot(
+            grouped_by_scene=scene_data,
+            models=models,
+            save_dir_path=save_dir_path,
+            save_file_name=f"{save_file_name}_{scene_type}",
+            save=save,
+            show=show,
+            metric=metric,
+            param_dict=param_dict
+        )
+
+def plot_global_plot(
+    grouped_by_scene,
+    models,
+    save_dir_path,
+    save_file_name = "global",
+    save = True,
+    show = False,
+    metric = "mIoU",
+    param_dict=p_utils.scenes_plot_global
+):
+    p_utils.set_params(param_dict=param_dict)
+    x_axis = np.arange(len(models))
     bar_width = 0.96 / len(grouped_by_scene.keys())
     relative_positions = get_relative_positions(
-        grouped_dict=grouped_by_scene,
-        fig_size=fig_size
+        grouped_dict=grouped_by_scene
     )
     for scene_idx, scene_item in enumerate(grouped_by_scene.items()):
         (scene_name, scene_value) = scene_item
@@ -142,6 +198,7 @@ def global_plot(
     
     plt.ylabel(metric)
     plt.yticks(np.arange(0, 110, 10))
+    plt.ylim(48, 102)
     plt.xticks(x_axis, models)
     plt.xlabel("model name")
     plt.legend(
@@ -236,7 +293,6 @@ def model_data_grouped_by_metric(
 
 def get_relative_positions(
     grouped_dict,
-    fig_size,
     step_size = 1
 ):
     n_bars = len(list(grouped_dict.keys()))
@@ -255,7 +311,6 @@ def model_plot(
     save_dir_path,
     save = True,
     show = False,
-    fig_size = (18, 7),
     include_av = False
 ):
     
@@ -269,7 +324,6 @@ def model_plot(
         include_av=include_av
     )
     
-    # TODO temp
     p_utils.set_params(
         param_dict=p_utils.scenes_plot_model
     )
@@ -280,12 +334,11 @@ def model_plot(
     scenes = tuple(scenes)
         
     x_axis = np.arange(len(scenes))
-    plt.figure(figsize=fig_size)
+    
     bar_width = 0.95 / len(grouped_by_metric.keys())
-    # font_size = 8.0 * (bar_width / 0.15)
+    
     relative_positions = get_relative_positions(
-        grouped_dict=grouped_by_metric,
-        fig_size=fig_size
+        grouped_dict=grouped_by_metric
     )
     for item_idx, metric_item in enumerate(grouped_by_metric.items()):
         (metric_name, metric_value) = metric_item
@@ -350,7 +403,8 @@ def main():
             save_file_name="global",
             save=(not args.dont_save),
             show=args.show,
-            include_av=args.include_av
+            include_av=args.include_av,
+            plot_sep=args.plot_sep
         )     
     if args.per_model:
         plot_all_models(
