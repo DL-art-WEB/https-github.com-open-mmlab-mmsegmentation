@@ -1,6 +1,6 @@
 import os
 import subprocess
-
+import argparse
 
 
 def run_performance_test(
@@ -155,15 +155,30 @@ def collect_and_organize_all_data(
         "my_projects/scripts/generate_json_all_test_results.py",
         "-dsp",
         results_path,
-        "-si",
-        "-ss"
+        "-si"
     ]
     subprocess.call(call_list)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'models_path',
+        type=str
+    )
+    parser.add_argument(
+        'test_results_path',
+        type=str
+    )
+    args = parser.parse_args()
+    return args
    
 def main():
-    selection_path = "my_projects/best_models/selection_trained/arid20_cat"
-    test_results_path = "my_projects/test_results/arid20_cat"
-
+    # selection_path = "my_projects/best_models/selection_trained/arid20_cat"
+    # test_results_path = "my_projects/test_results/arid20_cat"
+    args = parse_args()
+    selection_path = args.models_path
+    test_results_path = args.test_results_path
     for model_name in os.listdir(selection_path):
         if model_name == "data":
             continue

@@ -293,33 +293,6 @@ ARID20CAT2IRL_VISION_CAT_CLASS_NAMES = {
     "pear"          :       "pear", 
     "sponge"        :       "sponge"
 }
-
-SOURCE_TARGET_MAP = {
-    "HOTS"                  :   {
-        "HOTS_CAT"          :   [HOTS2HOTS_CAT],
-        "ADE20K"            :   [HOTS2HOTS_CAT, HOTS_CAT2ADE20K],
-        "IRL_VISION_CAT"    :   [HOTS2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT]
-    },
-    "IRL_VISION"            :   {
-        "IRL_VISION_CAT"   :   [IRL_VISION2IRL_VISION_CAT],
-        "HOTS_CAT"          :   [
-            IRL_VISION2IRL_VISION_CAT, 
-            IRL_VISION_CAT2HOTS_CAT
-        ]
-    },
-    "ADE20K"    :   {
-        "HOTS_CAT"      :   [ADE20K2HOTS_CAT]
-    },
-    "IRL_VISION_CAT"    :   {
-        "HOTS_CAT"  :   [IRL_VISION_CAT2HOTS_CAT]
-    },
-    "HOTS_CAT"          :   {
-        "IRL_VISION_CAT"    :   [HOTS_CAT2IRL_VISION_CAT]
-    }
-}
-
-
-
 DATASET_CLASSES = {
     "HOTS"          :   hots_v1_classes,
     "HOTS_CAT"      :   hots_v1_cat_classes,
@@ -328,6 +301,43 @@ DATASET_CLASSES = {
     "ADE20K"        :   ade_classes 
 }
 
+def get_auto_convert(dataset_name):
+    return {
+        idx : idx for idx in range(len(DATASET_CLASSES[dataset_name]()))
+    }
+
+SOURCE_TARGET_MAP = {
+    "HOTS"                  :   {
+            "HOTS_CAT"          :   [HOTS2HOTS_CAT],
+            "ADE20K"            :   [HOTS2HOTS_CAT, HOTS_CAT2ADE20K],
+            "IRL_VISION_CAT"    :   [HOTS2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT],
+            "HOTS"              :   [get_auto_convert(dataset_name="HOTS")]
+    },
+    "IRL_VISION"            :   {
+                "IRL_VISION_CAT"   :   [IRL_VISION2IRL_VISION_CAT],
+                "HOTS_CAT"          :   [
+                    IRL_VISION2IRL_VISION_CAT, 
+                    IRL_VISION_CAT2HOTS_CAT
+                ],
+                "IRL_VISION"    : [get_auto_convert(dataset_name="IRL_VISION")]
+    },
+    "ADE20K"    :   {
+        "HOTS_CAT"      :   [ADE20K2HOTS_CAT]
+    },
+    "IRL_VISION_CAT"    :           {
+                "HOTS_CAT"          :   [IRL_VISION_CAT2HOTS_CAT],
+                "IRL_VISION_CAT"    :[
+                    get_auto_convert(dataset_name="IRL_VISION_CAT")
+                    ]
+    },
+    "HOTS_CAT"          :   {
+        "IRL_VISION_CAT"    :   [HOTS_CAT2IRL_VISION_CAT],
+        "HOTS_CAT"          : [get_auto_convert(dataset_name="HOTS_CAT")]
+    }
+}
+
+
+
 DATASET_PALETTE = {
     "HOTS"          :   hots_v1_palette,
     "HOTS_CAT"      :   hots_v1_cat_palette,
@@ -335,3 +345,4 @@ DATASET_PALETTE = {
     "IRL_VISION_CAT":   irl_vision_sim_cat_palette,
     "ADE20K"        :   ade_palette 
 }
+

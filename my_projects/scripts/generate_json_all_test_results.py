@@ -1,26 +1,22 @@
 import json 
 import os
 import argparse
+from parse_test_log_table import parse_table
 
 KEYS_OF_INTEREST = {
     "performance"   :   [
-        "mPr@50.0", 
-        "mPr@60.0",
-        "mPr@70.0",
-        "mPr@80.0", 
-        "mPr@90.0", 
+        "mPr@50", 
+        "mPr@60",
+        "mPr@70",
+        "mPr@80", 
+        "mPr@90", 
         "mIoU"
     ],
     "benchmark"    :   [
-        "average_fps",
-        "fps_variance",
-        "average_mem",
-        "mem_variance"
-    ],
-    "compare"       :   [
-        "mIoU",
-        "average_fps",
-        "average_mem"
+        "Mem (MB)",
+        "Var Mem",
+        "FPS",
+        "Var FPS"
     ]
 }
 
@@ -31,22 +27,7 @@ def parse_args():
         '-dsp', 
         type=str,
         default=None,
-        help='directory path of dataset results'
-    )
-    parser.add_argument(
-        '--model_name', 
-        '-mn',
-        type=str,
-        default=None,
-        choices=[
-            'bisenetv1', 
-            'mask2former', 
-            'maskformer', 
-            'segformer',
-            'segnext',
-            None
-        ],
-        help='directory path of model results'
+        help='directory path of dataset results or work dir'
     )
     parser.add_argument(
         '--save_intermediate',
@@ -54,16 +35,43 @@ def parse_args():
         action='store_true'
     )
     parser.add_argument(
-        '--save_seperately',
-        '-ss',
+        '--label_results',
+        '-lr',
         action='store_true'
     )
+    parser.add_argument(
+        '--confusion_results',
+        '-cr',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--general_results',
+        '-gr',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--n_confusion',
+        '-nc',
+        type=int,
+        default=5
+    )
+    
     
     args = parser.parse_args()
-    
+    # if no specific result is marked, do all by default
+    if (
+        not args.label_results
+        and 
+        not args.confusion_results
+        and 
+        not args.general_results
+    ):
+        args.label_results = True
+        args.confusion_results = True
+        args.general_results = True
     return args
 
-def save_dict_as_json(data_dict, dump_file_path):
+def save_dict_as_json(data_dict: dict, dump_file_path: str):
     print(f"saving to : {dump_file_path}")
     with open(dump_file_path, 'w') as dump_file:
         json.dump(data_dict, dump_file, indent=4)
@@ -85,6 +93,9 @@ def extract_json_file_name_from_dir(dir_path: str) -> str:
     return ""       
 
 def get_data_dict(data_dict: dict, keys_of_interest: list) -> dict:
+    if keys_of_interest is None:
+        return data_dict
+    
     return {
         key : val for key, val in data_dict.items()
             if key in keys_of_interest
@@ -110,7 +121,48 @@ def merg_dicts(dict_list: list) -> dict:
         for key, val in dict_.items():
             new_dict[key] = val
     return new_dict   
-    
+
+def get_top_n_confusion_values(
+    confusion_dict_list: list,
+    n_confusion_values: int
+):
+    return sorted(
+        confusion_dict_list, 
+        key=lambda d : d["score"],
+        reverse=True
+    )[:n_confusion_values]
+
+def generate_confusion_dict_dataset(
+    dataset_path: str,
+    n_confusion_values: int
+): 
+    confusion_dict = {}
+    for model_dir in os.listdir(dataset_path):
+        if model_dir == "data":
+            continue
+        model_name = model_dir.split("_")[0]
+        model_results_path = os.path.join(
+            dataset_path,
+            model_dir
+        )
+        if os.path.isfile(model_results_path):
+            continue
+        confusion_matrix_path = os.path.join(
+            model_results_path,
+            "confusion_matrix",
+            "confusion.json"
+        )
+        if not os.path.exists(confusion_matrix_path):
+            print(f"no confusion matrix found at {confusion_matrix_path}")
+            continue
+        # load dict and get top n
+        confusion_matrix = load_json_file(json_file_path=confusion_matrix_path)
+        # append top n dict to conf_dict
+        confusion_dict[model_name] = get_top_n_confusion_values(
+            confusion_dict_list=confusion_matrix,
+            n_confusion_values=n_confusion_values
+        )
+    return confusion_dict
 
 def generate_dict_model_results(model_results_path: str) -> dict:
     model_data_dict = {}
@@ -147,7 +199,8 @@ def generate_dict_dataset_results(
 ) -> dict:
     dataset_results_dict = {}
     for model_dir in os.listdir(dataset_path):
-        
+        if model_dir == "data":
+            continue
         model_name = model_dir.split("_")[0]
         model_results_path = os.path.join(
             dataset_path,
@@ -169,6 +222,60 @@ def generate_dict_dataset_results(
     return dataset_results_dict
 
 
+def generate_dict_per_label_model(
+    model_results_path: str
+) -> dict:
+    
+    for dir_name in os.listdir(model_results_path):
+        if dir_name == "data":
+            continue
+        dir_path = os.path.join(model_results_path, dir_name)
+        if os.path.isfile(dir_path):
+            continue
+        dict_ = {}
+        if is_acc_test(dir_name=dir_name):
+            for file in os.listdir(dir_path):
+                if ".log" in file:
+                    log_path = os.path.join(
+                        dir_path, 
+                        file
+                    )
+                    print(f"log path: {log_path}\n")
+                    table_dict = parse_table(
+                        log_path=log_path
+                    )
+                    return table_dict
+    return None
+
+
+def get_per_label_results_dataset(
+    dataset_path: str, 
+    save_intermediate: bool = False
+) -> dict:
+    dataset_results_dict = {}
+    for model_dir in os.listdir(dataset_path):
+        if model_dir == "data":
+            continue
+        model_name = model_dir.split("_")[0]
+        model_results_path = os.path.join(
+            dataset_path,
+            model_dir
+        )
+        if os.path.isfile(model_results_path):
+            continue
+        dataset_results_dict[model_name] = generate_dict_per_label_model(
+            model_results_path=model_results_path
+        )
+        if save_intermediate:
+            save_dict_as_json(
+                data_dict=dataset_results_dict[model_name],
+                dump_file_path=os.path.join(
+                    model_results_path,
+                    f"{model_name}_label_results.json"
+                )
+            )
+    return dataset_results_dict
+
 def get_model_results_path(model_name: str, dataset_path: str):
     for model_res_name in os.listdir(dataset_path):
         if model_name in model_res_name:
@@ -182,74 +289,56 @@ def main():
     args = parse_args()
     if not args.dataset_path:
         return
-    if args.model_name:
         
-        model_results_path = get_model_results_path(
-            model_name=args.model_name,
-            dataset_path=args.dataset_path
-        )
-        if model_results_path is None:
-            print("no model res dir found ")
-            return
-        
-        model_res_dict = generate_dict_model_results(
-            model_results_path=model_results_path
-        )
-        # for key, val in model_res_dict.items():
-        #     print(f"{key} : {val}")
-    else:
+    data_dir_path = os.path.join(
+        args.dataset_path,
+        "data"
+    )
+    if not os.path.exists(data_dir_path):
+        os.mkdir(data_dir_path)
+    _, dataset_name = os.path.split(args.dataset_path)
+    if args.dataset_path[-1] == '/' or dataset_name == '':
+        _, dataset_name = os.path.split(args.dataset_path[:-1])
+    if args.general_results:
         dataset_results_dict = generate_dict_dataset_results(
             dataset_path=args.dataset_path,
             save_intermediate=args.save_intermediate
         )
-        _, dataset_name = os.path.split(args.dataset_path)
-        if args.dataset_path[-1] == '/' or dataset_name == '':
-            _, dataset_name = os.path.split(args.dataset_path[:-1])
+        
         save_dict_as_json(
             data_dict=dataset_results_dict,
             dump_file_path=os.path.join(
-                args.dataset_path,
+                data_dir_path,
                 f"{dataset_name}_results.json"
             )
         )
-        if args.save_seperately:
-            performance_dict = {}
-            bench_dict = {}
-            compare_dict = {}
-            for model_name, res_data in dataset_results_dict.items():
-                performance_dict[model_name] = get_data_dict(
-                    data_dict=res_data,
-                    keys_of_interest=KEYS_OF_INTEREST['performance']
-                )
-                bench_dict[model_name] = get_data_dict(
-                    data_dict=res_data,
-                    keys_of_interest=KEYS_OF_INTEREST['benchmark']
-                )
-                compare_dict[model_name] = get_data_dict(
-                    data_dict=res_data,
-                    keys_of_interest=KEYS_OF_INTEREST['compare']
-                )     
-            save_dict_as_json(
-                data_dict=performance_dict,
-                dump_file_path=os.path.join(
-                    args.dataset_path,
-                    f"{dataset_name}_performance_results.json"
-                )
-            )   
-            save_dict_as_json(
-                data_dict=bench_dict,
-                dump_file_path=os.path.join(
-                    args.dataset_path,
-                    f"{dataset_name}_benchmark_results.json"
-                )
-            ) 
-            save_dict_as_json(
-                data_dict=compare_dict,
-                dump_file_path=os.path.join(
-                    args.dataset_path,
-                    f"{dataset_name}_compare_results.json"
-                )
-            ) 
+    if args.confusion_results:
+        dataset_confusion_dict = generate_confusion_dict_dataset(
+            dataset_path=args.dataset_path,
+            n_confusion_values=args.n_confusion
+        )
+        
+        save_dict_as_json(
+            data_dict=dataset_confusion_dict,
+            dump_file_path=os.path.join(
+                data_dir_path,
+                f"{dataset_name}_confusion_top_{args.n_confusion}.json"
+            )
+        )
+    if args.label_results:
+        label_results = get_per_label_results_dataset(
+            dataset_path=args.dataset_path,
+            save_intermediate=args.save_intermediate
+        )
+        
+        save_dict_as_json(
+            data_dict=label_results,
+            dump_file_path=os.path.join(
+                data_dir_path,
+                f"{dataset_name}_per_label_results.json"
+            )
+        )
+        
                 
             
             

@@ -282,7 +282,8 @@ class CustomIoUMetricConversion(BaseMetric):
                 class_scores += (iou > thres).astype(np.int32)
                 class_counts += (gt > 0).astype(np.int32)
             class_scores /= class_counts
-            ret_metrics[f"Pr@{np.round(thres * 100, 2)}"] = class_scores
+            pr_key = f"Pr@{np.round(thres * 100, 2).astype(np.int32)}"
+            ret_metrics[pr_key] = class_scores
                 
                 
                 

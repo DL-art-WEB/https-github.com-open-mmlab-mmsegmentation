@@ -51,19 +51,18 @@ def main():
     test_dataloader = cfg.test_dataloader
     
     dataset_root = test_dataloader["dataset"]["data_root"]
-    for n_objects_dir in os.listdir(
-        os.path.join(
-            dataset_root,
-            "img_dir"
-        )
-    ):
-        if n_objects_dir in ["test", "train", "eval", "val"]:
-            continue
+    clutter_dir_path = os.path.join(dataset_root, "img_dir", "clutter")
+    if not os.path.exists(clutter_dir_path):
+        print(f"path {clutter_dir_path} does not exists. clutter test failed")
+        return
+    
+    for n_objects_dir in os.listdir(clutter_dir_path):
+        
         if not n_objects_dir.isnumeric():
             continue
         test_dataloader["dataset"]["data_prefix"] = dict(
-            img_path=f"img_dir/{n_objects_dir}",
-            seg_map_path=f"ann_dir/{n_objects_dir}"
+            img_path=os.path.join("img_dir", "clutter", n_objects_dir),
+            seg_map_path=os.path.join("ann_dir", "clutter", n_objects_dir)
         )
         cfg.test_dataloader = test_dataloader
         cfg.work_dir = os.path.join(work_dir, n_objects_dir)

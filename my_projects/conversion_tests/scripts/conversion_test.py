@@ -13,8 +13,10 @@ from tools.test_selection import (
 
 
 TEST_DATASET_TEMPLATE_PATHS = {
-    "HOTS" :  "my_projects/conversion_tests/dataset_template_configs/hots_test_data.py",
-    "IRL_VISION"   : "my_projects/conversion_tests/dataset_template_configs/irl_test_data.py"
+    "HOTS"          :   "my_projects/conversion_tests/dataset_template_configs/hots_test_data.py",
+    "IRL_VISION"    :   "my_projects/conversion_tests/dataset_template_configs/irl_test_data.py",
+    "HOTS_CAT"      :   "my_projects/conversion_tests/dataset_template_configs/hots_cat_test_data.py",
+    "IRL_VISION_CAT":   "my_projects/conversion_tests/dataset_template_configs/irl_cat_test_data.py"  
 }
 
 
@@ -32,14 +34,14 @@ def arg_parse():
         '-test_ds',
         type=str,
         default="HOTS",
-        choices=["HOTS", "IRL_VISION"]
+        choices=["HOTS", "IRL_VISION", "HOTS_CAT", "IRL_VISION_CAT"]
     )
     parser.add_argument(
         '--output_dataset',
         '-out_ds',
         type=str,
         default="HOTS",
-        choices=["HOTS", "IRL_VISION", "ADE20K"]
+        choices=["HOTS", "IRL_VISION", "ADE20K", "HOTS_CAT", "IRL_VISION_CAT"]
     )
     parser.add_argument(
         '--target_dataset',
@@ -125,6 +127,8 @@ def conversion_test_model(
         save_dir_path=confusion_matrix_save_path,
         top_n=10
     )
+    
+    
 
 def run_confusion_matrix(
         cfg_path,

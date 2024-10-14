@@ -2,31 +2,15 @@ from mmseg.utils import irl_vision_sim_classes, hots_v1_classes
 from mmseg.utils import cocostuff_classes, ade_classes
 from mmseg.utils import irl_vision_sim_cat_classes, hots_v1_cat_classes
 from mmseg.utils import arid20cat_classes, arid20cat_palette
-# from my_projects.conversion_tests.converters.conversion_dicts import (
-#     HOTS2HOTS_CAT, IRL_VISION2IRL_VISION_CAT, 
-#     IRL_VISION_CAT2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT,
-#     ADE20K2HOTS_CAT_CLASS_NAMES
-# )
+from my_projects.conversion_tests.converters.conversion_dicts import (
+    HOTS2HOTS_CAT, IRL_VISION2IRL_VISION_CAT, 
+    IRL_VISION_CAT2HOTS_CAT, HOTS_CAT2IRL_VISION_CAT,
+    ADE20K2HOTS_CAT_CLASS_NAMES, ARID20CAT2IRL_VISION_CAT_CLASS_NAMES,
+    ARID20CAT2HOTS_CAT_CLASS_NAMES
+)
 
-ARID20CAT2IRL_VISION_CAT_CLASS_NAMES = {
-    "_background_" : "_background_", 
-    "apple" : "apple", 
-    "banana" : "banana", 
-    "bowl" : "bowl", 
-    "food_can" : "can", 
-    "soda_can" : "can", 
-    "cereal_box" : "cereal", 
-    "flashlight" : "flashlight", 
-    "keyboard" : "keyboard", 
-    "lemon" : "lemon", 
-    "marker" : "marker", 
-    "coffee_mug" : "mug", 
-    "orange" : "orange", 
-    "peach" : "peach", 
-    "pear" : "pear", 
-    "sponge" : "sponge"
-}
 
+print(f"{'#' * 10} ARID20K vs IRL {'#' * 10}")
 print("not in arid:")
 for irl_name in irl_vision_sim_cat_classes():
     if irl_name not in ARID20CAT2IRL_VISION_CAT_CLASS_NAMES.values():
@@ -36,6 +20,32 @@ print("not in irl:")
 for arid_name in arid20cat_classes():
     if arid_name not in ARID20CAT2IRL_VISION_CAT_CLASS_NAMES.keys():
         print(arid_name)
+        
+
+
+print(f"{'#' * 10} ARID20K vs HOTS {'#' * 10}")
+print("not in arid:")
+for hots_name in hots_v1_cat_classes():
+    if hots_name not in ARID20CAT2HOTS_CAT_CLASS_NAMES.values():
+        print(hots_name)
+
+print("not in hots:")
+for arid_name in arid20cat_classes():
+    if arid_name not in ARID20CAT2HOTS_CAT_CLASS_NAMES.keys():
+        print(arid_name)
+
+
+print(f"{'#' * 10} HOTS vs IRL {'#' * 10}")
+print("not in hots:")
+for irl_name in irl_vision_sim_cat_classes():
+    if irl_vision_sim_cat_classes().index(irl_name) not in HOTS_CAT2IRL_VISION_CAT.values():
+        print(irl_name)
+
+print("not in irl:")
+for hots_name in hots_v1_cat_classes():
+    if hots_v1_cat_classes().index(hots_name) not in HOTS_CAT2IRL_VISION_CAT.keys():
+        print(hots_name)
+   
 # for irl_name in irl_vision_sim_cat_classes():
 #     for arid_name in arid20cat_classes():
 #         if (

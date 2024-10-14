@@ -1,11 +1,26 @@
 import subprocess
 import os
+import torch
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--selection_path',
+        '-p',
+        type=str
+    )
+    args = parser.parse_args()
+    return args
 
 def main():
-    config_dir = "my_projects/configs/arid20_cat"
+    args = parse_args()
+    config_dir = args.selection_path
     for cfg_name in os.listdir(config_dir):
-        if "mask" not in cfg_name:
-            continue
+        # if "mask" not in cfg_name:
+        #     continue
+        torch.cuda.empty_cache()
+        
         cfg_path = os.path.join(config_dir, cfg_name)
         print(f"cfg: {cfg_name}")
         call_list = [

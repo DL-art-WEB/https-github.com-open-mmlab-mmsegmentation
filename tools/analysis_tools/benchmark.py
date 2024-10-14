@@ -116,14 +116,14 @@ def main():
                 overall_mem_list.append(mem)
                 break
     
-    benchmark_dict['average_fps'] = round(np.mean(overall_fps_list), 2) 
-    benchmark_dict['fps_variance'] = round(np.var(overall_fps_list), 4)
-    benchmark_dict['average_mem'] = round(np.mean(overall_mem_list), 2) 
-    benchmark_dict['mem_variance'] = round(np.var(overall_mem_list), 4)
+    benchmark_dict['FPS'] = round(np.mean(overall_fps_list), 2) 
+    benchmark_dict['Var FPS'] = round(np.var(overall_fps_list), 4)
+    benchmark_dict['Mem (MB)'] = round(np.mean(overall_mem_list), 2) 
+    benchmark_dict['Var Mem'] = round(np.var(overall_mem_list), 4)
     print(f'Average fps of {repeat_times} evaluations: '
-          f'{benchmark_dict["average_fps"]}')
+          f'{benchmark_dict["FPS"]}')
     print(f'The variance of {repeat_times} evaluations: '
-          f'{benchmark_dict["fps_variance"]}')
+          f'{benchmark_dict["Var FPS"]}')
     dump(benchmark_dict, json_file, indent=4)
 
 

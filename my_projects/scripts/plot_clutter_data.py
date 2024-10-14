@@ -3,18 +3,20 @@ import numpy as np
 import json 
 import os
 import argparse
-
+import plotting_utils as p_utils
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'clutter_path', 
+        '--clutter_path', 
         type=str,
+        default="my_projects/test_results/arid20_cat/",
         help='directory path of clutter experiment'
     )
     parser.add_argument(
-        "save_dir_path",
-        type=str
+        "--save_dir_path",
+        type=str,
+        default="my_projects/test_results/arid20_cat/data/"
     )
     
     parser.add_argument(
@@ -41,8 +43,8 @@ def get_data_dict(json_path):
 
 def reorganize_clutter_dict(clutter_data_dict):
     metrics_names = [
-        "mPr@50.0", "mPr@60.0", "mPr@70.0", 
-        "mPr@80.0", "mPr@90.0", "mIoU"
+        "mPr@50", "mPr@60", "mPr@70", 
+        "mPr@80", "mPr@90", "mIoU"
     ]
     cl_dict_new = {
         metric_name : np.zeros(len(clutter_data_dict))
@@ -50,6 +52,8 @@ def reorganize_clutter_dict(clutter_data_dict):
     }
     for n_objects, data_dict in clutter_data_dict.items():
         for metric_name, metric_val in data_dict.items():
+            # TODO temp split due to wrong notation old tests
+            metric_name = metric_name.split(".")[0]
             if metric_name not in metrics_names:
                 continue
             cl_dict_new[metric_name][int(n_objects) - 1] = metric_val
@@ -69,13 +73,24 @@ def make_plot(
         )
     ]
     y_axis = np.arange(0, 110, 10)
-    legend = []
+    legend_handles = []
+    # important moments 1-9 separated, 10-16 phys touch, 17-20 stacked
+    for data_point in [9, 16, 20]:
+        plt.axvline(data_point, color='k', ls ='dotted', linewidth=2.5)
     for metric_name, data in clutter_data_dict.items():
-        plt.plot(x_axis, data, linewidth=3)
-        legend.append(metric_name)
+        metric_name = p_utils.map_key(metric_name)
+        handle, = plt.plot(
+                x_axis, 
+                data,
+                label=metric_name
+        )
+        legend_handles.append(
+            handle
+        )
+        # legend_labels.append(p_utils.fix_metric_name(metric_name))
     if ".png" not in save_path:
         save_path = f"{save_path}.png"
-    plt.legend(legend, loc='lower left')
+    plt.legend(handles=legend_handles, loc='lower left')
     plt.xticks(x_axis)
     plt.yticks(y_axis)
     plt.ylabel(ylabel)
@@ -123,6 +138,7 @@ def global_plot(args):
         clutter_dict = get_clutter_dict(
             clutter_path=clutter_path
         )
+        
         model_name = model_dir.split("_")[0]
         if args.per_model:
             plot_clutter_per_model(
@@ -142,14 +158,17 @@ def global_plot(args):
  
 def main():
     args = parse_args()
+    p_utils.set_params(param_dict=p_utils.clutter_plot)
     if args.global_plot:
         global_plot(args=args)         
     else:
         clutter_dict = get_clutter_dict(clutter_path=args.clutter_path)
+        print(clutter_dict)
         plot_clutter_per_model(
             clutter_dict=clutter_dict,
             save_path=args.save_dir_path
         )
+    p_utils.reset_params()
 
 if __name__ == '__main__':
     main()

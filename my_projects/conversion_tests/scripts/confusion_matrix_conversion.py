@@ -31,21 +31,21 @@ def parse_args():
         '-test_ds',
         type=str,
         default="HOTS",
-        choices=["HOTS", "IRL_VISION"]
+        choices=["HOTS", "IRL_VISION", "HOTS_CAT", "IRL_VISION_CAT"]
     )
     parser.add_argument(
         '--output_dataset',
         '-out_ds',
         type=str,
         default="HOTS",
-        choices=["HOTS", "IRL_VISION", "ADE20K"]
+        choices=["HOTS", "IRL_VISION", "ADE20K", "HOTS_CAT", "IRL_VISION_CAT"]
     )
     parser.add_argument(
         '--target_dataset',
         '-tar_ds',
         type=str,
         default="HOTS_CAT",
-        choices=["HOTS_CAT", "IRL_VISION_CAT"]
+        choices=["HOTS_CAT", "IRL_VISION_CAT", "HOTS", "IRL_VISION"]
     )
    
     parser.add_argument(
@@ -93,7 +93,7 @@ def calculate_confusion_matrix(
     confusion_matrix = np.zeros(shape=[n, n])
     assert len(test_dataset) == len(results)
     # TODO not sure if should be the test of target dataset
-    ignore_index = test_dataset.ignore_index
+    ignore_index = dataset_converter.unknown_idx
     reduce_zero_label = test_dataset.reduce_zero_label
     prog_bar = progressbar.ProgressBar(len(results))
     for idx, per_img_res in enumerate(results):
@@ -118,6 +118,8 @@ def calculate_confusion_matrix(
         
         # confusion_matrix += mat
         for gt_pix, pred_pix in zip(gt_segm, res_segm):
+            if gt_pix == ignore_index or pred_pix == ignore_index:
+                continue
             confusion_matrix[gt_pix][pred_pix] += 1
         prog_bar.update()
     return confusion_matrix
