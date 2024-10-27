@@ -1,5 +1,8 @@
 from copy import deepcopy
 import json
+
+# TODO change std out to filepath
+
 LABEL_TABLE_TEMPLATE = """
     \\begin{table}[ht]
     \centering
@@ -114,25 +117,18 @@ def group_data_by_class_label(label_results_dict):
             grouped_dict[label_name][model_name] = label_metrics["IoU"]
     return grouped_dict
 
-def per_label_per_model(
+def per_label_per_model_std(
     label_results_dict, 
     dataset_name,
     template = LABEL_MODEL_TABLE_TEMPLATE
 ):
+    
     model_names = list(label_results_dict.keys())
     template = get_label_model_template(
         dataset_name=dataset_name,
         model_names=model_names
     )
     print(template.split("#")[0])
-    # print_str = ""
-    # for col_idx, col_name in enumerate(col_names):
-    #     if col_idx == len(col_names) - 1:
-    #         print_str = f"{print_str} {col_name} \\\\"
-    #     else:
-    #         print_str = f"{print_str} {col_name} &"
-    # print(f"\t\t{print_str}")
-    # print("\t\t\midrule")
     label_results_dict = group_data_by_class_label(
         label_results_dict=label_results_dict
     )
@@ -146,6 +142,39 @@ def per_label_per_model(
                 print_str = f"{print_str} {iou_val} \t &"
         print(f"\t\t{print_str}")
     print(template.split("#")[-1])   
+
+def per_label_per_model(
+    label_results_dict, 
+    dataset_name,
+    template = LABEL_MODEL_TABLE_TEMPLATE,
+    file_path = None
+):
+    if file_path is None:
+        return per_label_per_model_std(
+            label_results_dict=label_results_dict,
+            dataset_name=dataset_name,
+            template=template,
+        )
+    with open(file_path, 'w') as table_file:
+        model_names = list(label_results_dict.keys())
+        template = get_label_model_template(
+            dataset_name=dataset_name,
+            model_names=model_names
+        )
+        table_file.write(f"{template.split('#')[0]}\n")
+        label_results_dict = group_data_by_class_label(
+            label_results_dict=label_results_dict
+        )
+        for class_name, class_data in label_results_dict.items():
+            class_name_ = class_name.replace('_', '\_')
+            print_str = f"\\texttt{{{class_name_}}} \t&"
+            for model_idx, (model_name, iou_val) in enumerate(class_data.items()):
+                if model_idx == len(class_data.items()) - 1:
+                    print_str = f"{print_str} {iou_val} \t \\\\"
+                else:
+                    print_str = f"{print_str} {iou_val} \t &"
+            table_file.write(f"\t\t{print_str}\n")
+        table_file.write(f"{template.split('#')[-1]}\n")  
     
 def main():
     file_path = "my_projects/test_results/irl_vision_cat/data/irl_vision_cat_per_label_results.json"

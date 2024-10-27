@@ -224,8 +224,7 @@ ADE20K2HOTS_CAT_CLASS_NAMES = {
         "laptop",
         "monitor"
     ],
-    "glass"         :   ["cup", "bowl"]
-    
+    "glass"         :   ["cup", "bowl"] 
 }
 
 ADE20K2HOTS_CAT  = {
@@ -259,6 +258,12 @@ HOTS_CAT2ADE20K = {
     6 : [147],
     4 : [147]
 }
+
+# for sod2ade:
+#   cereal is box,
+#  flashlight = light
+
+
 
 ARID20CAT2HOTS_CAT_CLASS_NAMES = {
     "_background_"  :       "_background_", 
@@ -336,7 +341,50 @@ SOURCE_TARGET_MAP = {
     }
 }
 
+MISSING_CLASS_NAMES = {
+    "HOTS_CAT"      :       {
+        "IRL_VISION_CAT"    :       [
+            "cap",
+            "cereal",
+            "flashlight",
+            "mug",
+            "sponge"
+        ]
+    },
+    "IRL_VISION_CAT"    :   {
+        "HOTS_CAT"      :       [
+            "stapler"
+        ]
+    },
+    "HOTS"      :       {
+        "IRL_VISION"    :       [
+            "cap",
+            "cereal",
+            "flashlight",
+            "mug",
+            "sponge"
+        ]
+    },
+    "IRL_VISION"    :   {
+        "HOTS"      :       [
+            "stapler"
+        ]
+    }
+}
 
+def get_missing_class_names(source_dataset, target_dataset):
+    if "HOTS" in source_dataset:
+        source_dataset = "HOTS"
+    elif "IRL" in source_dataset:
+        source_dataset = "IRL_VISION"
+    
+    if "HOTS" in target_dataset:
+        target_dataset = "HOTS"
+    elif "IRL" in target_dataset:
+        target_dataset = "IRL_VISION"
+    if target_dataset == source_dataset:
+        return []
+    return MISSING_CLASS_NAMES[source_dataset][target_dataset]
 
 DATASET_PALETTE = {
     "HOTS"          :   hots_v1_palette,

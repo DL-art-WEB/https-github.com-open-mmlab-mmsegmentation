@@ -1,7 +1,7 @@
 import json 
 import os
 import argparse
-
+from my_projects.scripts.plotting_utils import map_dataset_name, map_metric_key, map_model_name
 map_basic2plot = {
     "mPr@50.0"      :   "mPr@50",
     "mPr@60.0"      :   "mPr@60",
@@ -193,11 +193,150 @@ def clean_keys_scene(
         dump_file_path = json_file_path.replace(".json", "_clean.json")
         
     )
-               
-def main():
-    clean_keys_scene(
-        json_file_path="my_projects/ablation_tests/test_results/data/scene_results.json"
+
+def fix_model_names(data_dict: dict) -> dict:
+    new_data = {}
+    for model_name, model_data in data_dict.items():
+        model_name_ = map_model_name(model_name=model_name)
+        new_data[model_name_] = model_data
+    return new_data
+
+def fix_metrics_keys_and_vals(metric_dict: dict, n_decimals = 1) -> dict:
+    new_dict = {}
+    for metric_name, metric_val in metric_dict.items():
+        metric_name_ = map_metric_key(key=metric_name)
+        new_dict[metric_name_] = round(metric_val, n_decimals)
+    return new_dict
+
+def fix_confusion_dict(confusion_dict: dict, n_decimals = 1) -> dict:
+    new_conf_dict = fix_model_names(data_dict=confusion_dict) 
+    for model_name, conf_list in new_conf_dict.items():
+        for conf_item in conf_list:
+            conf_item["score"] = round(conf_item["score"], n_decimals)
+    return new_conf_dict
+
+def fix_results_dict(results_dict: dict, n_decimals = 1) -> dict:
+    new_dict = fix_model_names(data_dict=results_dict)
+    for model_name, metric_dict in new_dict.items():
+        new_dict[model_name] = fix_metrics_keys_and_vals(
+            metric_dict=metric_dict,
+            n_decimals=n_decimals
+        )
+    return new_dict
+
+def fix_per_label_results_dict(results_dict: dict, n_decimals = 1) -> dict:
+    new_dict = fix_model_names(data_dict=results_dict)
+    for model_name, label_dict in new_dict.items():
+        for label, metric_dict in label_dict.items():
+            new_dict[model_name][label] = fix_metrics_keys_and_vals(
+                metric_dict=metric_dict,
+                n_decimals=n_decimals
+            )
+    return new_dict
+
+def gen_default_save_path(source_json_path, save_app):
+    return source_json_path.replace(
+        ".json",
+        f"{save_app}.json"
     )
+
+def fix_jsons(
+    confusion_json_path = None,
+    global_results_json_path = None,
+    per_label_results_json_path = None,
+    confusion_json_save_path = None,
+    global_results_json_save_path = None,
+    per_label_results_json_save_path = None,
+    n_decimals = 1,
+    save_app = ""
+):
+    if confusion_json_path is not None:
+        confusion_matrix = load_json_file(
+            json_file_path=confusion_json_path
+        )
+        confusion_matrix = fix_confusion_dict(
+            confusion_dict=confusion_matrix,
+            n_decimals=n_decimals
+        )
+        if confusion_json_save_path is None:
+            confusion_json_save_path = gen_default_save_path(
+                source_json_path=confusion_json_path,
+                save_app=save_app
+            )
+        save_dict_as_json(
+            data_dict=confusion_matrix,
+            dump_file_path=confusion_json_save_path
+        )
+    
+    if global_results_json_path is not None:
+        results_dict = load_json_file(
+            json_file_path=global_results_json_path
+        )
+        results_dict = fix_results_dict(
+            results_dict=results_dict,
+            n_decimals=n_decimals
+        )
+        if global_results_json_save_path is None:
+            global_results_json_save_path = gen_default_save_path(
+                source_json_path=global_results_json_path,
+                save_app=save_app
+            )
+        save_dict_as_json(
+            data_dict=results_dict,
+            dump_file_path=global_results_json_save_path
+        )
+        
+    if per_label_results_json_path is not None:
+        results_dict = load_json_file(
+            json_file_path=per_label_results_json_path
+        )
+        results_dict = fix_per_label_results_dict(
+            results_dict=results_dict,
+            n_decimals=n_decimals
+        )
+        if per_label_results_json_save_path is None:
+            per_label_results_json_save_path = gen_default_save_path(
+                source_json_path=per_label_results_json_path,
+                save_app=save_app
+            )
+        save_dict_as_json(
+            data_dict=results_dict,
+            dump_file_path=per_label_results_json_save_path
+        )
+    
+            
+        
+        
+def main():
+    # clean_keys_scene(
+    #     json_file_path="my_projects/ablation_tests/test_results/data/scene_results.json"
+    # )
+    test_results_path = "my_projects/conversion_tests/test_results"
+    for results_dir in os.listdir(test_results_path):
+        results_dir_path = os.path.join(
+            test_results_path,
+            results_dir
+        )
+        confusion_json_path = os.path.join(
+            results_dir_path,
+            "data",
+            f"{results_dir}_confusion_top_5.json"
+        )
+        global_results_json_path = os.path.join(
+            results_dir_path,
+            "data",
+            f"{results_dir}_results.json"
+        )
+        per_label_results_json_path = os.path.join(
+            results_dir_path,
+            "data",
+            f"{results_dir}_per_label_results.json"
+        )
+        fix_jsons(
+            confusion_json_path=confusion_json_path,
+            global_results_json_path=global_results_json_path,
+            per_label_results_json_path=per_label_results_json_path
+        )
     
 
 if __name__ == '__main__':

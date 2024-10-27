@@ -343,7 +343,7 @@ def model_plot(
     for item_idx, metric_item in enumerate(grouped_by_metric.items()):
         (metric_name, metric_value) = metric_item
         offset = (bar_width) * relative_positions[item_idx]
-        metric_name = p_utils.map_key(metric_name)
+        metric_name = p_utils.map_metric_key_plot(metric_name)
         rects = plt.bar(
             x_axis + offset, 
             metric_value, 

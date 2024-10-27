@@ -3,7 +3,7 @@ import numpy as np
 import json 
 import os
 import argparse
-import plotting_utils as p_utils
+import my_projects.scripts.plotting_utils as p_utils
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -53,7 +53,7 @@ def reorganize_clutter_dict(clutter_data_dict):
     for n_objects, data_dict in clutter_data_dict.items():
         for metric_name, metric_val in data_dict.items():
             # TODO temp split due to wrong notation old tests
-            metric_name = metric_name.split(".")[0]
+            metric_name = p_utils.map_metric_key(key=metric_name)
             if metric_name not in metrics_names:
                 continue
             cl_dict_new[metric_name][int(n_objects) - 1] = metric_val
@@ -78,7 +78,7 @@ def make_plot(
     for data_point in [9, 16, 20]:
         plt.axvline(data_point, color='k', ls ='dotted', linewidth=2.5)
     for metric_name, data in clutter_data_dict.items():
-        metric_name = p_utils.map_key(metric_name)
+        metric_name = p_utils.map_metric_key_plot(metric_name)
         handle, = plt.plot(
                 x_axis, 
                 data,
@@ -148,7 +148,8 @@ def global_plot(args):
                     f"{model_name}_clutter.png"
                 )
             )
-        global_miou_dict[model_name] = clutter_dict["mIoU"]
+        model_name_ = p_utils.map_model_name(model_name=model_name)
+        global_miou_dict[model_name_] = clutter_dict["mIoU"]
     save_path = os.path.join(args.save_dir_path, f"global_clutter")
     make_plot(
         clutter_data_dict=global_miou_dict,

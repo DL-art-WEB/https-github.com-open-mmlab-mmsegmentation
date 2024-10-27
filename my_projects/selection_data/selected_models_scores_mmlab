@@ -707,6 +707,7 @@ custom_score : 22.495468277945616
 fps_per_GB : 8.03323262839879
 mIoU_per_spf : 1272.8632999999998
 
+
 sorted scores (5): 
 config : configs/mask2former/mask2former_swin-t_8xb2-160k_ade20k-512x512.py
 Mem (GB) : 3.826

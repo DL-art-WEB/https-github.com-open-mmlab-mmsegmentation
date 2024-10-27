@@ -1,6 +1,6 @@
 
 from matplotlib import pyplot as plt
-from generate_latex_tables import load_json_file
+from my_projects.scripts.generate_latex_tables import load_json_file
 import os
 
 def save_class_hist_plot(class_hist, save_path):
@@ -13,7 +13,6 @@ def save_class_hist_plot(class_hist, save_path):
         rotation = 90
     )
     plt.ylabel("IoU")
-    # plt.waitforbuttonpress()
     
     plt.savefig(save_path, bbox_inches='tight',dpi=100)
     plt.clf()
@@ -27,7 +26,7 @@ def make_class_hist(model_data_dict, metric = "IoU"):
     
 
 def main():
-    data_path = "my_projects/test_results/arid20_cat/data/"
+    data_path = "my_projects/conversion_tests/test_results/hots_cat2irl_vision_cat/data/"
     file_name = [
         pth for pth in os.listdir(data_path) 
             if "per_label_results.json" in pth
@@ -44,4 +43,5 @@ def main():
             )
         )
     
-main()
+if __name__ == '__main__':
+    main()

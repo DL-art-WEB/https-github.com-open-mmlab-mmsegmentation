@@ -1,7 +1,8 @@
 import json 
 import os
 import argparse
-from parse_test_log_table import parse_table
+from my_projects.scripts.parse_test_log_table import parse_table
+
 
 KEYS_OF_INTEREST = {
     "performance"   :   [
@@ -134,7 +135,8 @@ def get_top_n_confusion_values(
 
 def generate_confusion_dict_dataset(
     dataset_path: str,
-    n_confusion_values: int
+    n_confusion_values: int,
+    ignore_background: bool = True,
 ): 
     confusion_dict = {}
     for model_dir in os.listdir(dataset_path):
@@ -157,6 +159,12 @@ def generate_confusion_dict_dataset(
             continue
         # load dict and get top n
         confusion_matrix = load_json_file(json_file_path=confusion_matrix_path)
+        if ignore_background:
+        
+            confusion_matrix = [
+                data_dict for data_dict in confusion_matrix
+                    if "_background_" not in data_dict.values()
+            ]
         # append top n dict to conf_dict
         confusion_dict[model_name] = get_top_n_confusion_values(
             confusion_dict_list=confusion_matrix,
@@ -284,6 +292,7 @@ def get_model_results_path(model_name: str, dataset_path: str):
                 model_res_name
             )
 
+ 
 
 def main():
     args = parse_args()

@@ -6,8 +6,7 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--selection_path',
-        '-p',
+        'selection_path',
         type=str
     )
     args = parser.parse_args()

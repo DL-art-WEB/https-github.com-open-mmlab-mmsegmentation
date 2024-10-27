@@ -49,6 +49,27 @@ clutter_plot = {
     'ytick.labelsize'   :   25,
     'lines.linewidth'   :   6
 }
+
+TRADEOFF_PLOT_PARAMS = {
+    'figure.figsize'    :   (12, 8),
+    'legend.fontsize'   :   25,
+    'axes.labelsize'    :   25,
+    'axes.titlesize'    :   25,
+    'xtick.labelsize'   :   25,
+    'ytick.labelsize'   :   25,
+    'lines.linewidth'   :   6,
+    'lines.markersize'  :   30
+}
+PRED_VISUALIZATION_FIGURE_PARAMS = {
+    'figure.figsize'    :   (16, 6),
+    'legend.fontsize'   :   20,
+    # 'axes.labelsize'    :   30,
+    'axes.titlesize'    :   25,
+    # 'xtick.labelsize'   :   30,
+    # 'ytick.labelsize'   :   25,
+    'lines.linewidth'   :   6
+}
+
 def set_params(param_dict=None):
     if param_dict is None:
         param_dict = double_col_readable
@@ -68,7 +89,35 @@ def reset_params():
 # def fix_metric_name(metric_name):
 #     return metric_name.split(".")[0]
 
-KEY_MAP = {
+METRIC_KEY_MAP = {
+    "mPr@50"        :    "mPr@50",
+    "mPr@60"        :    "mPr@60",
+    "mPr@70"        :    "mPr@70",
+    "mPr@80"        :    "mPr@80",
+    "mPr@90"        :    "mPr@90",
+    "mPr@50.0"      :    "mPr@50",
+    "mPr@60.0"      :    "mPr@60",
+    "mPr@70.0"      :    "mPr@70",
+    "mPr@80.0"      :    "mPr@80",
+    "mPr@90.0"      :    "mPr@90",  
+    "mIoU"          :    "mIoU",
+    "average_fps"   :    "FPS",
+    "average_mem"   :    "Mem (MB)"  
+}
+
+def map_metric_key_strict(key):
+    if key in METRIC_KEY_MAP.keys():
+        return METRIC_KEY_MAP[key]
+    return False 
+
+def map_metric_key(key):
+    if key in METRIC_KEY_MAP.keys():
+        return METRIC_KEY_MAP[key]
+    return key
+    # return key.split(".")[0]
+
+
+METRIC_KEY_MAP_PLOT = {
     "mPr@50"      :    "$\mathregular{mPr_{50}}$",
     "mPr@60"      :    "$\mathregular{mPr_{60}}$",
     "mPr@70"      :    "$\mathregular{mPr_{70}}$",
@@ -81,9 +130,9 @@ KEY_MAP = {
     "mPr@90.0"    :    "$\mathregular{mPr_{90}}$"     
 }
 
-def map_key(key):
-    if key in KEY_MAP.keys():
-        return KEY_MAP[key]
+def map_metric_key_plot(key):
+    if key in METRIC_KEY_MAP_PLOT.keys():
+        return METRIC_KEY_MAP_PLOT[key]
     return key
 
 MODEL_NAME_MAP = {
@@ -113,12 +162,13 @@ def map_dataset_name(ds_name):
     if ds_name_ in DATASET_NAME_MAP.keys():
         return DATASET_NAME_MAP[ds_name_]
     if "hots" in ds_name_:
-        if "cat" or "c" in ds_name_:
+        if "cat" in ds_name_:
             return DATASET_NAME_MAP["hots cat"]
         else:
             return DATASET_NAME_MAP["hots"]
     if "irl" in ds_name_:
-        if "cat" or "c" in ds_name_:
+        if "cat" in ds_name_:
+            
             return DATASET_NAME_MAP["irl vision cat"]
         else:
             return DATASET_NAME_MAP["irl vision"]
