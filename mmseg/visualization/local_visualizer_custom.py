@@ -104,7 +104,9 @@ class SegLocalVisualizerCustom(Visualizer):
                       classes: Optional[List],
                       palette: Optional[List],
                       with_labels: Optional[bool] = True,
-                      ignore_idx: Optional[int] = 255
+                      ignore_idx: Optional[int] = 255,
+                      label_scale = 0.05,
+                      ignore_background = True
     ) -> np.ndarray:
         """Draw semantic seg of GT or prediction.
 
@@ -139,15 +141,16 @@ class SegLocalVisualizerCustom(Visualizer):
 
         mask = np.zeros_like(image, dtype=np.uint8)
         for label, color in zip(labels, colors):
-            if label == ignore_idx:
+            if ignore_background and label == ignore_idx:
+                mask[sem_seg[0] == label, :] = image[sem_seg[0] == label, :]
                 continue
             mask[sem_seg[0] == label, :] = color
 
         if with_labels:
             font = cv2.FONT_HERSHEY_SIMPLEX
             # (0,1] to change the size of the text relative to the image
-            scale = 0.05
-            fontScale = min(image.shape[0], image.shape[1]) / (25 / scale)
+            
+            fontScale = min(image.shape[0], image.shape[1]) / (25 / label_scale)
             fontColor = (255, 255, 255)
             if image.shape[0] < 300 or image.shape[1] < 300:
                 thickness = 1
@@ -167,23 +170,37 @@ class SegLocalVisualizerCustom(Visualizer):
                 classes_color = colors[mask_num]
                 loc = self._get_center_loc(masks[mask_num])
                 text = classes[classes_id]
+                if ignore_background and text == "_background_":
+                    continue
                 (label_width, label_height), baseline = cv2.getTextSize(
                     text, font, fontScale, thickness)
                 
                 mask = cv2.rectangle(mask, loc,
                                      (loc[0] + label_width + baseline,
                                       loc[1] + label_height + baseline),
-                                     classes_color, -1)
-                mask = cv2.rectangle(mask, loc,
-                                     (loc[0] + label_width + baseline,
-                                      loc[1] + label_height + baseline),
-                                     (0, 0, 0), rectangleThickness)
+                                     (0, 0, 0), -1)
+                # mask = cv2.rectangle(mask, loc,
+                #                      (loc[0] + label_width + baseline,
+                #                       loc[1] + label_height + baseline),
+                #                      (0, 0, 0), rectangleThickness)
+                
                 mask = cv2.putText(mask, text, (loc[0], loc[1] + label_height),
                                    font, fontScale, fontColor, thickness,
                                    lineType)
+        
+              
         color_seg = (image * (1 - self.alpha) + mask * self.alpha).astype(
             np.uint8)
+        # if ignore_background:
+        #     bg_mask = np.zeros_like(image, dtype=np.uint8)
+        #     bg_alpha = 0.8
+        #     bg_mask[sem_seg[0] == ignore_idx, :] = palette[ignore_idx]
+        #     color_seg = (
+        #         image * (1 - self.alpha) + bg_mask * bg_alpha + mask * self.alpha
+        #     ).astype(
+        #     np.uint8)
         self.set_image(color_seg)
+       
         return color_seg
 
     def _draw_depth_map(self, image: np.ndarray,

@@ -60,14 +60,31 @@ TRADEOFF_PLOT_PARAMS = {
     'lines.linewidth'   :   6,
     'lines.markersize'  :   30
 }
-PRED_VISUALIZATION_FIGURE_PARAMS = {
-    'figure.figsize'    :   (16, 6),
+PRED_VISUALIZATION_FIGURE_PARAMS_2ROWS = {
+    'figure.figsize'    :   (16, 8),
     'legend.fontsize'   :   20,
     # 'axes.labelsize'    :   30,
     'axes.titlesize'    :   25,
     # 'xtick.labelsize'   :   30,
     # 'ytick.labelsize'   :   25,
     'lines.linewidth'   :   6
+}
+PRED_VISUALIZATION_FIGURE_PARAMS = {
+    'figure.figsize'    :   (16, 4),
+    'figure.constrained_layout.use' : True,
+    'legend.fontsize'   :   20,
+    # 'axes.labelsize'    :   30,
+    'axes.titlesize'    :   12,
+    # 'xtick.labelsize'   :   30,
+    # 'ytick.labelsize'   :   25,
+    'lines.linewidth'   :   6
+}
+MODEL_COLORS = {
+    "BiSeNet"       :           'tab:blue', 
+    "Mask2Former"   :           'tab:orange', 
+    "MaskFormer"    :           'tab:green', 
+    "SegFormer"     :           'tab:red', 
+    "SegNeXt"       :           'tab:purple'
 }
 
 def set_params(param_dict=None):

@@ -49,7 +49,7 @@ def parse_args():
         '--save_path',
         '-sp',
         type=str,
-        default="my_projects/images_plots/acc_eff_trade_off/acc_eff_to"
+        default="my_projects/images_plots/acc_eff_trade_off/"
     )
     parser.add_argument(
         '--fix_jsons',
@@ -67,6 +67,16 @@ def parse_args():
     parser.add_argument(
         '--plot_data',
         '-plt',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--plot_th_analysis',
+        '-plt_th',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--verbose',
+        '-v',
         action='store_true'
     )
     args = parser.parse_args()
@@ -304,13 +314,7 @@ def merge_model_score_dicts(
             new_ms_dict[model_name][metric_name] = val_0 + val_1
     return new_ms_dict
 
-MODEL_COLORS = {
-    "BiSeNet"       :           'b', #[1, 1, 0],
-    "Mask2Former"   :           'g', #[0, 0, 1],
-    "MaskFormer"    :           'r', #[1, 0, 1],
-    "SegFormer"     :           'c', #[0, 1, 0],
-    "SegNeXt"       :           'm', #[1, 0, 0]
-}
+
 
 def generate_scatter_data(
     global_dict: dict,
@@ -319,6 +323,7 @@ def generate_scatter_data(
     area_key = None,
     mark_models = True
 ):
+    # TODO add params 
     x_data = []
     y_data = []
     area_data = []
@@ -330,12 +335,12 @@ def generate_scatter_data(
             if area_key:
                 area_data.append(model_data[area_key])
             if mark_models:
-                color_data.append(MODEL_COLORS[model_name])
+                color_data.append(p_utils.MODEL_COLORS[model_name])
     return x_data, y_data, area_data, color_data
 
 def make_handles():
     legend_handles = []
-    for model_name, color in MODEL_COLORS.items():
+    for model_name, color in p_utils.MODEL_COLORS.items():
         
         legend_handles.append(
                 mlines.Line2D(
@@ -356,6 +361,7 @@ def plot_trade_off_global(
     mark_models = True,
     save_path = None
 ):
+    
     x_data, y_data, area_data, color_data = generate_scatter_data(
         global_dict=global_dict,
         x_key=x_key,
@@ -460,7 +466,12 @@ def random_analysis(
         "FPS"       :       0.5,
         "Mem (MB)"  :       0.5
     }
-    
+    fps_weights = {
+        "FPS"       :       1
+    }
+    mem_weights = {
+        "Mem (MB)"  :       1
+    }
     sorted_pr_keys = sorted(pr_keys, reverse=True)
     pr_scaled_by_th = {
         pr_key : (len(sorted_pr_keys) - pr_rank) / len(sorted_pr_keys)
@@ -485,6 +496,8 @@ def random_analysis(
     labeled_weights = {
         "Global"            :       custom_weights,
         "Efficiency"        :       eff_weights,
+        "FPS"               :       fps_weights,
+        "Memory"            :       mem_weights,
         "Precision"         :       pr_scaled_by_th,
         "Accuracy"          :       acc_weights
     }
@@ -496,12 +509,24 @@ def random_analysis(
         verbose=True
     )
     
-    
-    
-def threshold_analyses(
+def av_results(
     total_model_score_dict: dict
 ):
-    print(f"{'#' * 80}\n             THRESHOLD_ANALYSES\n")
+    for model_name, metric_score_dict in total_model_score_dict.items():
+        for metric_name, metric_score in metric_score_dict.items():
+            metric_score_dict[metric_name] /= 5
+            
+    
+def threshold_analyses(
+    total_model_score_dict: dict,
+    scoring_mode: str,
+    plot_th_analysis: bool = False,
+    verbose: bool = False,
+    save_path_dir = "my_projects/images_plots/acc_eff_trade_off"
+):
+    if verbose:
+        print(f"{'#' * 80}\n             THRESHOLD_ANALYSES\n")
+        
     pr_keys = [
         pr_metric for pr_metric in KEYS_OF_INTEREST
             if "mPr" in pr_metric
@@ -526,76 +551,150 @@ def threshold_analyses(
     }
    
     
-    custom_weights = {}
+    default_weights = {}
     for key, val in pr_scaled_by_th.items():
-        custom_weights[key] = val
+        default_weights[key] = val
     for key, val in eff_weights.items():
-        custom_weights[key] = 1 
+        default_weights[key] = 1 
     for key, val in acc_weights.items():
-        custom_weights[key] = 1 
+        default_weights[key] = 1 
     
-    acc_factors = [
-        fac for fac in np.arange(0, 10, 0.5)
+    for metric_key in KEYS_OF_INTEREST:
+        if "mPr" in metric_key:
+            continue
+        factors = [
+            fac for fac in np.arange(0, 100, 0.1)
+        ]
+        labeled_weights = {}
+        for fac in factors:
+            new_weights = deepcopy(default_weights)
+            new_weights[metric_key] = fac
+            labeled_weights[fac] = new_weights
+        labeled_scores = analyse_weights(
+            total_model_score_dict=total_model_score_dict,
+            labeled_custom_weights=labeled_weights,
+            verbose=False
+        )
+        if verbose:
+            print_labeled_scores(
+                metric_key=metric_key,
+                default_weights=default_weights,
+                labeled_scores=labeled_scores
+            )
+        if plot_th_analysis:
+            plot_threshold_analysis(
+                metric_key=metric_key,
+                labeled_scores=labeled_scores,
+                scoring_mode=scoring_mode,
+                save_path_dir=save_path_dir
+            )
+    # Pr analysis
+    factors = [
+        fac for fac in np.arange(0, 100, 0.1)
     ]
     labeled_weights = {}
-    for fac in acc_factors:
-        new_weights = deepcopy(custom_weights)
-        for key in acc_weights.keys():
-            new_weights[key] = fac
+    for fac in factors:
+        new_weights = deepcopy(default_weights)
+        for pr_key in pr_keys:
+            new_weights[pr_key] *= fac
         labeled_weights[fac] = new_weights
-    
     labeled_scores = analyse_weights(
         total_model_score_dict=total_model_score_dict,
         labeled_custom_weights=labeled_weights,
         verbose=False
     )
-    print(f"{'#' * 80}\n ACC comparison")
-    for label, model_score_dict in labeled_scores.items():
-        print(f"\nacc weight {label}  :  ")
-        model_scores = dict(
-            sorted(
-                model_score_dict.items(), 
-                key=lambda d: d[1],
-                reverse=True
-            )
+    if verbose:
+        print_labeled_scores(
+            metric_key="mPr",
+            default_weights=default_weights,
+            labeled_scores=labeled_scores
         )
-        for model_name, total_score in model_scores.items():
-            print(f"{model_name} : {total_score}")
-    
-    
-    fps_factors = [
-        fac for fac in np.arange(0, 10, 0.5)
-    ]
-    labeled_weights = {}
-    for fac in fps_factors:
-        new_weights = deepcopy(custom_weights)
-        
-        new_weights["FPS"] = fac
-        labeled_weights[fac] = new_weights
-    
-    labeled_scores = analyse_weights(
-        total_model_score_dict=total_model_score_dict,
-        labeled_custom_weights=labeled_weights,
-        verbose=False
-    )
-    
-    print(f"{'#' * 80}\n FPS comparison")
-    for label, model_score_dict in labeled_scores.items():
-        print(f"\nfps weight {label}  :  ")
-        model_scores = dict(
-            sorted(
-                model_score_dict.items(), 
-                key=lambda d: d[1],
-                reverse=True
-            )
+    if plot_th_analysis:
+        plot_threshold_analysis(
+            metric_key="mPr",
+            labeled_scores=labeled_scores,
+            scoring_mode=scoring_mode,
+            save_path_dir=save_path_dir
         )
-        for model_name, total_score in model_scores.items():
-            print(f"{model_name} : {total_score}")
-            
-    
-            
 
+        
+def plot_threshold_analysis(
+    metric_key,
+    labeled_scores,
+    scoring_mode,
+    save_path_dir = "my_projects/images_plots/acc_eff_trade_off"
+):
+    plt.clf()
+    p_utils.set_params(param_dict=p_utils.TRADEOFF_PLOT_PARAMS)
+    x_axis = [
+        float(factor) for factor in list(labeled_scores.keys())
+    ]
+    model_score_lists_dict = {
+        model_name : [] 
+            for model_name in p_utils.MODEL_COLORS.keys()
+    }
+    for factor, model_score_dict in labeled_scores.items():
+        for model_name, total_score in model_score_dict.items():
+            model_score_lists_dict[model_name].append(total_score)
+            
+    for model_name, model_score_list in model_score_lists_dict.items():
+        plt.plot(
+            x_axis, 
+            model_score_list, 
+            color=p_utils.MODEL_COLORS[model_name]
+        ) 
+    plt.legend(handles=make_handles())
+    save_path = os.path.join(
+        save_path_dir,
+        f"{scoring_mode}_{metric_key}"
+    )
+    plt.xlabel(f"{metric_key} weight")
+    plt.ylabel("score")
+    print(f"saved fig in : {save_path}")
+    plt.savefig(
+        save_path,
+        dpi=100,
+        bbox_inches='tight'
+    )
     
+    p_utils.reset_params()
+    
+def get_intersections(
+    metric_key,
+    default_weights,
+    labeled_scores,
+):
+    pass
+           
+def print_labeled_scores(
+    metric_key,
+    default_weights,
+    labeled_scores,
+    max_items = 10
+):
+    print_every = len(labeled_scores.items()) / max_items
+    print(f"{'#' * 80}\n {metric_key} comparison")
+    print(f"\ndefault weights:")
+    for key, val in default_weights.items():
+        print(f"{key} : {val}")
+    for score_idx, (label, model_score_dict) in enumerate(labeled_scores.items()):
+        if score_idx % print_every != 0:
+            continue
+        print(f"\n{metric_key} weight factor: {label}")
+        reverse = descending_order(metric=metric_key)
+        model_scores = dict(
+            sorted(
+                model_score_dict.items(), 
+                key=lambda d: d[1],
+                reverse=reverse
+            )
+        )
+        for model_name, total_score in model_scores.items():
+            print(f"{model_name} : {total_score}")
+    
+
+
+
 def print_per_model_score(
     total_model_score_dict: dict
 ):
@@ -615,13 +714,17 @@ def main():
     global_dict = collect_all_datasets_results_jsons(args=args)
     
     if args.plot_data:
+        save_path = os.path.join(
+            args.save_path,
+            "global_scatter"
+        )
         plot_trade_off_global(
             global_dict=global_dict,
             x_key="mIoU",
             y_key="FPS",
             area_key="Mem (MB)",
             mark_models=True,
-            save_path=args.save_path
+            save_path=save_path
         )
     if args.scoring_mode == "ALL":
         for mode in SCORING_MODE.keys():
@@ -630,13 +733,21 @@ def main():
                 global_dict=global_dict,
                 scoring_mode=mode
             )
-            print('#' * 80)
-            print(f"scoring_mode: {mode}")
+            av_results(total_model_score_dict=per_model)
+            if args.verbose:
+                print('#' * 80)
+                print(f"scoring_mode: {mode}")
+                print_per_model_score(total_model_score_dict=per_model)
+                
             random_analysis(
                 total_model_score_dict=per_model
             )
             threshold_analyses(
-                total_model_score_dict=per_model
+                total_model_score_dict=per_model,
+                scoring_mode=mode,
+                plot_th_analysis=args.plot_th_analysis,
+                verbose=args.verbose,
+                save_path_dir=args.save_path
             )
     else:
         per_model, per_dataset = collect_score_per_model_over_all_datasets(
@@ -647,8 +758,12 @@ def main():
             total_model_score_dict=per_model
         )
         threshold_analyses(
-            total_model_score_dict=per_model
-        )
+                total_model_score_dict=per_model,
+                scoring_mode=args.scoring_mode,
+                plot_th_analysis=args.plot_th_analysis,
+                verbose=args.verbose,
+                save_path_dir=args.save_path
+            )
     
     
 
