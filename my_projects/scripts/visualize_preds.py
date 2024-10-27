@@ -110,8 +110,7 @@ def parse_args():
     parser.add_argument(
         '--legend_pos',
         choices=[
-            "side", "low",
-            "top"
+            "side", "low"
         ],
         default="side"
     )
@@ -126,18 +125,7 @@ def parse_args():
         type=float,
         default=0.5
     )
-    parser.add_argument(
-        '--include_gt',
-        '-gt',
-        action='store_true'
-    )
     
-    parser.add_argument(
-        '--n_rows',
-        '-nr',
-        type=int,
-        default=1
-    )
     # parser.add_argument(
     #     '--with_iou',
     #     '-iou',
@@ -345,8 +333,8 @@ def generate_set_figure(args):
         return
     figure = plt.figure()
     subplots  = figure.subplots(
-        nrows=1, 
-        ncols=6, 
+        nrows=2, 
+        ncols=3, 
         gridspec_kw = {
             'wspace':0.05, 
             'hspace':0.20
@@ -398,21 +386,6 @@ def generate_set_figure(args):
             20
         )
         if args.legend_pos == "low":
-            ncols = 4
-            bbheight = ceil(len(legend_handles) / ncols)
-            bby = -1 * ((bbheight * 2) + (bbheight / 2.0)) / 100
-            print(bbheight)
-            print(bby)
-            
-            figure.legend(
-                handles=legend_handles,
-                # bbox_to_anchor=(0.12, 0.72, 1, 0.2),
-                bbox_to_anchor=(0.5, bby),
-                ncols=ncols,
-                loc = 'lower center',
-                fontsize=fontsize
-            )
-        if args.legend_pos == "top":
             ncols = 4
             bbheight = ceil(len(legend_handles) / ncols)
             bby = -1 * ((bbheight * 2) + (bbheight / 2.0)) / 100
