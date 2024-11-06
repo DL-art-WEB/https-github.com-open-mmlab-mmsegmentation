@@ -2,8 +2,10 @@
 norm_cfg = dict(type='SyncBN', eps=0.001, requires_grad=True)
 data_preprocessor = dict(
     type='SegDataPreProcessor',
-    mean=[123.675, 116.28, 103.53],
-    std=[58.395, 57.12, 57.375],
+    # mean=[123.675, 116.28, 103.53],
+    # std=[58.395, 57.12, 57.375],
+    mean=[97.85609871, 96.75819166, 101.97295342],
+    std=[83.26665057, 80.24579992, 79.9720934],
     bgr_to_rgb=True,
     pad_val=0,
     seg_pad_val=255)
@@ -22,7 +24,7 @@ model = dict(
         channels=128,
         input_transform='multiple_select',
         dropout_ratio=0.1,
-        num_classes=19,
+        num_classes=66,
         norm_cfg=norm_cfg,
         act_cfg=dict(type='ReLU'),
         align_corners=False,
