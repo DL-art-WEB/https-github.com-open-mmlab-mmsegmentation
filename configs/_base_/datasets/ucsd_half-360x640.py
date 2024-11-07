@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'MapillaryDataset_v1'
-data_root = '/lich-west-vol/dataset/campus_dataset'
+data_root = '/lich-central-vol/dataset/campus_dataset'
 crop_size = (360, 640)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
