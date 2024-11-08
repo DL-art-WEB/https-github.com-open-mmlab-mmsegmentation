@@ -58,7 +58,7 @@ class MapillaryDataset_v1(BaseSegDataset):
                                                          10], [0, 0, 0]])
 
     def __init__(self,
-                 img_suffix='.jpg',
+                 img_suffix='.png',
                  seg_map_suffix='.png',
                  **kwargs) -> None:
         super().__init__(
@@ -169,7 +169,7 @@ class MapillaryDataset_v2(BaseSegDataset):
                  [111, 111, 0], [0, 0, 0]])
 
     def __init__(self,
-                 img_suffix='.jpg',
+                 img_suffix='.png',
                  seg_map_suffix='.png',
                  **kwargs) -> None:
         super().__init__(
