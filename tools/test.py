@@ -5,6 +5,7 @@ import os.path as osp
 
 from mmengine.config import Config, DictAction
 from mmengine.runner import Runner
+from mmseg.registry import RUNNERS
 
 
 # TODO: support fuse_conv_bn, visualization, and format_only
@@ -113,7 +114,13 @@ def main():
         cfg.test_evaluator['keep_results'] = True
 
     # build the runner from config
-    runner = Runner.from_cfg(cfg)
+    if 'runner_type' not in cfg:
+        # build the default runner
+        runner = Runner.from_cfg(cfg)
+    else:
+        # build customized runner from the registry
+        # if 'runner_type' is set in the cfg
+        runner = RUNNERS.build(cfg)
 
     # start testing
     runner.test()
